@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -6,6 +7,9 @@
   --text: #d6dde8;
   --text-strong: #f5f7fb;
   --muted: #94a3b8;
+  --font-cinzel-decorative: 'Cinzel Decorative', serif;
+  --font-cinzel: 'Cinzel', serif;
+  --font-crimson: 'Crimson Text', serif;
 }
 
 html {
@@ -26,6 +30,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-crimson);
 }
 
 #root {
