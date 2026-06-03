@@ -11,13 +11,15 @@
   },
   "dependencies": {
     "react": "^19.2.6",
-    "react-dom": "^19.2.6"
+    "react-dom": "^19.2.6",
+    "react-pageflip": "^2.0.3",
+    "react-router-dom": "^7.16.0"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
-    "@tailwindcss/vite": "^4.1.8",
     "@eslint/js": "^10.0.1",
     "@rolldown/plugin-babel": "^0.2.3",
+    "@tailwindcss/vite": "^4.1.8",
     "@types/babel__core": "^7.20.5",
     "@types/node": "^24.12.3",
     "@types/react": "^19.2.14",

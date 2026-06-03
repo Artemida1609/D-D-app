@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Header } from "../../shared/ui/Header";
+import { Header } from "../../shared/ui/Header/Header";
 
 interface MainLayoutProps {
   children: ReactNode;
