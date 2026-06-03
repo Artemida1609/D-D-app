@@ -1,0 +1,11 @@
+{
+  "installCommand": "cd dnd-frontend && npm install",
+  "buildCommand": "cd dnd-frontend && npm run build",
+  "outputDirectory": "dnd-frontend/dist",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
