@@ -1,36 +1,18 @@
-.discover-title {
-  font-family: 'Cinzel Decorative', serif;
-  font-size: 8rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  position: relative;
-  display: inline-block; /* важливо! */
+.home-page {
+  &__title {
+    font-family: "Cormorant Unicase", serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: #fffbe4;
+  }
 
-  -webkit-text-stroke: 12px #3a0e00;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-}
-
-.discover-title::after {
-  content: attr(data-text); /* беремо текст з атрибута */
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  white-space: nowrap;
-
-  background: linear-gradient(
-    180deg,
-    #ffaa30 0%,
-    #e06010 45%,
-    #c03000 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 0;
-
-  filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.95));
+  &__start-exploring-btn {
+    font-family: "Manrope", sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    background: #fffbe4;
+    color: #00192d;
+    border: none;
+    cursor: pointer;
+  }
 }
