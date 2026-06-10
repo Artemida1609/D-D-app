@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -9,9 +9,7 @@
   --muted: #94a3b8;
   --main-dark: #00192D;
   --accent-hover: #FFB000;
-  --font-cinzel-decorative: 'Cinzel Decorative', serif;
-  --font-cinzel: 'Cinzel', serif;
-  --font-crimson: 'Crimson Text', serif;
+  --font-cormorant-unicase: 'Cormorant Unicase', serif;
   --font-manrope: 'Manrope', sans-serif;
 }
 
@@ -33,7 +31,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: var(--font-crimson);
+  font-family: var(--font-manrope);
 }
 
 #root {

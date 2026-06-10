@@ -1,9 +1,15 @@
+@use "../../styles/mixins.scss" as *;
+
 .footer {
   &__link {
     font-family: "Manrope", sans-serif;
-    font-size: 20px;
+    font-size: 16px;
     color: #fffbe4;
     transition: color 0.25s ease, text-shadow 0.3s ease;
+
+    @include desktop {
+      font-size: 20px;
+    }
 
     &:hover {
       color: var(--accent-hover);
