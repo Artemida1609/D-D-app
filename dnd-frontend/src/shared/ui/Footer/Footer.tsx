@@ -3,7 +3,7 @@ import "./Footer.scss";
 
 export const Footer = () => {
   return (
-    <footer className="w-full pb-[34px] md:pb-[40px] pt-10 z-10">
+    <footer className="w-full px-20 pb-[34px] md:pb-[40px] pt-10 z-10">
       <ul className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
         <li>
           <Link to="/character" className="footer__link">

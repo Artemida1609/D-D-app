@@ -1,4 +1,4 @@
-import { Button } from "../../shared/ui/Button";
+import { Button } from "../../shared/ui/Icons/Button";
 import "./HomePage.scss";
 
 export const HomePage = () => {
