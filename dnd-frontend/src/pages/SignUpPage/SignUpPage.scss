@@ -1,0 +1,49 @@
+.sign-up {
+  font-family: var(--font-manrope);
+
+  &__input {
+    font-family: inherit;
+    width: 450px;
+    height: 54px;
+    border-radius: 30px;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 16px 24px 16px 12px;
+    color: var(--text-strong);
+    font-size: 16px;
+
+    &::placeholder {
+      color: var(--muted);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 1px #FFFBE4;
+    }
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+
+  &__button {
+    font-family: inherit;
+    width: 450px;
+    height: 64px;
+    border-radius: 25px;
+    background-color: #FFFBE4;
+    color: #00192D;
+    font-size: 20px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #ffffff;
+    }
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+}

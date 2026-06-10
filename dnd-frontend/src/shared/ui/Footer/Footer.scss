@@ -1,0 +1,13 @@
+.footer {
+  &__link {
+    font-family: "Manrope", sans-serif;
+    font-size: 20px;
+    color: #fffbe4;
+    transition: color 0.25s ease, text-shadow 0.3s ease;
+
+    &:hover {
+      color: var(--accent-hover);
+      text-shadow: 0 0 12px var(--accent-hover);
+    }
+  }
+}

@@ -42,10 +42,9 @@ export const Header = () => {
   const [language, setLanguage] = useState("EN");
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-10 flex justify-between px-20 pt-10 header">
-      {/* Navigation */}
-      <nav className="p-4">
-        <ul className="flex gap-6 justify-start items-center">
+    <header className="pt-10 pb-6 flex justify-between items-center w-full z-50 relative header">
+      <nav>
+        <ul className="flex gap-[48px] justify-start items-center">
           {navItems.map((item) => (
             <li className="nav-item" key={item.path}>
               <Link to={item.path} className="cursor-pointer nav-item__link">
@@ -65,33 +64,35 @@ export const Header = () => {
         </ul>
       </nav>
 
-      {/* Search */}
-      <div className="relative flex items-center justify-center">
+      <div className="relative flex items-center justify-center w-[280px] h-[54px]">
         <div
-          className={`h-[54px] flex items-center relative transition-all duration-300 ${
+          className={`absolute top-0 left-1/2 -translate-x-1/2 h-[54px] flex items-center justify-center transition-all duration-300 z-20 ${
             isSearchDropdownOpen
-              ? "w-[516px] bg-[#00192D] rounded-t-[20px] px-6"
+              ? "w-[398px] bg-[#00192D] rounded-t-[20px]"
               : "w-[280px]"
           }`}
         >
-          <button
-            className={`absolute translate-x-[12px] top-1/2 -translate-y-1/2 z-10`}
+          <div
+            className={`relative flex items-center transition-all duration-300 ${
+              isSearchDropdownOpen ? "w-[350px]" : "w-[280px]"
+            }`}
           >
-            <SearchIcon />
-          </button>
-          <input
-            type="text"
-            placeholder="Search"
-            className="bg-white/20 text-white placeholder:text-gray-400 rounded-[50px] h-[40px] w-full pl-9 focus:outline-none"
-            onFocus={() => setIsSearchDropdownOpen(true)}
-            onBlur={() => setIsSearchDropdownOpen(false)}
-          />
+            <button className="absolute left-[12px] top-1/2 -translate-y-1/2 z-10">
+              <SearchIcon />
+            </button>
+            <input
+              type="text"
+              placeholder="Search"
+              className="bg-white/20 text-white text-[16px] placeholder:text-gray-400 rounded-[50px] h-[54px] w-full pl-12 focus:outline-none"
+              onFocus={() => setIsSearchDropdownOpen(true)}
+              onBlur={() => setIsSearchDropdownOpen(false)}
+            />
+          </div>
         </div>
 
-        {/* Dropdown */}
         {isSearchDropdownOpen && (
-          <div className="absolute top-[54px] left-0 w-full bg-[#00192D] rounded-b-[20px] p-6 z-20 search-dropdown">
-            <h2 className="text-[#FFFBE4] text-lg font-bold mb-4 search__title">
+          <div className="absolute top-[54px] left-1/2 -translate-x-1/2 w-[398px] bg-[#00192D] rounded-b-[20px] p-6 z-10 search__dropdown">
+            <h2 className="text-[#FFFBE4] text-[40px] font-bold mb-4 search__title">
               Filters
             </h2>
             <div className="search__chosen h-10"></div>
@@ -106,16 +107,16 @@ export const Header = () => {
         )}
       </div>
 
-      {/* User Actions */}
-      <div className="flex gap-6 items-center nav-actions">
-        <button className="h-full w-[100px] login cursor-pointer">
-          Log in
-        </button>
-        <button className="h-full w-[100px] border border-[#FFFBE4] rounded-[25px] signup cursor-pointer">
+      <div className="flex gap-[24px] items-center nav-actions">
+        <button className="w-[100px] h-[54px] login cursor-pointer">Log in</button>
+        <Link
+          to="/signup"
+          className="flex items-center justify-center w-[100px] h-[54px] border border-[#FFFBE4] rounded-[25px] signup cursor-pointer"
+        >
           Sign up
-        </button>
+        </Link>
         <div className="language relative">
-          <button className="h-full w-[100px] flex items-center justify-center gap-1 cursor-pointer">
+          <button className="w-[100px] h-[54px] flex items-center justify-center gap-1 cursor-pointer">
             {language}
             <ArrowDown />
           </button>
