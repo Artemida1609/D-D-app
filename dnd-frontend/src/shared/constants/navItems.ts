@@ -13,7 +13,7 @@ export const navItems = [
     path: "/equipment",
     subItems: [
       { title: "Weapons", path: "equipment/weapons" },
-      { title: "Armor", path: "equipment/armor" },
+      { title: "Armor", path: "equipment/armors" },
       { title: "Gear", path: "equipment/gear" },
     ],
   },

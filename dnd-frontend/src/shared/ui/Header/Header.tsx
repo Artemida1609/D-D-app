@@ -18,45 +18,53 @@ export const Header = ({ setActiveAside }: { setActiveAside: (active: boolean) =
   }, []);
 
   return (
-    <header className="flex justify-between items-center w-full z-50 px-6 py-2 relative header">
+    <header className="flex justify-between items-center w-full z-50 relative header">
       {!isMobile ? (
         <>
           {/* Navigation */}
-          <nav>
-            <ul className="flex gap-[48px] justify-start items-center">
-              {navItems.map((item) => (
-                <li className="nav-item" key={item.path}>
-                  <Link
-                    to={item.path}
-                    className="cursor-pointer nav-item__link"
-                  >
-                    {item.title}
-                  </Link>
-                  {item.subItems && (
-                    <ul className="nav-item__dropdown">
-                      {item.subItems?.map((subItem) => (
-                        <li
-                          className="nav-item__dropdown-link"
-                          key={subItem.path}
-                        >
-                          <Link to={subItem.path}>{subItem.title}</Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <div className="flex items-center gap-[48px]">
+            <Link to="/">
+              <DnDIcon />
+            </Link>
+            <nav>
+              <ul className="flex gap-[32px] justify-start items-center">
+                {navItems.map((item) => (
+                  <li className="nav-item" key={item.path}>
+                    <Link
+                      to={item.path}
+                      className="cursor-pointer nav-item__link"
+                    >
+                      {item.title}
+                    </Link>
+                    {item.subItems && (
+                      <ul className="nav-item__dropdown">
+                        {item.subItems?.map((subItem) => (
+                          <li
+                            className="nav-item__dropdown-link"
+                            key={subItem.path}
+                          >
+                            <Link to={subItem.path}>{subItem.title}</Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
 
           {/* Search */}
           <SearchFilters variant="header" />
 
           {/* Navigation Actions */}
           <div className="flex gap-[24px] items-center nav-actions">
-            <button className="w-[100px] h-[54px] login cursor-pointer">
+            <Link
+              to="/login"
+              className="flex items-center justify-center w-[100px] h-[54px] login cursor-pointer"
+            >
               Log in
-            </button>
+            </Link>
             <Link
               to="/signup"
               className="flex items-center justify-center w-[100px] h-[54px] border border-[#FFFBE4] rounded-[25px] signup cursor-pointer"
@@ -82,10 +90,15 @@ export const Header = ({ setActiveAside }: { setActiveAside: (active: boolean) =
       ) : (
         <>
           {/* Mobile Header */}
-          <div className="flex items-center justify-between w-full h-10 px-4">
+          <div className="flex items-center justify-between w-full h-10">
             <Link to="/">
               <DnDIcon />
             </Link>
+            
+            <div className="hidden md:block">
+              <SearchFilters variant="header" />
+            </div>
+
             <span className="cursor-pointer" onClick={() => setActiveAside(true)}>
               <BurgerMenuIcon />
             </span>

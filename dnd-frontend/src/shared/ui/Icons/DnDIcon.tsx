@@ -1,8 +1,7 @@
 export const DnDIcon = () => {
   return (
     <svg
-      width="61"
-      height="21"
+      className="w-[63px] h-[39px] md:w-[110px] md:h-[68px]"
       viewBox="0 0 61 21"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
