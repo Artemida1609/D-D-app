@@ -3,8 +3,8 @@ import { DnDIcon } from "../Icons/DnDIcon";
 import { BurgerMenuIcon } from "../Icons/BurgerMenuIcon";
 import { navItems } from "../../constants/navItems";
 import { ArrowLeft } from "../Icons/ArrowLeft";
-import "./SideBar.scss";
 import { SearchFilters } from "../SearchFilters/SearchFilters";
+import "./SideBar.scss";
 
 export const SideBar = ({
   setActiveAside,

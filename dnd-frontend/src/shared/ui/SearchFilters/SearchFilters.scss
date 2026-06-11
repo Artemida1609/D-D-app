@@ -1,6 +1,13 @@
 @use "../../styles/mixins" as *;
 
 .search {
+  box-sizing: border-box;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
   // ── Header режим (дефолт) ──────────────────────────────────
   position: relative;
   display: flex;
@@ -64,8 +71,12 @@
     width: 100%;
     padding-left: 48px;
 
-    &::placeholder { color: #9ca3af; }
-    &:focus { outline: none; }
+    &::placeholder {
+      color: #9ca3af;
+    }
+    &:focus {
+      outline: none;
+    }
   }
 
   &__dropdown {
@@ -73,7 +84,8 @@
     left: 50%;
     transform: translateX(-50%);
     top: 40px;
-    width: 398px;
+    width: 280px;
+
     background: #00192d;
     font-family: "Manrope", sans-serif;
     font-size: 20px;
@@ -87,10 +99,14 @@
     transition: all 0.3s ease;
 
     &--open {
-      top: 54px;
+      // top: 54px;
+      top: 100%;
+      width: 398px;
       opacity: 1;
       pointer-events: auto;
       border-color: #fffbe4;
+      // margin-top: -25px;
+      // margin-top: -3px;
     }
 
     &-btn {
@@ -148,7 +164,9 @@
       text-shadow 0.3s ease,
       transform 0.25s ease;
 
-    &:hover { transform: translateX(6px); }
+    &:hover {
+      transform: translateX(6px);
+    }
 
     &--active {
       padding: 8px 12px;
@@ -280,8 +298,8 @@
     }
 
     .search__lists {
-      display: flex;        // явно flex
-      flex-direction: row;  // явно row
+      display: flex; // явно flex
+      flex-direction: row; // явно row
       margin-bottom: 16px;
     }
 

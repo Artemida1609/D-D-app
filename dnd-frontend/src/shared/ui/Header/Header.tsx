@@ -7,20 +7,63 @@ import { BurgerMenuIcon } from "../Icons/BurgerMenuIcon";
 import { navItems } from "../../constants/navItems";
 import { SearchFilters } from "../SearchFilters/SearchFilters";
 
-export const Header = ({ setActiveAside }: { setActiveAside: (active: boolean) => void }) => {
+export const Header = ({
+  setActiveAside,
+}: {
+  setActiveAside: (active: boolean) => void;
+}) => {
   const [language, setLanguage] = useState("EN");
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
+  const [isTablet, setIsTablet] = useState(() => window.innerWidth < 1350);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 992);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+      setIsTablet(window.innerWidth < 1350);
+    };
+
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
     <header className="flex justify-between items-center w-full z-50 relative header">
-      {!isMobile ? (
+      {isMobile && (
+        <div className="flex items-center justify-between w-full h-10 px-4">
+          <Link to="/">
+            <DnDIcon />
+          </Link>
+
+          {/* <div className="hidden md:block">
+            <SearchFilters variant="header" />
+          </div> */}
+
+          <span className="cursor-pointer" onClick={() => setActiveAside(true)}>
+            <BurgerMenuIcon />
+          </span>
+        </div>
+      )}
+
+      {isTablet && !isMobile && (
+        <div className="flex items-center justify-between w-full h-10 px-10">
+          <Link to="/">
+            <DnDIcon />
+          </Link>
+
+          <div className="">
+            <SearchFilters variant="header" />
+          </div>
+
+          <span className="cursor-pointer" onClick={() => setActiveAside(true)}>
+            <BurgerMenuIcon />
+          </span>
+        </div>
+      )}
+
+      {!isTablet && !isMobile && (
         <>
+          {/* Laptop */}
+
           {/* Navigation */}
           <div className="flex items-center gap-[48px]">
             <Link to="/">
@@ -42,6 +85,7 @@ export const Header = ({ setActiveAside }: { setActiveAside: (active: boolean) =
                           <li
                             className="nav-item__dropdown-link"
                             key={subItem.path}
+                            onClick={(e) => e.currentTarget.blur()}
                           >
                             <Link to={subItem.path}>{subItem.title}</Link>
                           </li>
@@ -85,23 +129,6 @@ export const Header = ({ setActiveAside }: { setActiveAside: (active: boolean) =
                 </li>
               </ul>
             </div>
-          </div>
-        </>
-      ) : (
-        <>
-          {/* Mobile Header */}
-          <div className="flex items-center justify-between w-full h-10">
-            <Link to="/">
-              <DnDIcon />
-            </Link>
-            
-            <div className="hidden md:block">
-              <SearchFilters variant="header" />
-            </div>
-
-            <span className="cursor-pointer" onClick={() => setActiveAside(true)}>
-              <BurgerMenuIcon />
-            </span>
           </div>
         </>
       )}
