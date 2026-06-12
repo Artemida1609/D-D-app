@@ -1,0 +1,60 @@
+@use "../../styles/mixins" as *;
+
+.language {
+  position: relative;
+
+  &__dropdown {
+    @include dropdown-base;
+
+    &--aside {
+      left: 15%;
+      top: 110%;
+    }
+  }
+
+  &__option {
+    @include dropdown-item-hover;
+
+    button {
+      cursor: pointer;
+      width: 100%;
+    }
+  }
+
+  &:hover &__dropdown {
+    display: flex;
+    pointer-events: auto;
+  }
+}
+
+.nav-actions {
+  button,
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      color 0.25s ease,
+      text-shadow 0.3s ease,
+      border-color 0.25s ease;
+
+    &:hover {
+      color: var(--accent-hover);
+      text-shadow: 0 0 12px var(--accent-hover);
+    }
+  }
+
+  &--aside {
+    a,
+    button {
+      font-size: 24px;
+      font-weight: 500;
+    }
+  }
+
+  .signup {
+    &:hover {
+      border-color: var(--accent-hover);
+    }
+  }
+}

@@ -1,18 +1,19 @@
 import { Link } from "react-router-dom";
 import "./Header.scss";
-import { ArrowDown } from "../Icons/ArrowDown";
+// import { ArrowDown } from "../Icons/ArrowDown";
 import { useEffect, useState } from "react";
 import { DnDIcon } from "../Icons/DnDIcon";
 import { BurgerMenuIcon } from "../Icons/BurgerMenuIcon";
 import { navItems } from "../../constants/navItems";
 import { SearchFilters } from "../SearchFilters/SearchFilters";
+import { NavActions } from "../NavActions/NavActions";
 
 export const Header = ({
   setActiveAside,
 }: {
   setActiveAside: (active: boolean) => void;
 }) => {
-  const [language, setLanguage] = useState("EN");
+  // const [language, setLanguage] = useState("EN");  
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
   const [isTablet, setIsTablet] = useState(() => window.innerWidth < 1350);
 
@@ -63,7 +64,6 @@ export const Header = ({
       {!isTablet && !isMobile && (
         <>
           {/* Laptop */}
-
           {/* Navigation */}
           <div className="flex items-center gap-[48px]">
             <Link to="/">
@@ -102,34 +102,8 @@ export const Header = ({
           <SearchFilters variant="header" />
 
           {/* Navigation Actions */}
-          <div className="flex gap-[24px] items-center nav-actions">
-            <Link
-              to="/login"
-              className="flex items-center justify-center w-[100px] h-[54px] login cursor-pointer"
-            >
-              Log in
-            </Link>
-            <Link
-              to="/signup"
-              className="flex items-center justify-center w-[100px] h-[54px] border border-[#FFFBE4] rounded-[25px] signup cursor-pointer"
-            >
-              Sign up
-            </Link>
-            <div className="language relative">
-              <button className="w-[100px] flex items-center justify-center gap-1 cursor-pointer">
-                {language}
-                <ArrowDown />
-              </button>
-              <ul className="language__dropdown">
-                <li className="language__option">
-                  <button onClick={() => setLanguage("EN")}>EN</button>
-                </li>
-                <li className="language__option">
-                  <button onClick={() => setLanguage("UKR")}>UKR</button>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <NavActions isAside={false} />
+
         </>
       )}
     </header>
