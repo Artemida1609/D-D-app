@@ -5,8 +5,7 @@ export const HomePage = () => {
   return (
     <>
       <div
-        className="fixed top-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat -z-10"
-        style={{ backgroundImage: 'url("/images/bg/hero-bg/hero-bg.webp")' }}
+        className="fixed top-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat -z-10 home-page__bg"
       />
       <section className="flex-1 flex flex-col items-center justify-center gap-12 w-full pt-[10vh]">
         <h1 className="flex text-center align-center justify-center home-page__title">

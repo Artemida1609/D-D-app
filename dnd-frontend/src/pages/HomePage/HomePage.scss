@@ -1,6 +1,18 @@
 @use "../../shared/styles/mixins.scss" as *;
 
 .home-page {
+  &__bg {
+    background-image: url("/images/bg/hero-bg/hero-bg-desktop.webp");
+
+    @include tablet {
+      background-image: url("/images/bg/hero-bg/hero-bg-tablet.webp");
+    }
+
+    @include mobile {
+      background-image: url("/images/bg/hero-bg/hero-bg-mobile.webp");
+    }
+  }
+
   &__title {
     font-family: "Cormorant Unicase", serif;
     font-size: 32px;

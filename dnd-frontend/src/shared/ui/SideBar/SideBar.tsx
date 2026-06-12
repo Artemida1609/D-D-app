@@ -18,9 +18,9 @@ export const SideBar = ({
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   return (
-    <aside className="sidebar absolute w-screen h-screen bg-[#00192D] text-[#FFFBE4] p-6 pt-11 z-99 flex flex-col">
+    <aside className="sidebar absolute w-screen h-screen bg-[#00192D] text-[#FFFBE4] px-4 md:px-10 pb-6 pt-11 z-99 flex flex-col">
       <div className="flex items-center justify-between w-full h-10 mb-8">
-        <Link to="/">
+        <Link to="/" onClick={() => setActiveAside(false)}>
           <DnDIcon />
         </Link>
         <span className="cursor-pointer" onClick={() => setActiveAside(false)}>
@@ -39,22 +39,34 @@ export const SideBar = ({
 
       {navItems.map((item) => (
         <ul key={item.title} className="mb-4">
-          <li
-            className="flex items-center cursor-pointer mb-4 title"
-            onClick={() =>
-              setActiveCategory(
-                activeCategory === item.title ? null : item.title,
-              )
-            }
-          >
-            {item.title}
+          <li className="flex items-center mb-4 title">
+            <Link
+              to={item.path}
+              className="cursor-pointer flex-1"
+              onClick={() => setActiveAside(false)}
+            >
+              {item.title}
+            </Link>
             {item.subItems && (
-              <ArrowDown
-                className={`ml-4 ${activeCategory === item.title ? "arrow-up" : "arrow-down"}`}
-              />
+              <span
+                className="cursor-pointer px-2 py-1 ml-4"
+                onClick={() =>
+                  setActiveCategory(
+                    activeCategory === item.title ? null : item.title,
+                  )
+                }
+              >
+                <ArrowDown
+                  className={activeCategory === item.title ? "arrow-up" : "arrow-down"}
+                />
+              </span>
             )}
           </li>
-          <SubItems item={item} activeCategory={activeCategory} />
+          <SubItems 
+            item={item} 
+            activeCategory={activeCategory} 
+            setActiveAside={setActiveAside} 
+          />
         </ul>
       ))}
 
@@ -77,36 +89,25 @@ export const SideBar = ({
 
       <div className="w-full h-[1px] bg-[#FFFBE4] mb-6"></div>
 
-      <NavActions isAside={true} />
+      <NavActions isAside={true} closeSidebar={() => setActiveAside(false)} />
 
       {/* <SearchFilters variant="sidebar" /> */}
 
-      <div className="mt-auto">
-        <div className="sidebar__bottom-nav flex justify-center items-center gap-6 py-6">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className="sidebar__bottom-item text-sm text-[#FFFBE4] opacity-80"
-            >
-              {item.title}
-            </Link>
-          ))}
-        </div>
-      </div>
     </aside>
   );
 };
 
-type SubItem = { title: string };
-type NavItem = { title: string; subItems?: SubItem[] };
+type SubItem = { title: string; path: string };
+type NavItem = { title: string; path: string; subItems?: SubItem[] };
 
 const SubItems = ({
   item,
   activeCategory,
+  setActiveAside,
 }: {
   item: NavItem;
   activeCategory: string | null;
+  setActiveAside: (active: boolean) => void;
 }) => {
   const ref = useRef<HTMLUListElement>(null);
   const [height, setHeight] = useState("0px");
@@ -120,10 +121,20 @@ const SubItems = ({
   }, [activeCategory, item.title]);
 
   return (
-    <ul ref={ref} style={{ height }} className="pl-8 sub-items__list">
+    <ul 
+      ref={ref} 
+      style={{ height, overflow: "hidden", transition: "height 0.3s ease" }} 
+      className="pl-8 sub-items__list"
+    >
       {item.subItems?.map((sub: SubItem) => (
-        <li key={sub.title} className="cursor-pointer mb-4 sub-title">
-          {sub.title}
+        <li key={sub.title} className="mb-4 sub-title">
+          <Link
+            to={sub.path}
+            className="cursor-pointer block"
+            onClick={() => setActiveAside(false)}
+          >
+            {sub.title}
+          </Link>
         </li>
       ))}
     </ul>
