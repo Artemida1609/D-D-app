@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
 import { filterCategories } from "../../constants/filterCategories";
 import { CloseIcon } from "../Icons/CloseIcon";
 import { SearchIcon } from "../Icons/SearchIcon";
 import { Button } from "../Icons/Button";
+import { useSearchFilters } from "../../hooks/useSearchFilters";
 import "./SearchFilters.scss";
 
 export const SearchFilters = ({
@@ -14,35 +14,22 @@ export const SearchFilters = ({
 }) => {
   const isSidebar = variant === "sidebar";
 
-  const [isOpen, setIsOpen] = useState(isSidebar);
-  const [activeCategory, setActiveCategory] = useState(filterCategories[0].category);
-  const [chosenSubcategories, setChosenSubcategories] = useState<string[]>([]);
-  const [showAllChosen, setShowAllChosen] = useState(false);
-  const searchRef = useRef<HTMLDivElement>(null);
-
-  const handleRemove = (sub: string) =>
-    setChosenSubcategories((prev) => prev.filter((v) => v !== sub));
-
-  const handleAdd = (sub: string) =>
-    setChosenSubcategories((prev) => (prev.includes(sub) ? prev : [...prev, sub]));
-
-  useEffect(() => {
-    if (isSidebar) return;
-    const handleClickOutside = (e: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isSidebar]);
+  const {
+    isOpen, setIsOpen,
+    activeCategory, setActiveCategory,
+    chosenSubcategories,
+    showAllChosen, setShowAllChosen,
+    visibleChosen,
+    searchRef,
+    handleRemove,
+    handleToggle,
+  } = useSearchFilters(isSidebar);
 
   return (
     <div
       ref={searchRef}
       className={`search ${isSidebar ? "search--sidebar" : ""} ${className ?? ""}`}
     >
-      {/* Input */}
       <div className={`search__input-wrapper ${isOpen ? "search__input-wrapper--open" : ""}`}>
         <div className="search__input-inner">
           <button className="search__input-icon">
@@ -52,18 +39,16 @@ export const SearchFilters = ({
             type="text"
             placeholder="Search"
             className="search__input"
-            onFocus={() => !isSidebar && setIsOpen(true)}
+            onFocus={() => setIsOpen(true)}
           />
         </div>
       </div>
 
-      {/* Dropdown / filters panel */}
       <div className={`search__dropdown ${isOpen ? "search__dropdown--open" : ""}`}>
         <h2 className="search__title">Filters</h2>
 
-        {/* Chosen tags */}
         <div className={`search__chosen ${showAllChosen ? "search__chosen--expanded" : ""}`}>
-          {(showAllChosen ? chosenSubcategories : chosenSubcategories.slice(0, 2)).map((sub) => (
+          {visibleChosen.map((sub) => (
             <span key={sub} className="search__chosen-item">
               <p>{sub}</p>
               <span className="cursor-pointer" onClick={() => handleRemove(sub)}>
@@ -81,31 +66,30 @@ export const SearchFilters = ({
           )}
         </div>
 
-        {/* Lists */}
         <div className="search__lists">
           <ul className="search__list search__list--categories">
-            {filterCategories.map((category) => (
+            {filterCategories.map(({ category }) => (
               <li
-                key={category.category}
+                key={category}
                 className={`search__list-item cursor-pointer ${
-                  activeCategory === category.category ? "search__list-item--active" : ""
+                  activeCategory === category ? "search__list-item--active" : ""
                 }`}
-                onClick={() => setActiveCategory(category.category)}
+                onClick={() => setActiveCategory(category)}
               >
-                <span>{category.category}</span>
+                <span>{category}</span>
               </li>
             ))}
           </ul>
           <div className="search__divider" />
           <ul className="search__list search__list--subcategories">
-            {filterCategories.map((category) =>
-              category.subcategories.map((sub) => (
+            {filterCategories.map(({ category, subcategories }) =>
+              subcategories.map((sub) => (
                 <li
                   key={sub}
                   className={`search__list-item cursor-pointer ${
-                    activeCategory === category.category ? "" : "search__list-item--hidden"
+                    activeCategory !== category ? "search__list-item--hidden" : ""
                   }`}
-                  onClick={() => handleAdd(sub)}
+                  onClick={() => handleToggle(sub)}
                 >
                   <span className={chosenSubcategories.includes(sub) ? "search__list-item--chosen" : ""}>
                     {sub}

@@ -7,15 +7,17 @@ import { BurgerMenuIcon } from "../Icons/BurgerMenuIcon";
 import { navItems } from "../../constants/navItems";
 import { SearchFilters } from "../SearchFilters/SearchFilters";
 import { NavActions } from "../NavActions/NavActions";
+import { NavCategories } from "../NavCategories/NavCategories";
 
 export const Header = ({
   setActiveAside,
 }: {
   setActiveAside: (active: boolean) => void;
 }) => {
-  // const [language, setLanguage] = useState("EN");  
+  // const [language, setLanguage] = useState("EN");
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
   const [isTablet, setIsTablet] = useState(() => window.innerWidth < 1350);
+  const [isActiveBurgerDropdown, setIsActiveBurgerDropdown] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -55,9 +57,19 @@ export const Header = ({
             <SearchFilters variant="header" />
           </div>
 
-          <span className="cursor-pointer" onClick={() => setActiveAside(true)}>
+          <span
+            className="cursor-pointer"
+            onClick={() => setIsActiveBurgerDropdown((prev) => !prev)}
+          >
             <BurgerMenuIcon />
           </span>
+          <div
+            className={`border border-[#FFFBE4] rounded-[20px] absolute top-[70px] right-0 bg-[#00192D] p-6 mr-6 z-50 ${isActiveBurgerDropdown ? "block" : "hidden"}`}
+          >
+            <NavCategories isTablet={true} />
+            <div className="h-[1px] bg-[#FFFBE4] mb-4"></div>
+            <NavActions isAside={true} isTablet={true} />
+          </div>
         </div>
       )}
 
@@ -103,7 +115,6 @@ export const Header = ({
 
           {/* Navigation Actions */}
           <NavActions isAside={false} />
-
         </>
       )}
     </header>

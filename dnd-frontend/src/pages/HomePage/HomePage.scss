@@ -19,6 +19,10 @@
     font-weight: 700;
     color: #fffbe4;
 
+    @include tablet {
+      font-size: 48px;
+    }
+
     @include desktop {
       font-size: 56px;
     }

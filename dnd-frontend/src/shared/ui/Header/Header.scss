@@ -38,3 +38,45 @@
     pointer-events: auto;
   }
 }
+
+.burger-menu {
+  // display: none;
+  // position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateY(50%);
+  z-index: 100;
+
+  &:hover {
+    display: flex;
+  }
+}
+
+.burger-icon {
+  overflow: visible;
+}
+
+.burger-icon line {
+  stroke: #fffbe4;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+
+  transform-box: fill-box;
+  transform-origin: center;
+
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.burger-icon.open .top {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.burger-icon.open .middle {
+  opacity: 0;
+}
+
+.burger-icon.open .bottom {
+  transform: translateY(-8px) rotate(-45deg);
+}

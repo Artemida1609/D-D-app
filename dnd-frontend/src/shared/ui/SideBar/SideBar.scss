@@ -29,34 +29,7 @@
     font-size: 32px;
     font-weight: 500;
   }
-}
 
-.title {
-  font-family: "Manrope", sans-serif;
-  font-size: 24px;
-  font-weight: 500;
-}
-
-.sub-title {
-  font-family: "Manrope", sans-serif;
-  font-size: 20px;
-  font-weight: 400;
-}
-
-.sub-items__list {
-  overflow: hidden;
-  transition: height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.arrow-down {
-  transition: transform 0.3s ease-in-out;
-}
-
-.arrow-up {
-  transform: rotate(-180deg);
-  transition: transform 0.3s ease-in-out;
-}
-.sidebar {
   &__search {
     position: relative;
     display: flex;
@@ -94,5 +67,56 @@
         outline: none;
       }
     }
+  }
+
+  &__title {
+    font-family: "Manrope", sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+  }
+
+  .search--sidebar {
+    .search__title {
+      font-size: 32px;
+      font-family: "Manrope", sans-serif;
+      font-weight: 500;
+    }
+
+    .search__list {
+      font-size: 20px;
+    }
+
+    .search__chosen {
+      max-height: 56px;
+    }
+
+    .search__chosen--expanded {
+      max-height: 160px;
+    }
+
+    .search__chosen-item {
+      height: 56px;
+    }
+
+    .search__chosen-more {
+      height: 56px; 
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .search__lists {
+      margin-bottom: 32px;
+    }
+
+    .search__dropdown-btn {
+      font-size: 24px;
+      font-weight: 500;
+    }
+  }
+
+  &__back-text {
+    font-family: "Cormorant Unicase", sans-serif;
+    font-size: 32px;
+    font-weight: 700;
   }
 }
