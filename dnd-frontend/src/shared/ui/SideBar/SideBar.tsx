@@ -12,12 +12,14 @@ import { Button } from "../Icons/Button";
 import { CloseIcon } from "../Icons/CloseIcon";
 import { useSearchFilters } from "../../hooks/useSearchFilters";
 import { filterCategories } from "../../constants/filterCategories";
+import { useTranslation } from "react-i18next";
 
 export const SideBar = ({
   setActiveAside,
 }: {
   setActiveAside: (active: boolean) => void;
 }) => {
+  const { t } = useTranslation();
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const { 
       activeCategory, setActiveCategory,
@@ -146,7 +148,7 @@ export const SideBar = ({
           >
             {visibleChosen.map((sub) => (
               <span key={sub} className="search__chosen-item ">
-                <p>{sub}</p>
+                <p>{t(sub)}</p>
                 <span
                   className="cursor-pointer"
                   onClick={() => handleRemove(sub)}
@@ -169,28 +171,28 @@ export const SideBar = ({
 
           <div className="search__lists">
             <ul className="search__list search__list--categories">
-              {filterCategories.map(({ category }) => (
+              {filterCategories.map(({ categoryKey }) => (
                 <li
-                  key={category}
+                  key={categoryKey}
                   className={`search__list-item cursor-pointer ${
-                    activeCategory === category
+                    activeCategory === categoryKey
                       ? "search__list-item--active"
                       : ""
                   }`}
-                  onClick={() => setActiveCategory(category)}
+                  onClick={() => setActiveCategory(categoryKey)}
                 >
-                  <span>{category}</span>
+                  <span>{t(categoryKey)}</span>
                 </li>
               ))}
             </ul>
             <div className="search__divider" />
             <ul className="search__list search__list--subcategories">
-              {filterCategories.map(({ category, subcategories }) =>
+              {filterCategories.map(({ categoryKey, subcategories }) =>
                 subcategories.map((sub) => (
                   <li
                     key={sub}
                     className={`search__list-item cursor-pointer ${
-                      activeCategory !== category
+                      activeCategory !== categoryKey
                         ? "search__list-item--hidden"
                         : ""
                     }`}
@@ -203,7 +205,7 @@ export const SideBar = ({
                           : ""
                       }
                     >
-                      {sub}
+                      {t(sub)}
                     </span>
                   </li>
                 )),
