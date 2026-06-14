@@ -8,6 +8,8 @@ import { EquipmentPage } from "./pages/EquipmentPage/EquipmentPage";
 import { MagicPage } from "./pages/MagicPage/MagicPage";
 import { CategoryListPage } from "./pages/CategoryListPage/CategoryListPage";
 import { DetailPage } from "./pages/DetailPage/DetailPage";
+import { DevAuthToggle } from "./shared/ui/DevAuthToggle/DevAuthToggle";
+import { FavoritesPage } from "./pages/FavoritesPage/FavoritesPage";
 import {
   mockSpecies,
   mockClasses,
@@ -95,11 +97,14 @@ export function App() {
           {/* OTHER PAGES */}
           <Route path="login" element={<LoginPage />} />
           <Route path="signup" element={<SignUpPage />} />
-          <Route path="favorites" element={<></>} />
+          <Route path="favorites" element={<FavoritesPage />} />
           <Route path="account" element={<></>} />
           <Route path="*" element={<></>} />
         </Route>
       </Routes>
+
+      {/* !!! DEV !!! */}
+      <DevAuthToggle />
     </BrowserRouter>
   );
 }

@@ -3,6 +3,7 @@ import { ArrowDown } from "../Icons/ArrowDown";
 import { useState } from "react";
 import "./NavActions.scss";
 import { useCollapse } from "../../hooks/useCollapse";
+import { useAuthStore } from "../../store/authStore";
 
 interface NavActionsProps {
   isAside: boolean;
@@ -14,6 +15,7 @@ export const NavActions = ({ isAside, closeSidebar, isTablet }: NavActionsProps)
   const [language, setLanguage] = useState("EN");
   const [isLangOpen, setIsLangOpen] = useState(false);
   const { ref, height } = useCollapse(isAside && isLangOpen);
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
 
   const handleSelect = (lang: string) => {
     setLanguage(lang);
@@ -22,20 +24,41 @@ export const NavActions = ({ isAside, closeSidebar, isTablet }: NavActionsProps)
 
   return (
     <div className={`flex gap-[24px] nav-actions ${isAside ? "flex-col nav-actions--aside" : "items-center"}`}>
-      <Link
-        to="/login"
-        className={`flex items-center justify-center login cursor-pointer ${isAside ? "h-auto self-start" : "h-[54px] w-[100px]"}`}
-        onClick={closeSidebar}
-      >
-        Log in
-      </Link>
-      <Link
-        to="/signup"
-        className={`flex items-center justify-center signup ${isAside ? "h-auto self-start" : "border border-[#FFFBE4] rounded-[25px] h-[54px] w-[100px]"} cursor-pointer`}
-        onClick={closeSidebar}
-      >
-        Sign up
-      </Link>
+      {isLoggedIn ? (
+        <>
+          <Link
+            to="/favorites"
+            className={`flex items-center justify-center login cursor-pointer ${isAside ? "h-auto self-start" : "h-[54px] w-[100px]"}`}
+            onClick={closeSidebar}
+          >
+            Favorites
+          </Link>
+          <Link
+            to="/account"
+            className={`flex items-center justify-center signup ${isAside ? "h-auto self-start" : "border border-[#FFFBE4] rounded-[25px] h-[54px] w-[100px]"} cursor-pointer`}
+            onClick={closeSidebar}
+          >
+            Account
+          </Link>
+        </>
+      ) : (
+        <>
+          <Link
+            to="/login"
+            className={`flex items-center justify-center login cursor-pointer ${isAside ? "h-auto self-start" : "h-[54px] w-[100px]"}`}
+            onClick={closeSidebar}
+          >
+            Log in
+          </Link>
+          <Link
+            to="/signup"
+            className={`flex items-center justify-center signup ${isAside ? "h-auto self-start" : "border border-[#FFFBE4] rounded-[25px] h-[54px] w-[100px]"} cursor-pointer`}
+            onClick={closeSidebar}
+          >
+            Sign up
+          </Link>
+        </>
+      )}
 
       <div className="language relative">
         {isAside ? (
