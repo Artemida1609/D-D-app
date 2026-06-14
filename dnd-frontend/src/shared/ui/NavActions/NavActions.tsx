@@ -4,6 +4,8 @@ import { useState } from "react";
 import "./NavActions.scss";
 import { useCollapse } from "../../hooks/useCollapse";
 import { useAuthStore } from "../../store/authStore";
+import { useLangStore } from "../../store/languageStore";
+import { useTranslation } from "react-i18next";
 
 interface NavActionsProps {
   isAside: boolean;
@@ -12,13 +14,16 @@ interface NavActionsProps {
 }
 
 export const NavActions = ({ isAside, closeSidebar, isTablet }: NavActionsProps) => {
-  const [language, setLanguage] = useState("EN");
+  const language = useLangStore((state) => state.lang);
+  const toggleLang = useLangStore((state) => state.toggleLang);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const { ref, height } = useCollapse(isAside && isLangOpen);
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+  const { i18n } = useTranslation();
 
-  const handleSelect = (lang: string) => {
-    setLanguage(lang);
+  const handleSelect = (option: string) => {
+    toggleLang(option);
+    i18n.changeLanguage(option.toLowerCase());
     setIsLangOpen(false);
   };
 
@@ -76,7 +81,7 @@ export const NavActions = ({ isAside, closeSidebar, isTablet }: NavActionsProps)
               className={`language__dropdown--aside-animated flex flex-col gap-4 ${isTablet ? "pl-6" : "pl-8"}`}
             >
               <li className="language__option self-start"><button onClick={() => handleSelect("EN")}>EN</button></li>
-              <li className="language__option self-start"><button onClick={() => handleSelect("UKR")}>UKR</button></li>
+              <li className="language__option self-start"><button onClick={() => handleSelect("UA")}>UA</button></li>
             </ul>
           </>
         ) : (
@@ -87,7 +92,7 @@ export const NavActions = ({ isAside, closeSidebar, isTablet }: NavActionsProps)
             </button>
             <ul className="language__dropdown">
               <li className="language__option"><button onClick={() => handleSelect("EN")}>EN</button></li>
-              <li className="language__option"><button onClick={() => handleSelect("UKR")}>UKR</button></li>
+              <li className="language__option"><button onClick={() => handleSelect("UA")}>UA</button></li>
             </ul>
           </>
         )}

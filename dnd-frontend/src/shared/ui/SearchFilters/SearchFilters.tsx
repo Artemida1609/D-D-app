@@ -4,6 +4,7 @@ import { SearchIcon } from "../Icons/SearchIcon";
 import { Button } from "../Icons/Button";
 import { useSearchFilters } from "../../hooks/useSearchFilters";
 import "./SearchFilters.scss";
+import { useTranslation } from "react-i18next";
 
 export const SearchFilters = ({
   className,
@@ -13,6 +14,7 @@ export const SearchFilters = ({
   variant?: "header" | "sidebar";
 }) => {
   const isSidebar = variant === "sidebar";
+  const { t } = useTranslation();
 
   const {
     isOpen, setIsOpen,
@@ -50,7 +52,7 @@ export const SearchFilters = ({
         <div className={`search__chosen ${showAllChosen ? "search__chosen--expanded" : ""}`}>
           {visibleChosen.map((sub) => (
             <span key={sub} className="search__chosen-item">
-              <p>{sub}</p>
+              <p>{t(sub)}</p>
               <span className="cursor-pointer" onClick={() => handleRemove(sub)}>
                 <CloseIcon />
               </span>
@@ -68,31 +70,31 @@ export const SearchFilters = ({
 
         <div className="search__lists">
           <ul className="search__list search__list--categories">
-            {filterCategories.map(({ category }) => (
+            {filterCategories.map(({ categoryKey }) => (
               <li
-                key={category}
+                key={categoryKey}
                 className={`search__list-item cursor-pointer ${
-                  activeCategory === category ? "search__list-item--active" : ""
+                  activeCategory === categoryKey ? "search__list-item--active" : ""
                 }`}
-                onClick={() => setActiveCategory(category)}
+                onClick={() => setActiveCategory(categoryKey)}
               >
-                <span>{category}</span>
+                <span>{t(categoryKey)}</span>
               </li>
             ))}
           </ul>
           <div className="search__divider" />
           <ul className="search__list search__list--subcategories">
-            {filterCategories.map(({ category, subcategories }) =>
+            {filterCategories.map(({ categoryKey, subcategories }) =>
               subcategories.map((sub) => (
                 <li
                   key={sub}
                   className={`search__list-item cursor-pointer ${
-                    activeCategory !== category ? "search__list-item--hidden" : ""
+                    activeCategory !== categoryKey ? "search__list-item--hidden" : ""
                   }`}
                   onClick={() => handleToggle(sub)}
                 >
                   <span className={chosenSubcategories.includes(sub) ? "search__list-item--chosen" : ""}>
-                    {sub}
+                    {t(sub)}
                   </span>
                 </li>
               ))

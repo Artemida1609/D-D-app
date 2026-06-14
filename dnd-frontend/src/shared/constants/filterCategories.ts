@@ -1,22 +1,49 @@
 export const filterCategories = [
   {
-    category: "Species",
-    subcategories: ["Humanoid", "Beast", "Undead", "Dragon", "Giant"],
+    categoryKey: "filters.species",
+    subcategories: [
+      "filters.humanoid",
+      "filters.beast",
+      "filters.undead",
+      "filters.dragon",
+      "filters.giant",
+    ],
   },
   {
-    category: "Classes",
-    subcategories: ["Warrior", "Mage", "Rogue", "Cleric", "Ranger"],
+    categoryKey: "filters.classes",
+    subcategories: [
+      "filters.warrior",
+      "filters.mage",
+      "filters.rogue",
+      "filters.cleric",
+      "filters.ranger",
+    ],
   },
   {
-    category: "Weapons",
-    subcategories: ["Melee", "Ranged", "Magic", "Siege"],
+    categoryKey: "filters.weapons",
+    subcategories: [
+      "filters.melee",
+      "filters.ranged",
+      "filters.magic",
+      "filters.siege",
+    ],
   },
   {
-    category: "Armors",
-    subcategories: ["Light", "Medium", "Heavy", "Shields"],
+    categoryKey: "filters.armors",
+    subcategories: [
+      "filters.light",
+      "filters.medium",
+      "filters.heavy",
+      "filters.shields",
+    ],
   },
   {
-    category: "Spells",
-    subcategories: ["Offensive", "Defensive", "Utility", "Healing"],
+    categoryKey: "filters.spells",
+    subcategories: [
+      "filters.offensive",
+      "filters.defensive",
+      "filters.utility",
+      "filters.healing",
+    ],
   },
 ];

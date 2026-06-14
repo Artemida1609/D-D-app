@@ -1,0 +1,49 @@
+{
+  "nav": {
+    "character": "Character",
+    "species": "Species",
+    "classes": "Classes",
+    "skills": "Skills",
+    "equipment": "Equipment",
+    "weapons": "Weapons",
+    "armor": "Armor",
+    "gear": "Gear",
+    "magic": "Magic",
+    "spells": "Spells",
+    "schools": "Schools",
+    "bestiary": "Bestiary"
+  },
+  "filters": {
+    "species": "Species",
+    "humanoid": "Humanoid",
+    "beast": "Beast",
+    "undead": "Undead",
+    "dragon": "Dragon",
+    "giant": "Giant",
+
+    "classes": "Classes",
+    "warrior": "Warrior",
+    "mage": "Mage",
+    "rogue": "Rogue",
+    "cleric": "Cleric",
+    "ranger": "Ranger",
+
+    "weapons": "Weapons",
+    "melee": "Melee",
+    "ranged": "Ranged",
+    "magic": "Magic",
+    "siege": "Siege",
+
+    "armors": "Armors",
+    "light": "Light",
+    "medium": "Medium",
+    "heavy": "Heavy",
+    "shields": "Shields",
+
+    "spells": "Spells",
+    "offensive": "Offensive",
+    "defensive": "Defensive",
+    "utility": "Utility",
+    "healing": "Healing"
+  }
+}

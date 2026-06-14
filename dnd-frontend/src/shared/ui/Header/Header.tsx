@@ -8,6 +8,7 @@ import { navItems } from "../../constants/navItems";
 import { SearchFilters } from "../SearchFilters/SearchFilters";
 import { NavActions } from "../NavActions/NavActions";
 import { NavCategories } from "../NavCategories/NavCategories";
+import { useTranslation } from "react-i18next";
 
 export const Header = ({
   setActiveAside,
@@ -18,6 +19,7 @@ export const Header = ({
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
   const [isTablet, setIsTablet] = useState(() => window.innerWidth < 1350);
   const [isActiveBurgerDropdown, setIsActiveBurgerDropdown] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -89,7 +91,7 @@ export const Header = ({
                       to={item.path}
                       className="cursor-pointer nav-item__link"
                     >
-                      {item.title}
+                      {t(item.titleKey)}
                     </Link>
                     {item.subItems && (
                       <ul className="nav-item__dropdown">
@@ -99,7 +101,7 @@ export const Header = ({
                             key={subItem.path}
                             onClick={(e) => e.currentTarget.blur()}
                           >
-                            <Link to={subItem.path}>{subItem.title}</Link>
+                            <Link to={subItem.path}>{t(subItem.titleKey)}</Link>
                           </li>
                         ))}
                       </ul>

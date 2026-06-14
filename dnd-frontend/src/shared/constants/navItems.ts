@@ -1,33 +1,56 @@
 export const navItems = [
   {
-    title: "Character",
+    titleKey: "nav.character",
     path: "/character",
     subItems: [
-      { title: "Species", path: "character/species" },
-      { title: "Classes", path: "character/classes" },
-      { title: "Skills", path: "character/skills" },
+      {
+        titleKey: "nav.species",
+        path: "character/species",
+      },
+      {
+        titleKey: "nav.classes",
+        path: "character/classes",
+      },
+      {
+        titleKey: "nav.skills",
+        path: "character/skills",
+      },
     ],
   },
   {
-    title: "Equipment",
+    titleKey: "nav.equipment",
     path: "/equipment",
     subItems: [
-      { title: "Weapons", path: "equipment/weapons" },
-      { title: "Armor", path: "equipment/armors" },
-      { title: "Gear", path: "equipment/gear" },
+      {
+        titleKey: "nav.weapons",
+        path: "equipment/weapons",
+      },
+      {
+        titleKey: "nav.armor",
+        path: "equipment/armors",
+      },
+      {
+        titleKey: "nav.gear",
+        path: "equipment/gear",
+      },
     ],
   },
   {
-    title: "Magic",
+    titleKey: "nav.magic",
     path: "/magic",
     subItems: [
-      { title: "Spells", path: "magic/spells" },
-      { title: "Schools", path: "magic/schools" },
+      {
+        titleKey: "nav.spells",
+        path: "magic/spells",
+      },
+      {
+        titleKey: "nav.schools",
+        path: "magic/schools",
+      },
     ],
   },
   {
-    title: "Bestiary",
+    titleKey: "nav.bestiary",
     path: "/bestiary",
   },
 ];
-

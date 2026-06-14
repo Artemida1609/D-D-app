@@ -3,7 +3,7 @@ import { filterCategories } from "../constants/filterCategories";
 
 export const useSearchFilters = (isSidebar: boolean) => {
   const [isOpen, setIsOpen] = useState(isSidebar);
-  const [activeCategory, setActiveCategory] = useState(filterCategories[0].category);
+  const [activeCategory, setActiveCategory] = useState(filterCategories[0].categoryKey);
   const [chosenSubcategories, setChosenSubcategories] = useState<string[]>([]);
   const [showAllChosen, setShowAllChosen] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);

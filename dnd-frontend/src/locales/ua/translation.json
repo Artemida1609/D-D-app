@@ -1,0 +1,50 @@
+{
+  "nav": {
+    "character": "Персонаж",
+    "species": "Раси",
+    "classes": "Класи",
+    "skills": "Навички",
+    "equipment": "Спорядження",
+    "weapons": "Зброя",
+    "armor": "Броня",
+    "gear": "Спорядження",
+    "magic": "Магія",
+    "spells": "Закляття",
+    "schools": "Школи магії",
+    "bestiary": "Бестіарій"
+  },
+
+  "filters": {
+    "species": "Раси",
+    "humanoid": "Гуманоїд",
+    "beast": "Звір",
+    "undead": "Нежить",
+    "dragon": "Дракон",
+    "giant": "Велетень",
+
+    "classes": "Класи",
+    "warrior": "Воїн",
+    "mage": "Маг",
+    "rogue": "Розбійник",
+    "cleric": "Жрець",
+    "ranger": "Следопит",
+
+    "weapons": "Зброя",
+    "melee": "Ближній бій",
+    "ranged": "Дальня зброя",
+    "magic": "Магічна",
+    "siege": "Облогова",
+
+    "armors": "Броня",
+    "light": "Легка",
+    "medium": "Середня",
+    "heavy": "Важка",
+    "shields": "Щити",
+
+    "spells": "Закляття",
+    "offensive": "Атакувальні",
+    "defensive": "Захисні",
+    "utility": "Допоміжні",
+    "healing": "Лікувальні"
+  }
+}
