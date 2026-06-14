@@ -1,6 +1,7 @@
 import { PageTitle } from "../../shared/ui/PageTitle";
-import { Button } from "../../shared/ui/Button/Button";
+// import { Button } from "../../shared/ui/Button/Button";
 import "../../shared/styles/AuthForm.scss";
+import { Form } from "../../shared/ui/Form/Form";
 
 export const SignUpPage = () => {
   return (
@@ -9,35 +10,7 @@ export const SignUpPage = () => {
       <div className="w-full flex flex-col flex-1">
         <PageTitle title="Sign Up" />
 
-        <div className="flex-1 flex w-full justify-center pb-20">
-          <form className="flex flex-col items-center auth-form">
-            <div className="flex flex-col gap-[24px] w-full">
-              <div className="flex flex-col gap-[8px]">
-                <label className="text-white text-[24px]">Name</label>
-                <input type="text" placeholder="Name" className="auth-form__input" />
-              </div>
-
-              <div className="flex flex-col gap-[8px]">
-                <label className="text-white text-[24px]">E-mail</label>
-                <input type="email" placeholder="E-mail" className="auth-form__input" />
-              </div>
-
-              <div className="flex flex-col gap-[8px]">
-                <label className="text-white text-[24px]">Password</label>
-                <input type="password" placeholder="Password" className="auth-form__input" />
-              </div>
-
-              <div className="flex flex-col gap-[8px]">
-                <label className="text-white text-[24px]">Repeat Password</label>
-                <input type="password" placeholder="Repeat Password" className="auth-form__input" />
-              </div>
-            </div>
-
-            <Button type="submit" className="w-full md:w-[450px] mt-[56px]">
-              Sign Up
-            </Button>
-          </form>
-        </div>
+        <Form type="signup" />
       </div>
     </>
   );

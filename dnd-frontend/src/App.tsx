@@ -21,6 +21,7 @@ import {
   mockSchools,
   mockBestiary
 } from "./shared/constants/mockData";
+import { AccountPage } from "./pages/AccountPage/AccountPage";
 
 export function App() {
   return (
@@ -98,7 +99,7 @@ export function App() {
           <Route path="login" element={<LoginPage />} />
           <Route path="signup" element={<SignUpPage />} />
           <Route path="favorites" element={<FavoritesPage />} />
-          <Route path="account" element={<></>} />
+          <Route path="account" element={<AccountPage />} />
           <Route path="*" element={<></>} />
         </Route>
       </Routes>

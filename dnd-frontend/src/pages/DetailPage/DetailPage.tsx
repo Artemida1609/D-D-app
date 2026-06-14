@@ -1,16 +1,17 @@
 import { PageTitle } from "../../shared/ui/PageTitle";
 import { Button } from "../../shared/ui/Button/Button";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useFavoritesStore } from "../../shared/store/favoritesStore";
 
 export const DetailPage = () => {
-  const { id } = useParams();
+  // const { id } = useParams();
+  // const params = useParams<{ id: string }>();
   const location = useLocation();
 
   const pathParts = location.pathname.split("/").filter(Boolean);
   const mainCategory = pathParts[0] || "character";
   const subCategory = (pathParts[1] || "category").toLowerCase();
-  const currentId = id || "unknown-id";
+  const currentId = location.pathname;
 
   const displayTitle = subCategory.charAt(0).toUpperCase() + subCategory.slice(1);
   const imagePath = `/images/icons/placeholders/${mainCategory.toLowerCase()}.png`;

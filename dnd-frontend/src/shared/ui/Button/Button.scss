@@ -17,4 +17,25 @@
   &:hover {
     background-color: #ffffff;
   }
+
+  &__login {
+    background-color: transparent;
+    color: #FFFBE4;
+    border: 1px solid #FFFBE4;
+
+    &:hover {
+      background-color: #FFFBE4;
+      color: #00192D;
+    }
+  }
+  &__delete {
+    background-color: transparent;
+    color: #FFFBE4;
+    border: 1px solid #FFFBE4;
+
+    &:hover {
+      background-color: red;
+      color: #FFFBE4;
+    }
+  }
 }
