@@ -2,14 +2,14 @@
 
 .home-page {
   &__bg {
-    background-image: url("/images/bg/hero-bg/hero-bg-desktop.webp");
+    background-image: url("/images/bg/hero-bg/hero-bg-desktop.jpg");
 
     @include tablet {
-      background-image: url("/images/bg/hero-bg/hero-bg-tablet.webp");
+      background-image: url("/images/bg/hero-bg/hero-bg-tablet.jpg");
     }
 
     @include mobile {
-      background-image: url("/images/bg/hero-bg/hero-bg-mobile.webp");
+      background-image: url("/images/bg/hero-bg/hero-bg-mobile.jpg");
     }
   }
 

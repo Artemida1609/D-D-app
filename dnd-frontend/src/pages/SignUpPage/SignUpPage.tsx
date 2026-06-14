@@ -1,5 +1,4 @@
 import { PageTitle } from "../../shared/ui/PageTitle";
-// import { Button } from "../../shared/ui/Button/Button";
 import "../../shared/styles/AuthForm.scss";
 import { Form } from "../../shared/ui/Form/Form";
 

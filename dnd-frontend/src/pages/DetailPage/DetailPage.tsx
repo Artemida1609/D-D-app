@@ -4,8 +4,6 @@ import { useLocation } from "react-router-dom";
 import { useFavoritesStore } from "../../shared/store/favoritesStore";
 
 export const DetailPage = () => {
-  // const { id } = useParams();
-  // const params = useParams<{ id: string }>();
   const location = useLocation();
 
   const pathParts = location.pathname.split("/").filter(Boolean);
