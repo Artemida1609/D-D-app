@@ -88,7 +88,7 @@ export function App() {
 
           {/* BESTIARY PAGE */}
           <Route path="bestiary">
-            <Route index element={<CategoryListPage title="Bestiary" items={mockBestiary} />} />
+            <Route index element={<CategoryListPage title="Bestiary" items={mockBestiary} backgroundVariant="bestiary" />} />
             
             <Route path="monster">
               <Route path=":id" element={<DetailPage />} />

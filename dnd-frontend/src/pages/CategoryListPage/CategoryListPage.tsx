@@ -1,5 +1,6 @@
 import { PageTitle } from "../../shared/ui/PageTitle";
 import { CategoryCard } from "../../shared/ui/CategoryCard/CategoryCard";
+import { PageBackground } from "../../shared/ui/PageBackground/PageBackground";
 
 interface ListItem {
   id: string;
@@ -11,12 +12,17 @@ interface ListItem {
 interface CategoryListPageProps {
   title: string;
   items: ListItem[];
+  backgroundVariant?: "signup" | "login" | "account" | "bestiary" | "favorites";
 }
 
-export const CategoryListPage = ({ title, items }: CategoryListPageProps) => {
+export const CategoryListPage = ({ title, items, backgroundVariant }: CategoryListPageProps) => {
   return (
     <div className="w-full flex flex-col flex-1">
-      <div className="fixed top-0 left-0 w-full h-full bg-[#00192D] -z-10" />
+      {backgroundVariant ? (
+        <PageBackground variant={backgroundVariant} />
+      ) : (
+        <div className="fixed top-0 left-0 w-full h-full bg-[#00192D] -z-10" />
+      )}
 
       <PageTitle title={title} />
 
