@@ -7,6 +7,7 @@ import { NavCategories } from "../NavCategories/NavCategories";
 import { BurgerMenuIcon } from "../Icons/BurgerMenuIcon";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { ArrowLeft } from "../Icons/ArrowLeft";
 import { Button } from "../Icons/Button";
 import { CloseIcon } from "../Icons/CloseIcon";
@@ -30,11 +31,17 @@ export const SideBar = ({
       handleToggle,
     } = useSearchFilters(true);
 
-  return (
+  const portalRoot = (typeof document !== "undefined" && document.getElementById("portal-root")) || document.body;
+
+  const sidebarNode = (
     <motion.aside
       layout
-      className="sidebar absolute w-screen h-screen bg-[#00192D] text-[#FFFBE4] px-4 md:px-10 pb-6 pt-11 z-99 flex flex-col"
+      className="sidebar fixed w-screen h-screen bg-[#00192D] text-[#FFFBE4] px-4 md:px-10 pb-6 pt-11 flex flex-col"
+      role="dialog"
+      aria-modal="true"
+      style={{ top: 0, left: 0, zIndex: 9999 }}
     >
+      <div className="sidebar__inner">
       {/* header */}
       <div className="flex justify-between items-center mb-6">
         <Link to="/" onClick={() => setActiveAside(false)}>
@@ -85,7 +92,7 @@ export const SideBar = ({
           ease: [0.4, 0, 0.2, 1],
         }}
         style={{
-          overflow: "hidden",
+          // overflow: "hidden",
         }}
       >
         <NavCategories setActiveAside={setActiveAside} />
@@ -239,6 +246,9 @@ export const SideBar = ({
 
         <NavActions isAside={true} closeSidebar={() => setActiveAside(false)} />
       </motion.div>
+      </div>
     </motion.aside>
   );
+
+  return createPortal(sidebarNode, portalRoot as Element);
 };

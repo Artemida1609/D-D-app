@@ -1,18 +1,29 @@
 import { Header } from "../../../shared/ui/Header/Header";
 import { Footer } from "../../../shared/ui/Footer/Footer";
 import { Outlet } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { SideBar } from "../../../shared/ui/SideBar/SideBar";
 
 export const MainLayout = () => {
   const [activeAside, setActiveAside] = useState(false);
 
+  const prevOverflow = useRef<string | null>(null);
+
   useEffect(() => {
     if (activeAside) {
+      // save previous overflow and disable scrolling
+      prevOverflow.current = document.body.style.overflow;
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "visible";
+      // restore previous overflow (or empty string)
+      document.body.style.overflow = prevOverflow.current ?? "";
+      prevOverflow.current = null;
     }
+
+    return () => {
+      // cleanup on unmount
+      document.body.style.overflow = prevOverflow.current ?? "";
+    };
   }, [activeAside]);
 
   return (

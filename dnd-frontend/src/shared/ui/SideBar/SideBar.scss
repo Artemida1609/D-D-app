@@ -6,6 +6,15 @@
   color: #fffbe4;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+
+  &__inner {
+    max-height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    padding-bottom: 24px;
+  }
 
   &__bottom-nav {
     border-top: 1px solid rgba(255, 251, 228, 0.06);
