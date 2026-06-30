@@ -12,16 +12,17 @@ import { DevAuthToggle } from "./shared/ui/DevAuthToggle/DevAuthToggle";
 import { FavoritesPage } from "./pages/FavoritesPage/FavoritesPage";
 import {
   mockSpecies,
-  mockClasses,
   mockSkills,
   mockWeapons,
   mockArmors,
   mockGear,
   mockSpells,
   mockSchools,
-  mockBestiary
+  mockBestiary,
 } from "./shared/constants/mockData";
 import { AccountPage } from "./pages/AccountPage/AccountPage";
+import { ClassesListPage } from "./pages/ClassesListPage/ClassesListPage";
+import { ClassDetailPage } from "./pages/ClassDetailPage/ClassDetailPage";
 
 export function App() {
   return (
@@ -34,19 +35,27 @@ export function App() {
           {/* CHARACTER PAGE */}
           <Route path="character">
             <Route index element={<CharacterPage />} />
-            
+
             <Route path="species">
-              <Route index element={<CategoryListPage title="Species" items={mockSpecies} />} />
+              <Route
+                index
+                element={
+                  <CategoryListPage title="Species" items={mockSpecies} />
+                }
+              />
               <Route path=":id" element={<DetailPage />} />
             </Route>
-            
+
             <Route path="classes">
-              <Route index element={<CategoryListPage title="Classes" items={mockClasses} />} />
-              <Route path=":id" element={<DetailPage />} />
+              <Route index element={<ClassesListPage />} />
+              <Route path=":index" element={<ClassDetailPage />} />
             </Route>
-            
+
             <Route path="skills">
-              <Route index element={<CategoryListPage title="Skills" items={mockSkills} />} />
+              <Route
+                index
+                element={<CategoryListPage title="Skills" items={mockSkills} />}
+              />
               <Route path=":id" element={<DetailPage />} />
             </Route>
           </Route>
@@ -54,19 +63,30 @@ export function App() {
           {/* EQUIPMENT PAGE */}
           <Route path="equipment">
             <Route index element={<EquipmentPage />} />
-            
+
             <Route path="weapons">
-              <Route index element={<CategoryListPage title="Weapons" items={mockWeapons} />} />
+              <Route
+                index
+                element={
+                  <CategoryListPage title="Weapons" items={mockWeapons} />
+                }
+              />
               <Route path=":id" element={<DetailPage />} />
             </Route>
-            
+
             <Route path="armors">
-              <Route index element={<CategoryListPage title="Armors" items={mockArmors} />} />
+              <Route
+                index
+                element={<CategoryListPage title="Armors" items={mockArmors} />}
+              />
               <Route path=":id" element={<DetailPage />} />
             </Route>
-            
+
             <Route path="gear">
-              <Route index element={<CategoryListPage title="Gear" items={mockGear} />} />
+              <Route
+                index
+                element={<CategoryListPage title="Gear" items={mockGear} />}
+              />
               <Route path=":id" element={<DetailPage />} />
             </Route>
           </Route>
@@ -74,22 +94,39 @@ export function App() {
           {/* MAGIC PAGE */}
           <Route path="magic">
             <Route index element={<MagicPage />} />
-            
+
             <Route path="spells">
-              <Route index element={<CategoryListPage title="Spells" items={mockSpells} />} />
+              <Route
+                index
+                element={<CategoryListPage title="Spells" items={mockSpells} />}
+              />
               <Route path=":id" element={<DetailPage />} />
             </Route>
-            
+
             <Route path="schools">
-              <Route index element={<CategoryListPage title="Schools" items={mockSchools} />} />
+              <Route
+                index
+                element={
+                  <CategoryListPage title="Schools" items={mockSchools} />
+                }
+              />
               <Route path=":id" element={<DetailPage />} />
             </Route>
           </Route>
 
           {/* BESTIARY PAGE */}
           <Route path="bestiary">
-            <Route index element={<CategoryListPage title="Bestiary" items={mockBestiary} backgroundVariant="bestiary" />} />
-            
+            <Route
+              index
+              element={
+                <CategoryListPage
+                  title="Bestiary"
+                  items={mockBestiary}
+                  backgroundVariant="bestiary"
+                />
+              }
+            />
+
             <Route path="monster">
               <Route path=":id" element={<DetailPage />} />
             </Route>

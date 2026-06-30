@@ -37,6 +37,7 @@ export const CharacterPage = () => {
             path={category.path}
             icon={category.icon}
           />
+          
         ))}
       </div>
     </div>
