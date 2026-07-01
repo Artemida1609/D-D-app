@@ -6,20 +6,10 @@ import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { CharacterPage } from "./pages/CharacterPage/CharacterPage";
 import { EquipmentPage } from "./pages/EquipmentPage/EquipmentPage";
 import { MagicPage } from "./pages/MagicPage/MagicPage";
-import { CategoryListPage } from "./pages/CategoryListPage/CategoryListPage";
+import { AsyncCategoryPage } from "./pages/AsyncCategoryPage/AsyncCategoryPage";
 import { DetailPage } from "./pages/DetailPage/DetailPage";
 import { DevAuthToggle } from "./shared/ui/DevAuthToggle/DevAuthToggle";
 import { FavoritesPage } from "./pages/FavoritesPage/FavoritesPage";
-import {
-  mockSpecies,
-  mockSkills,
-  mockWeapons,
-  mockArmors,
-  mockGear,
-  mockSpells,
-  mockSchools,
-  mockBestiary,
-} from "./shared/constants/mockData";
 import { AccountPage } from "./pages/AccountPage/AccountPage";
 import { ClassesListPage } from "./pages/ClassesListPage/ClassesListPage";
 import { ClassDetailPage } from "./pages/ClassDetailPage/ClassDetailPage";
@@ -28,7 +18,7 @@ export function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* MAIN LAYOUT використовує Outlet для вкладень */}
+        {/* MAIN LAYOUT */}
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
 
@@ -40,7 +30,11 @@ export function App() {
               <Route
                 index
                 element={
-                  <CategoryListPage title="Species" items={mockSpecies} />
+                  <AsyncCategoryPage 
+                    title="Species" 
+                    endpoint="/api/races" 
+                    basePath="/character/species" 
+                  />
                 }
               />
               <Route path=":id" element={<DetailPage />} />
@@ -54,7 +48,13 @@ export function App() {
             <Route path="skills">
               <Route
                 index
-                element={<CategoryListPage title="Skills" items={mockSkills} />}
+                element={
+                  <AsyncCategoryPage 
+                    title="Skills" 
+                    endpoint="/api/skills" 
+                    basePath="/character/skills" 
+                  />
+                }
               />
               <Route path=":id" element={<DetailPage />} />
             </Route>
@@ -68,7 +68,11 @@ export function App() {
               <Route
                 index
                 element={
-                  <CategoryListPage title="Weapons" items={mockWeapons} />
+                  <AsyncCategoryPage 
+                    title="Weapons" 
+                    endpoint="/api/equipment" 
+                    basePath="/equipment/weapons" 
+                  />
                 }
               />
               <Route path=":id" element={<DetailPage />} />
@@ -77,7 +81,13 @@ export function App() {
             <Route path="armors">
               <Route
                 index
-                element={<CategoryListPage title="Armors" items={mockArmors} />}
+                element={
+                  <AsyncCategoryPage 
+                    title="Armors" 
+                    endpoint="/api/equipment" 
+                    basePath="/equipment/armors" 
+                  />
+                }
               />
               <Route path=":id" element={<DetailPage />} />
             </Route>
@@ -85,7 +95,13 @@ export function App() {
             <Route path="gear">
               <Route
                 index
-                element={<CategoryListPage title="Gear" items={mockGear} />}
+                element={
+                  <AsyncCategoryPage 
+                    title="Gear" 
+                    endpoint="/api/equipment" 
+                    basePath="/equipment/gear" 
+                  />
+                }
               />
               <Route path=":id" element={<DetailPage />} />
             </Route>
@@ -98,7 +114,13 @@ export function App() {
             <Route path="spells">
               <Route
                 index
-                element={<CategoryListPage title="Spells" items={mockSpells} />}
+                element={
+                  <AsyncCategoryPage 
+                    title="Spells" 
+                    endpoint="/api/spells" 
+                    basePath="/magic/spells" 
+                  />
+                }
               />
               <Route path=":id" element={<DetailPage />} />
             </Route>
@@ -107,7 +129,11 @@ export function App() {
               <Route
                 index
                 element={
-                  <CategoryListPage title="Schools" items={mockSchools} />
+                  <AsyncCategoryPage 
+                    title="Schools" 
+                    endpoint="/api/magic-schools" 
+                    basePath="/magic/schools" 
+                  />
                 }
               />
               <Route path=":id" element={<DetailPage />} />
@@ -119,9 +145,10 @@ export function App() {
             <Route
               index
               element={
-                <CategoryListPage
+                <AsyncCategoryPage
                   title="Bestiary"
-                  items={mockBestiary}
+                  endpoint="/api/monsters"
+                  basePath="/bestiary/monster"
                   backgroundVariant="bestiary"
                 />
               }
