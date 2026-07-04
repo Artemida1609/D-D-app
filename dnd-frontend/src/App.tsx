@@ -11,7 +11,6 @@ import { DetailPage } from "./pages/DetailPage/DetailPage";
 import { DevAuthToggle } from "./shared/ui/DevAuthToggle/DevAuthToggle";
 import { FavoritesPage } from "./pages/FavoritesPage/FavoritesPage";
 import { AccountPage } from "./pages/AccountPage/AccountPage";
-import { ClassesListPage } from "./pages/ClassesListPage/ClassesListPage";
 import { ClassDetailPage } from "./pages/ClassDetailPage/ClassDetailPage";
 
 export function App() {
@@ -41,7 +40,16 @@ export function App() {
             </Route>
 
             <Route path="classes">
-              <Route index element={<ClassesListPage />} />
+              <Route 
+                index 
+                element={
+                  <AsyncCategoryPage 
+                    title="Classes" 
+                    endpoint="/api/classes" 
+                    basePath="/classes" 
+                  />
+                } 
+              />
               <Route path=":index" element={<ClassDetailPage />} />
             </Route>
 
@@ -70,7 +78,7 @@ export function App() {
                 element={
                   <AsyncCategoryPage 
                     title="Weapons" 
-                    endpoint="/api/equipment" 
+                    endpoint="/api/equipment-categories/weapon" 
                     basePath="/equipment/weapons" 
                   />
                 }
@@ -84,7 +92,7 @@ export function App() {
                 element={
                   <AsyncCategoryPage 
                     title="Armors" 
-                    endpoint="/api/equipment" 
+                    endpoint="/api/equipment-categories/armor" 
                     basePath="/equipment/armors" 
                   />
                 }
@@ -98,7 +106,7 @@ export function App() {
                 element={
                   <AsyncCategoryPage 
                     title="Gear" 
-                    endpoint="/api/equipment" 
+                    endpoint="/api/equipment-categories/gear" 
                     basePath="/equipment/gear" 
                   />
                 }
