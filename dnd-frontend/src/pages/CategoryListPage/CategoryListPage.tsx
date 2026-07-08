@@ -12,7 +12,7 @@ interface ListItem {
 interface CategoryListPageProps {
   title: string;
   items: ListItem[];
-  backgroundVariant?: "signup" | "login" | "account" | "bestiary" | "favorites";
+  backgroundVariant?: "signup" | "login" | "account" | "favorites";
 }
 
 export const CategoryListPage = ({ title, items, backgroundVariant }: CategoryListPageProps) => {
@@ -26,7 +26,7 @@ export const CategoryListPage = ({ title, items, backgroundVariant }: CategoryLi
 
       <PageTitle title={title} />
 
-      <div className="flex flex-wrap gap-6 justify-start pb-20">
+      <div className="flex flex-wrap gap-4 md:gap-[32.5px] justify-start pb-20">
         {items.map((item) => (
           <CategoryCard
             key={item.id}

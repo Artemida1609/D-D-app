@@ -87,12 +87,18 @@ export const Header = ({
               <ul className="flex gap-[32px] justify-start items-center">
                 {navItems.map((item) => (
                   <li className="nav-item" key={item.path}>
-                    <Link
-                      to={item.path}
-                      className="cursor-pointer nav-item__link"
-                    >
-                      {t(item.titleKey)}
-                    </Link>
+                    {item.subItems ? (
+                      <span className="cursor-pointer nav-item__link">
+                        {t(item.titleKey)}
+                      </span>
+                    ) : (
+                      <Link
+                        to={item.path}
+                        className="cursor-pointer nav-item__link"
+                      >
+                        {t(item.titleKey)}
+                      </Link>
+                    )}
                     {item.subItems && (
                       <ul className="nav-item__dropdown">
                         {item.subItems?.map((subItem) => (

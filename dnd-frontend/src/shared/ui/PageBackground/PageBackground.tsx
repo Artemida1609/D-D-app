@@ -1,6 +1,6 @@
 import "./PageBackground.scss";
 
-type BackgroundVariant = "signup" | "login" | "account" | "bestiary" | "favorites";
+type BackgroundVariant = "signup" | "login" | "account" | "favorites";
 
 interface PageBackgroundProps {
   variant: BackgroundVariant;

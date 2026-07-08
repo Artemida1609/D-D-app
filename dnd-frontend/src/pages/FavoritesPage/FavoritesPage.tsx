@@ -8,14 +8,16 @@ export const FavoritesPage = () => {
   const favorites = useFavoritesStore((state) => state.favorites);
 
   const groupedFavorites = favorites.reduce((acc, item) => {
-    if (!acc[item.category]) {
-      acc[item.category] = [];
+    const cat = item.category || "Other";
+    if (!acc[cat]) {
+      acc[cat] = [];
     }
-    acc[item.category].push(item);
+    acc[cat].push(item);
     return acc;
   }, {} as Record<string, typeof favorites>);
 
-  const categoriesOrder = ["Character", "Equipment", "Magic", "Bestiary"];
+  const defaultOrder = ["Character", "Equipment", "Magic", "Bestiary"];
+  const displayCategories = Array.from(new Set([...defaultOrder, ...Object.keys(groupedFavorites)]));
 
   return (
     <>
@@ -29,7 +31,7 @@ export const FavoritesPage = () => {
           </p>
         ) : (
           <div className="flex flex-col gap-12 mt-6">
-            {categoriesOrder.map((categoryName) => {
+            {displayCategories.map((categoryName) => {
               const items = groupedFavorites[categoryName];
               if (!items || items.length === 0) return null;
 
@@ -38,19 +40,17 @@ export const FavoritesPage = () => {
                   <h2 className="text-[#FFFBE4] text-[32px] font-medium" style={{ fontFamily: "var(--font-manrope)" }}>
                     {categoryName}
                   </h2>
-                  <div className="flex flex-wrap gap-6 justify-start">
-                    {items.map((item) => {
-                      const iconPath = `/images/icons/placeholders/${item.category.toLowerCase()}.png`;
-
-                      return (
-                        <CategoryCard
-                          key={item.id}
-                          title={item.title}
-                          path={item.path}
-                          icon={iconPath}
-                        />
-                      );
-                    })}
+                  <div className="flex flex-wrap gap-4 md:gap-[32.5px] justify-start">
+                    {items.map((item: any) => (
+                      <CategoryCard
+                        key={item.id}
+                        id={item.id}
+                        category={item.category}
+                        title={item.title}
+                        path={item.path}
+                        icon={item.icon || ""}
+                      />
+                    ))}
                   </div>
                 </div>
               );

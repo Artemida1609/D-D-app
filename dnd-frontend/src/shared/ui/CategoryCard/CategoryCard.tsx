@@ -27,13 +27,14 @@ export const CategoryCard = ({ id, category, title, path, icon }: CategoryCardPr
       title,
       category: derivedCategory,
       path,
+      icon,
     });
   };
 
   return (
     <Link
       to={path}
-      className="category-card group relative flex flex-col items-center justify-center gap-6"
+      className="category-card group relative flex flex-col items-center gap-[16px]"
     >
       <button
         onClick={handleFavoriteClick}
@@ -47,12 +48,15 @@ export const CategoryCard = ({ id, category, title, path, icon }: CategoryCardPr
         />
       </button>
 
-      <img 
-        src={icon} 
-        alt={title} 
-        className="w-[100px] h-[100px] object-contain"
-      />
-      <span className="text-[#FFFBE4] text-[20px] font-medium" style={{ fontFamily: "var(--font-manrope)" }}>
+      {icon && (
+        <img 
+          src={icon} 
+          alt={title} 
+          className="w-[108px] h-[108px] md:w-[166px] md:h-[166px] object-contain"
+        />
+      )}
+      
+      <span className="text-[#FFFBE4] text-[20px] font-medium text-center leading-tight font-manrope">
         {title}
       </span>
     </Link>

@@ -3,15 +3,11 @@ import { MainLayout } from "./app/layouts/MainLayout/MainLayout";
 import { HomePage } from "./pages/HomePage/HomePage";
 import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
-import { CharacterPage } from "./pages/CharacterPage/CharacterPage";
-import { EquipmentPage } from "./pages/EquipmentPage/EquipmentPage";
-import { MagicPage } from "./pages/MagicPage/MagicPage";
 import { AsyncCategoryPage } from "./pages/AsyncCategoryPage/AsyncCategoryPage";
 import { DetailPage } from "./pages/DetailPage/DetailPage";
 import { DevAuthToggle } from "./shared/ui/DevAuthToggle/DevAuthToggle";
 import { FavoritesPage } from "./pages/FavoritesPage/FavoritesPage";
 import { AccountPage } from "./pages/AccountPage/AccountPage";
-import { ClassDetailPage } from "./pages/ClassDetailPage/ClassDetailPage";
 
 export function App() {
   return (
@@ -23,8 +19,6 @@ export function App() {
 
           {/* CHARACTER PAGE */}
           <Route path="character">
-            <Route index element={<CharacterPage />} />
-
             <Route path="species">
               <Route
                 index
@@ -46,11 +40,11 @@ export function App() {
                   <AsyncCategoryPage 
                     title="Classes" 
                     endpoint="/api/classes" 
-                    basePath="/classes" 
+                    basePath="/character/classes" 
                   />
                 } 
               />
-              <Route path=":index" element={<ClassDetailPage />} />
+              <Route path=":id" element={<DetailPage />} />
             </Route>
 
             <Route path="skills">
@@ -70,8 +64,6 @@ export function App() {
 
           {/* EQUIPMENT PAGE */}
           <Route path="equipment">
-            <Route index element={<EquipmentPage />} />
-
             <Route path="weapons">
               <Route
                 index
@@ -117,8 +109,6 @@ export function App() {
 
           {/* MAGIC PAGE */}
           <Route path="magic">
-            <Route index element={<MagicPage />} />
-
             <Route path="spells">
               <Route
                 index
@@ -157,7 +147,6 @@ export function App() {
                   title="Bestiary"
                   endpoint="/api/monsters"
                   basePath="/bestiary/monster"
-                  backgroundVariant="bestiary"
                 />
               }
             />

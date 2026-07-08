@@ -31,7 +31,7 @@ export const MainLayout = () => {
       <div className="flex flex-col min-h-screen w-full max-w-[1280px] mx-auto main-layout">
         <Header setActiveAside={setActiveAside} />
         {activeAside && <SideBar setActiveAside={setActiveAside} />}
-        <main className="flex-1 w-full flex flex-col px-6">
+        <main className="flex-1 w-full flex flex-col">
           <Outlet />
         </main>
         <Footer />
