@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-saved_element-table
+      author: Petro
+      changes:
+        - createTable:
+            tableName: saved_element
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  name: entity_type
+                  type: VARCHAR(255)
+              - column:
+                  name: entity_id
+                  type: BIGINT
+              - column:
+                  name: saved_at
+                  type: datetime

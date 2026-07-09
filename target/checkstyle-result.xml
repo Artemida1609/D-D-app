@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="9.3">
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\anotation\Email.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\anotation\FieldMatch.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\anotation\validator\EmailValidator.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\anotation\validator\FieldMatchValidator.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\config\ImportConfig.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\config\MapperConfig.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\config\OpenApiConfig.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\config\SecurityConfig.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\AuthController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\GlobalSearchController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\ImportRunnerController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\AbilityScoreController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\ClassController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\ConditionController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\DamageTypeController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\EquipmentCategoryController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\EquipmentController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\FeatureController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\LanguageController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\MagicItemController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\MagicSchoolController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\MonsterController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\ProficiencyController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\RaceController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\RuleController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\RuleSectionController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\SkillController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\SpellController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\SubclassController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\SubraceController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\TraitController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\main\WeaponPropertyController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\SavedElementController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\controller\UserController.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\converter\IntegerListConverter.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\converter\ListMapStringObjectConverter.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\converter\MapStringObjectConverter.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\converter\StringListConverter.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\deserialize\StringOrListDeserializer.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\ability\AbilityScoreDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\ApiListResponse.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\ApiReferenceDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\classes\ClassDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\condition\ConditionDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\damage\DamageTypeDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\equipment\EquipmentCategoryDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\equipment\EquipmentDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\feature\FeatureDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\language\LanguageDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\level\LevelDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\magic\MagicItemDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\monster\MonsterDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\proficiency\ProficiencyDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\race\RaceDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\rule\RuleDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\rule\RuleSectionDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\saved\SavedElementRequestDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\saved\SavedElementResponseDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\school\MagicSchoolDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\SearchResult.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\skill\SkillDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\spell\SpellDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\subclass\SubclassDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\subrace\SubraceDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\trait\TraitDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\user\RefreshRequestDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\user\RefreshResponseDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\user\UserDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\user\UserLoginRequestDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\user\UserLoginResponseDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\user\UserRegistrationRequestDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\user\UserRegistrationResponseDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\dto\weapon\WeaponPropertyDto.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\exception\CustomGlobalExceptionHandler.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\exception\RegistrationException.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\importer\client\ApiClient.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\importer\EquipmentCategoryImporter.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\importer\ImportDefinition.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\importer\ImporterRunner.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\importer\UniversalImporter.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\importer\UniversalReferenceFixer.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\JvTeamProjectApplication.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\GenericMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\AbilityScoreMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\ClassMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\ConditionMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\DamageTypeMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\EquipmentCategoryMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\EquipmentMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\FeatureMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\LanguageMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\LevelMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\MagicItemMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\MagicSchoolMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\MonsterMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\ProficiencyMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\RaceMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\RuleMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\RuleSectionMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\SkillMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\SpellMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\SubclassMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\SubraceMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\TraitMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\main\WeaponPropertyMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\SavedElementMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\mapper\UserMapper.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\AbilityScore.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\Class.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\Condition.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\DamageType.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\Equipment.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\EquipmentCategory.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\Feature.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\Language.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\Level.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\MagicItem.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\MagicSchool.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\Monster.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\Proficiency.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\Race.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\Rule.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\RuleSection.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\Skill.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\Spell.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\Subclass.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\Subrace.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\Trait.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\main\WeaponProperty.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\RefreshToken.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\Role.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\SavedElement.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\model\User.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\GeneralRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\AbilityScoreRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\ClassRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\ConditionRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\DamageTypeRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\EquipmentCategoryRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\EquipmentRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\FeatureRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\LanguageRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\LevelRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\MagicItemRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\MagicSchoolRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\MonsterRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\ProficiencyRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\RaceRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\RuleRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\RuleSectionRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\SkillRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\SpellRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\SubclassRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\SubraceRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\TraitRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\main\WeaponPropertyRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\RefreshTokenRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\RoleRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\SavedElementRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\repository\UserRepository.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\security\JwtAuthenticationFilter.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\security\JwtUtil.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\security\UserDetailsServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\AuthenticationService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\GlobalSearchService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\AuthenticationServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\AbilityScoreServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\ClassServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\ConditionServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\DamageTypeServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\EquipmentCategoryServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\EquipmentServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\FeatureServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\LanguageServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\MagicItemServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\MagicSchoolServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\MonsterServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\ProficiencyServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\RaceServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\RuleSectionServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\RuleServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\SkillServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\SpellServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\SubclassServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\SubraceServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\TraitServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\main\WeaponPropertyServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\SavedElementServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\impl\UserServiceImpl.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\AbilityScoreService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\ClassService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\ConditionService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\DamageTypeService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\EquipmentCategoryService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\EquipmentService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\FeatureService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\LanguageService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\MagicItemService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\MagicSchoolService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\MonsterService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\ProficiencyService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\RaceService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\RuleSectionService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\RuleService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\SkillService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\SpellService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\SubclassService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\SubraceService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\TraitService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\main\WeaponPropertyService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\RefreshTokenService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\SavedElementService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\SearchableService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\java\mate\academy\jvteamproject\service\UserService.java">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\main\resources\application.properties">
+</file>
+<file name="C:\Users\petro\Idia-projects\jv-team-project\src\test\resources\application.properties">
+</file>
+</checkstyle>
