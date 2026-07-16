@@ -1,12 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { filterCategories } from "../constants/filterCategories";
+import { useSearchStore } from "../store/searchStore";
 
 export const useSearchFilters = (isSidebar: boolean) => {
   const [isOpen, setIsOpen] = useState(isSidebar);
-  const [activeCategory, setActiveCategory] = useState(filterCategories[0].categoryKey);
-  const [chosenSubcategories, setChosenSubcategories] = useState<string[]>([]);
   const [showAllChosen, setShowAllChosen] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
+
+  const query = useSearchStore((state) => state.query);
+  const setQuery = useSearchStore((state) => state.setQuery);
+  const activeCategory = useSearchStore((state) => state.activeCategory);
+  const setActiveCategory = useSearchStore((state) => state.setActiveCategory);
+  const chosenSubcategories = useSearchStore((state) => state.chosenSubcategories);
+  const removeSubcategory = useSearchStore((state) => state.removeSubcategory);
+  const toggleSubcategory = useSearchStore((state) => state.toggleSubcategory);
 
   useEffect(() => {
     if (isSidebar) return;
@@ -19,14 +26,22 @@ export const useSearchFilters = (isSidebar: boolean) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isSidebar]);
 
-  const handleRemove = (sub: string) =>
-    setChosenSubcategories((prev) => prev.filter((v) => v !== sub));
+  useEffect(() => {
+    if (!filterCategories.some((category) => category.categoryKey === activeCategory)) {
+      setActiveCategory(filterCategories[0].categoryKey);
+    }
+  }, [activeCategory, setActiveCategory]);
 
-  const handleAdd = (sub: string) =>
-    setChosenSubcategories((prev) => (prev.includes(sub) ? prev : [...prev, sub]));
+  const handleRemove = (sub: string) => removeSubcategory(sub);
 
-  const handleToggle = (sub: string) =>
-    chosenSubcategories.includes(sub) ? handleRemove(sub) : handleAdd(sub);
+  const handleToggle = (sub: string) => toggleSubcategory(sub);
+
+  const handleQueryChange = (value: string) => {
+    setQuery(value);
+    if (!isSidebar) {
+      setIsOpen(true);
+    }
+  };
 
   const visibleChosen = showAllChosen
     ? chosenSubcategories
@@ -36,6 +51,8 @@ export const useSearchFilters = (isSidebar: boolean) => {
     isOpen, setIsOpen,
     activeCategory, setActiveCategory,
     chosenSubcategories,
+    query,
+    setQuery: handleQueryChange,
     showAllChosen, setShowAllChosen,
     visibleChosen,
     searchRef,

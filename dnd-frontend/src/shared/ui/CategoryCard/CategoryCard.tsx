@@ -1,6 +1,8 @@
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useFavoritesStore } from "../../store/favoritesStore";
 import { HeartIcon } from "../Icons/HeartIcon";
+import { getOptimizedCardImageUrl } from "../../api/optimizeImageUrl";
 import "./CategoryCard.scss";
 
 interface CategoryCardProps {
@@ -15,6 +17,12 @@ export const CategoryCard = ({ id, category, title, path, icon }: CategoryCardPr
   const pathParts = path.split("/").filter(Boolean);
   const derivedCategory = category || (pathParts[0] ? pathParts[0].charAt(0).toUpperCase() + pathParts[0].slice(1) : "Unknown");
   const currentId = id || pathParts[pathParts.length - 1] || title;
+  const optimizedIcon = useMemo(() => getOptimizedCardImageUrl(icon), [icon]);
+  const [imageSrc, setImageSrc] = useState(optimizedIcon || icon);
+
+  useEffect(() => {
+    setImageSrc(optimizedIcon || icon);
+  }, [optimizedIcon, icon]);
 
   const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
   const isFavorite = useFavoritesStore((state) => state.isFavorite(currentId));
@@ -50,8 +58,18 @@ export const CategoryCard = ({ id, category, title, path, icon }: CategoryCardPr
 
       {icon && (
         <img 
-          src={icon} 
+          src={imageSrc}
           alt={title} 
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
+          width={166}
+          height={166}
+          onError={() => {
+            if (imageSrc !== icon) {
+              setImageSrc(icon);
+            }
+          }}
           className="w-[108px] h-[108px] md:w-[166px] md:h-[166px] object-contain"
         />
       )}

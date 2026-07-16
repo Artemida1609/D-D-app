@@ -23,6 +23,8 @@ export const SideBar = ({
   const { t } = useTranslation();
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const { 
+      query,
+      setQuery,
       activeCategory, setActiveCategory,
       chosenSubcategories,
       showAllChosen, setShowAllChosen,
@@ -122,6 +124,8 @@ export const SideBar = ({
               type="text"
               placeholder="Search"
               className="sidebar__search__input"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
               onFocus={() => setIsSearchFocused(true)}
             />
           </div>

@@ -8,6 +8,11 @@ export const Form = ({ type }: { type: "signup" | "login" | "account" }) => {
           <img
             src="/images/account_girl.jpg"
             alt="Account Girl"
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
+            width={170}
+            height={170}
             className="w-[170px] h-full object-cover rounded-full"
           />
         </div>

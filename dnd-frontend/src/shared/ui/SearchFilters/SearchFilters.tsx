@@ -20,6 +20,8 @@ export const SearchFilters = ({
     isOpen, setIsOpen,
     activeCategory, setActiveCategory,
     chosenSubcategories,
+    query,
+    setQuery,
     showAllChosen, setShowAllChosen,
     visibleChosen,
     searchRef,
@@ -41,6 +43,8 @@ export const SearchFilters = ({
             type="text"
             placeholder="Search"
             className="search__input"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
             onFocus={() => setIsOpen(true)}
           />
         </div>
@@ -102,7 +106,14 @@ export const SearchFilters = ({
           </ul>
         </div>
 
-        <Button className="search__dropdown-btn">
+        <Button
+          className="search__dropdown-btn"
+          onClick={() => {
+            if (!isSidebar) {
+              setIsOpen(false);
+            }
+          }}
+        >
           <span>Search</span>
         </Button>
       </div>

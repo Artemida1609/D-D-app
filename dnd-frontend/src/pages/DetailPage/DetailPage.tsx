@@ -255,6 +255,11 @@ export const DetailPage = () => {
             <img
               src={imagePath}
               alt={displayTitle}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              width={240}
+              height={240}
               className="w-full h-full object-cover"
               onError={(e) => {
                 e.currentTarget.src = `/images/icons/placeholders/${mainCategory.toLowerCase()}.png`;
@@ -264,6 +269,11 @@ export const DetailPage = () => {
             <img
               src={imagePath}
               alt={displayTitle}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              width={160}
+              height={160}
               className="w-[160px] h-[160px] object-contain"
             />
           )}
