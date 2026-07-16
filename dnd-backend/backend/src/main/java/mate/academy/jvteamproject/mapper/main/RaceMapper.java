@@ -19,6 +19,7 @@ public interface RaceMapper extends GenericMapper<RaceDto, Race> {
                     + "dto.getAbilityBonuses().stream().map(b -> (Integer) "
                     + "b.get(\"bonus\")).toList() : null)")
     @Mapping(target = "startingProficiencies", source = "startingProficiencies")
+    @Mapping(target = "image", ignore = true)
     Race toEntity(RaceDto dto);
 
     @Mapping(target = "abilityBonuses",
