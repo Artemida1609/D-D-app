@@ -54,6 +54,9 @@ databaseChangeLog:
                   name: name
                   type: VARCHAR(255)
               - column:
+                  name: file_resource_id
+                  type: BIGINT
+              - column:
                   name: hit_die
                   type: INT
               - column:
@@ -534,6 +537,7 @@ databaseChangeLog:
 
               - column: { name: original_index, type: VARCHAR(255) }
               - column: { name: name, type: VARCHAR(255) }
+              - column: { name: file_resource_id, type: BIGINT }
               - column: { name: speed, type: INT }
 
               - column: { name: ability_bonus_ability_score_data, type: LONGTEXT }
