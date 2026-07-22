@@ -9,6 +9,7 @@ import mate.academy.jvteamproject.model.main.Class;
 import mate.academy.jvteamproject.model.main.Subclass;
 import mate.academy.jvteamproject.repository.main.ClassRepository;
 import mate.academy.jvteamproject.repository.main.SubclassRepository;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
@@ -21,6 +22,7 @@ public class ImporterRunner {
     private final ClassRepository classRepository;
     private final SubclassRepository subclassRepository;
 
+    @Async
     public void run() {
         System.out.println("=== FIRST PASS: IMPORTING IN PARALLEL ===");
 
