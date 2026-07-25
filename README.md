@@ -1,1 +1,1 @@
-https://d-d-app-pi.vercel.app/
+https://dnd-app-lac.vercel.app/
