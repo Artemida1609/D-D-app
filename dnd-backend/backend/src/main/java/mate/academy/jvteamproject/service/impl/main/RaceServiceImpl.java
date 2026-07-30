@@ -2,6 +2,7 @@ package mate.academy.jvteamproject.service.impl.main;
 
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import mate.academy.jvteamproject.dto.DropboxUploadResponse;
 import mate.academy.jvteamproject.dto.SearchResult;
 import mate.academy.jvteamproject.dto.race.RaceDto;
 import mate.academy.jvteamproject.mapper.main.RaceMapper;
@@ -42,19 +43,19 @@ public class RaceServiceImpl implements RaceService, SearchableService {
     public ResponseEntity<?> uploadImage(String index, MultipartFile file) {
         Race race = raceRepository.getByOriginalIndex(index);
         String filename = race.getOriginalIndex() + ".png";
-        String url = dropboxService.upload(file, filename);
+        DropboxUploadResponse response = dropboxService.upload(file, filename);
 
         FileResource fileResource = new FileResource();
         fileResource.setEntityId(race.getId());
-        fileResource.setImageUrl(url);
+        fileResource.setImageUrl(response.getImageUrl());
         fileResource.setFileName(filename);
-        fileResource.setFileId(file.getOriginalFilename());
+        fileResource.setFileId(response.getFileId());
         fileResourceRepository.save(fileResource);
 
         race.setImage(fileResource);
         raceRepository.save(race);
 
-        return ResponseEntity.ok(url);
+        return ResponseEntity.ok(response.getImageUrl());
     }
 
     @Override

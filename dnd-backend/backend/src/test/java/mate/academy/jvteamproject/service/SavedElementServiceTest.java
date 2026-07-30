@@ -39,7 +39,7 @@ public class SavedElementServiceTest {
     void saveElement_success() {
         mockAuth("email");
         User user = createUser("email", "password",
-                "firstName", "lastName");
+                "nickname");
         user.setId(1L);
 
         SavedElement savedElement =
@@ -67,7 +67,7 @@ public class SavedElementServiceTest {
         mockAuth("email");
 
         User user = createUser("email", "password",
-                "firstName", "lastName");
+                "nickname");
         user.setId(1L);
 
         SavedElement savedElement =
@@ -87,7 +87,7 @@ public class SavedElementServiceTest {
     void getAllSavedElementsByUser_success() {
         mockAuth("email");
         User user = createUser("email", "password",
-                "firstName", "lastName");
+                "nickname");
         user.setId(1L);
 
         SavedElement savedElement =

@@ -19,3 +19,11 @@ databaseChangeLog:
       file: db/changelog/changes/009-insert-admin-to-users_roles-table.yaml
   - include:
       file: db/changelog/changes/010-create-file_resources-table.yaml
+  - include:
+      file: db/changelog/changes/011-create-avatar-table.yaml
+  - include:
+      file: db/changelog/changes/012-update-users-table.yaml
+  - include:
+      file: db/changelog/changes/013-add-admin-to-users-table-updated.yaml
+  - include:
+      file: db/changelog/changes/014-add-admin-to-users_roles-table-updated.yaml

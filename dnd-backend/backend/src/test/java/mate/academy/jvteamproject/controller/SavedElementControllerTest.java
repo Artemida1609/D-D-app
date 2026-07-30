@@ -49,13 +49,13 @@ public class SavedElementControllerTest extends TestContainersConfig {
 
     private SavedElement expected;
 
-    @BeforeEach
+    @BeforeAll
     void initData() {
         repository.deleteAll();
         userRepository.deleteAll();
 
         User user = createUser("email", "password",
-                "firstName", "lastName");
+                "nicknames");
         userRepository.save(user);
 
         expected = createSavedElement(null, user.getId(), "Class", 1L, LocalDateTime.now());

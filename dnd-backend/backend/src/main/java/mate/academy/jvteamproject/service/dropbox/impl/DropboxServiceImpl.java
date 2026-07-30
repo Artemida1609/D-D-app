@@ -5,10 +5,12 @@ import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.oauth.DbxCredential;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.DeleteErrorException;
+import com.dropbox.core.v2.files.FileMetadata;
 import com.dropbox.core.v2.sharing.SharedLinkMetadata;
 import java.io.InputStream;
 import lombok.Getter;
 import lombok.Setter;
+import mate.academy.jvteamproject.dto.DropboxUploadResponse;
 import mate.academy.jvteamproject.exception.DropBoxException;
 import mate.academy.jvteamproject.property.DropBoxProperties;
 import mate.academy.jvteamproject.service.dropbox.DropboxService;
@@ -37,15 +39,23 @@ public class DropboxServiceImpl implements DropboxService {
     }
 
     @Override
-    public String upload(MultipartFile file, String filename) {
+    public DropboxUploadResponse upload(MultipartFile file, String filename) {
         try (InputStream in = file.getInputStream()) {
-            client.files().uploadBuilder("/" + filename)
+
+            FileMetadata metadata = client.files()
+                    .uploadBuilder("/" + filename)
                     .uploadAndFinish(in);
 
             SharedLinkMetadata link = client.sharing()
                     .createSharedLinkWithSettings("/" + filename);
 
-            return link.getUrl().replace("dl=0", "raw=1");
+            DropboxUploadResponse response = new DropboxUploadResponse();
+            response.setFileId(metadata.getId());
+            response.setFileName(metadata.getName());
+            response.setImageUrl(link.getUrl().replace("dl=0", "raw=1"));
+
+            return response;
+
         } catch (Exception e) {
             throw new RuntimeException("Failed to upload to Dropbox", e);
         }

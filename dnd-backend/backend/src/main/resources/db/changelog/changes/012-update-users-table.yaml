@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: update-user-table
+      author: petro
+      changes:
+        - dropColumn:
+            columnName: last_name
+            tableName: users
+        - dropColumn:
+            columnName: first_name
+            tableName: users
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: user_nickname
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
