@@ -2,6 +2,7 @@ package mate.academy.jvteamproject.service.impl.main;
 
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import mate.academy.jvteamproject.dto.DropboxUploadResponse;
 import mate.academy.jvteamproject.dto.SearchResult;
 import mate.academy.jvteamproject.dto.classes.ClassDto;
 import mate.academy.jvteamproject.dto.level.LevelDto;
@@ -59,19 +60,19 @@ public class ClassServiceImpl implements ClassService, SearchableService {
     public ResponseEntity<?> uploadImage(String index, MultipartFile file) {
         Class clas = classRepository.getByOriginalIndex(index);
         String filename = clas.getOriginalIndex() + ".png";
-        String url = dropboxService.upload(file, filename);
+        DropboxUploadResponse response = dropboxService.upload(file, filename);
 
         FileResource fileResource = new FileResource();
         fileResource.setEntityId(clas.getId());
-        fileResource.setImageUrl(url);
+        fileResource.setImageUrl(response.getImageUrl());
         fileResource.setFileName(filename);
-        fileResource.setFileId(file.getOriginalFilename());
+        fileResource.setFileId(response.getFileId());
         fileResourceRepository.save(fileResource);
 
         clas.setImage(fileResource);
         classRepository.save(clas);
 
-        return ResponseEntity.ok(url);
+        return ResponseEntity.ok(response.getImageUrl());
     }
 
     @Override

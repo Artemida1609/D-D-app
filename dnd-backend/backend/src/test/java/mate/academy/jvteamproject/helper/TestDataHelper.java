@@ -69,42 +69,38 @@ public final class TestDataHelper {
         return requestDto;
     }
 
-    public static UserRegistrationRequestDto createUserRegistrationRequestDto(String email, String password, String repeatPassword, String lastName, String firstName) {
+    public static UserRegistrationRequestDto createUserRegistrationRequestDto(String email, String password, String repeatPassword, String userNickname) {
         UserRegistrationRequestDto userRegistrationRequestDto = new UserRegistrationRequestDto();
         userRegistrationRequestDto.setEmail(email);
         userRegistrationRequestDto.setPassword(password);
         userRegistrationRequestDto.setRepeatPassword(repeatPassword);
-        userRegistrationRequestDto.setLastName(lastName);
-        userRegistrationRequestDto.setFirstName(firstName);
+        userRegistrationRequestDto.setUserNickname(userNickname);
 
         return userRegistrationRequestDto;
     }
 
-    public static UserRegistrationResponseDto createUserRegistrationResponseDto(Long id, String email, String firstName, String lastName) {
+    public static UserRegistrationResponseDto createUserRegistrationResponseDto(Long id, String email, String userNickname) {
         UserRegistrationResponseDto userRegistrationResponseDto = new UserRegistrationResponseDto();
         userRegistrationResponseDto.setId(id);
         userRegistrationResponseDto.setEmail(email);
-        userRegistrationResponseDto.setFirstName(firstName);
-        userRegistrationResponseDto.setLastName(lastName);
+        userRegistrationResponseDto.setUserNickname(userNickname);
 
         return userRegistrationResponseDto;
     }
     public static User createUser(String email,
-                                  String password, String firstName, String lastName) {
+                                  String password, String userNickname) {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
+        user.setUserNickname(userNickname);
 
         return user;
     }
 
-    public static UserDto createDto(String email, String firstName, String lastName) {
+    public static UserDto createDto(String email, String userNickname) {
         UserDto userDto = new UserDto();
         userDto.setEmail(email);
-        userDto.setFirstName(firstName);
-        userDto.setLastName(lastName);
+        userDto.setUserNickname(userNickname);
 
         return userDto;
     }

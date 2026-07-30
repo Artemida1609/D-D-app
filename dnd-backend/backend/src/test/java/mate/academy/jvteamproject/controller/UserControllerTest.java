@@ -26,7 +26,7 @@ public class UserControllerTest extends TestContainersConfig {
         repository.deleteAll();
 
         repository.save(createUser("petro@gmail.com", "1234",
-                "Petro", "Petro"));
+                "Peatro"));
     }
 
     @WithMockUser(username = "admin", roles = "ADMIN")
