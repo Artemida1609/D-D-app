@@ -5,15 +5,15 @@ export const navItems = [
     subItems: [
       {
         titleKey: "nav.species",
-        path: "character/species",
+        path: "/character/species",
       },
       {
         titleKey: "nav.classes",
-        path: "character/classes",
+        path: "/character/classes",
       },
       {
         titleKey: "nav.skills",
-        path: "character/skills",
+        path: "/character/skills",
       },
     ],
   },
@@ -23,15 +23,15 @@ export const navItems = [
     subItems: [
       {
         titleKey: "nav.weapons",
-        path: "equipment/weapons",
+        path: "/equipment/weapons",
       },
       {
         titleKey: "nav.armor",
-        path: "equipment/armors",
+        path: "/equipment/armors",
       },
       {
         titleKey: "nav.gear",
-        path: "equipment/gear",
+        path: "/equipment/gear",
       },
     ],
   },
@@ -41,11 +41,11 @@ export const navItems = [
     subItems: [
       {
         titleKey: "nav.spells",
-        path: "magic/spells",
+        path: "/magic/spells",
       },
       {
         titleKey: "nav.schools",
-        path: "magic/schools",
+        path: "/magic/schools",
       },
     ],
   },

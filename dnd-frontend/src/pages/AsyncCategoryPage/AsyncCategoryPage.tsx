@@ -3,6 +3,8 @@ import { CategoryListPage } from "../CategoryListPage/CategoryListPage";
 import { Pagination } from "../../shared/ui/Pagination/Pagination";
 import { filterCategories } from "../../shared/constants/filterCategories";
 import { useSearchStore } from "../../shared/store/searchStore";
+import { API_BASE_URL } from "../../shared/api/config";
+import { getFavoriteUniqueId, getEntityTypeFromPath } from "../../shared/utils/favoritesUtils";
 
 interface AsyncCategoryPageProps {
   title: string;
@@ -11,7 +13,6 @@ interface AsyncCategoryPageProps {
   backgroundVariant?: "signup" | "login" | "account" | "favorites";
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://16.171.136.146";
 const ITEMS_PER_PAGE = 18;
 
 const subcategoryToCategory = new Map(
@@ -68,6 +69,7 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [error, setError] = useState<string | null>(null);
 
   const query = useSearchStore((state) => state.query);
   const chosenSubcategories = useSearchStore((state) => state.chosenSubcategories);
@@ -86,19 +88,10 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
     const fetchData = async () => {
       try {
         setIsLoading(true);
+        setError(null);
 
-        const titleLower = title.toLowerCase();
-        let targetEndpoint = endpoint;
-
-        if (titleLower === "armors" || titleLower === "armor") {
-          targetEndpoint = "/api/equipment-categories/armor";
-        } else if (titleLower === "weapons" || titleLower === "weapon") {
-          targetEndpoint = "/api/equipment-categories/weapon";
-        } else if (titleLower === "gear") {
-          targetEndpoint = "/api/equipment-categories/gear";
-        }
-
-        const isEquipmentPage = ["armors", "armor", "weapons", "weapon", "gear"].includes(titleLower);
+        const targetEndpoint = endpoint;
+        const isEquipmentPage = targetEndpoint.includes("/equipment-categories/");
 
         const fullEndpoint = targetEndpoint.startsWith("http")
           ? targetEndpoint
@@ -175,8 +168,11 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
             pathId = urlParts[urlParts.length - 1];
           }
 
+          const entityType = getEntityTypeFromPath(basePath) || pathId || "";
+          const uniqueId = pathId ? getFavoriteUniqueId(entityType, pathId) : Math.random().toString();
+
           return {
-            id: pathId || Math.random().toString(),
+            id: uniqueId,
             title: item.name || item.title || "Unknown",
             path: `${basePath}/${pathId}`,
             icon: imagePath,
@@ -187,8 +183,11 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
         if (!isCancelled) {
           setItems(formattedItems);
         }
-      } catch (error) {
-        console.error("Error fetching data:", error);
+      } catch (fetchError: any) {
+        console.error("Error fetching data:", fetchError);
+        if (!isCancelled) {
+          setError(fetchError?.message || "Failed to load items.");
+        }
       } finally {
         if (!isCancelled) {
           setIsLoading(false);
@@ -243,6 +242,17 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
     return (
       <div className="flex-1 w-full flex justify-center items-center text-[#FFFBE4] min-h-[50vh]">
         Loading...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex-1 w-full flex justify-center items-center text-[#FFFBE4] min-h-[50vh]">
+        <div className="text-center">
+          <p className="text-lg font-medium">{error}</p>
+          <p className="opacity-80 mt-2">Please try again later or choose a different category.</p>
+        </div>
       </div>
     );
   }

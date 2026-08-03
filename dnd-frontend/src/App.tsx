@@ -1,11 +1,10 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { MainLayout } from "./app/layouts/MainLayout/MainLayout";
 import { HomePage } from "./pages/HomePage/HomePage";
 import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { AsyncCategoryPage } from "./pages/AsyncCategoryPage/AsyncCategoryPage";
 import { DetailPage } from "./pages/DetailPage/DetailPage";
-import { DevAuthToggle } from "./shared/ui/DevAuthToggle/DevAuthToggle";
 import { FavoritesPage } from "./pages/FavoritesPage/FavoritesPage";
 import { AccountPage } from "./pages/AccountPage/AccountPage";
 
@@ -19,6 +18,7 @@ export function App() {
 
           {/* CHARACTER PAGE */}
           <Route path="character">
+            <Route index element={<Navigate replace to="species" />} />
             <Route path="species">
               <Route
                 index
@@ -64,6 +64,7 @@ export function App() {
 
           {/* EQUIPMENT PAGE */}
           <Route path="equipment">
+            <Route index element={<Navigate replace to="weapons" />} />
             <Route path="weapons">
               <Route
                 index
@@ -73,7 +74,7 @@ export function App() {
                     endpoint="/api/equipment-categories/weapon" 
                     basePath="/equipment/weapons" 
                   />
-                }
+                } 
               />
               <Route path=":id" element={<DetailPage />} />
             </Route>
@@ -109,6 +110,7 @@ export function App() {
 
           {/* MAGIC PAGE */}
           <Route path="magic">
+            <Route index element={<Navigate replace to="spells" />} />
             <Route path="spells">
               <Route
                 index
@@ -161,12 +163,9 @@ export function App() {
           <Route path="signup" element={<SignUpPage />} />
           <Route path="favorites" element={<FavoritesPage />} />
           <Route path="account" element={<AccountPage />} />
-          <Route path="*" element={<></>} />
+          <Route path="*" element={<Navigate replace to="/" />} />
         </Route>
       </Routes>
-
-      {/* !!! DEV !!! */}
-      <DevAuthToggle />
     </BrowserRouter>
   );
 }

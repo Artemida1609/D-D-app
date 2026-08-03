@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useFavoritesStore } from "../../store/favoritesStore";
 import { HeartIcon } from "../Icons/HeartIcon";
 import { getOptimizedCardImageUrl } from "../../api/optimizeImageUrl";
+import { getEntityIdFromPath, getEntityTypeFromPath } from "../../utils/favoritesUtils";
 import "./CategoryCard.scss";
 
 interface CategoryCardProps {
@@ -30,12 +31,18 @@ export const CategoryCard = ({ id, category, title, path, icon }: CategoryCardPr
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+
+    const entityType = getEntityTypeFromPath(path);
+    const entityId = getEntityIdFromPath(path);
+
     toggleFavorite({
       id: currentId,
       title,
       category: derivedCategory,
       path,
       icon,
+      entityType,
+      entityId,
     });
   };
 

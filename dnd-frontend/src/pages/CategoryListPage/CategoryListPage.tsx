@@ -30,6 +30,7 @@ export const CategoryListPage = ({ title, items, backgroundVariant }: CategoryLi
         {items.map((item) => (
           <CategoryCard
             key={item.id}
+            id={item.id}
             title={item.title}
             path={item.path}
             icon={item.icon}

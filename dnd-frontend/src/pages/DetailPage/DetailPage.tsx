@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { PageTitle } from "../../shared/ui/PageTitle";
 import { Button } from "../../shared/ui/Button/Button";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useFavoritesStore } from "../../shared/store/favoritesStore";
+import { API_BASE_URL } from "../../shared/api/config";
+import { getFavoriteUniqueId } from "../../shared/utils/favoritesUtils";
 import "./DetailPage.scss";
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://16.171.136.146";
 
 const propertyFormatters: Record<string, (val: any) => string | null> = {
   cost: (val) => (val?.quantity !== undefined ? `Cost: ${val.quantity} ${val.unit}` : null),
@@ -35,60 +35,68 @@ const propertyFormatters: Record<string, (val: any) => string | null> = {
 
 export const DetailPage = () => {
   const location = useLocation();
+  const params = useParams<{ id: string }>();
   const [data, setData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const pathParts = location.pathname.split("/").filter(Boolean);
   const mainCategory = pathParts[0] || "character";
   const subCategory = (pathParts[1] || "category").toLowerCase();
-  const itemId = pathParts[2] || "";
-  const currentId = location.pathname;
+  const itemId = params.id || "";
+  const apiCategoryMap: Record<string, string> = {
+    species: "races",
+    race: "races",
+    classes: "classes",
+    class: "classes",
+    skills: "skills",
+    weapons: "equipment",
+    weapon: "equipment",
+    armors: "equipment",
+    armor: "equipment",
+    gear: "equipment",
+    "adventuring-gear": "equipment",
+    spells: "spells",
+    schools: "magic-schools",
+    school: "magic-schools",
+    monster: "monsters",
+  };
+
+  const apiCategory = apiCategoryMap[subCategory] || (subCategory.endsWith("s") ? subCategory : `${subCategory}s`);
+  const currentId = getFavoriteUniqueId(apiCategory, itemId);
 
   useEffect(() => {
     const fetchData = async () => {
       if (!itemId) {
+        setError("Item ID is required to load details.");
         setIsLoading(false);
         return;
       }
 
       try {
         setIsLoading(true);
-        
-        let apiCategory = subCategory;
-        
-        if (subCategory === "class") {
-          apiCategory = "classes";
-        } else if (subCategory === "species" || subCategory === "race") {
-          apiCategory = "races";
-        } else if (["armors", "weapons", "gear", "adventuring-gear"].includes(subCategory)) {
-          apiCategory = "equipments";
-        } else if (subCategory === "magic-items") {
-          apiCategory = "magic-items";
-        } else if (subCategory === "schools" || subCategory === "school") {
-          apiCategory = "magic-schools"; // ИСПРАВЛЕНИЕ ДЛЯ ШКОЛ МАГИИ
-        } else if (!subCategory.endsWith("s") && subCategory !== "equipments") {
-          apiCategory = `${subCategory}s`;
-        }
+        setError(null);
 
         const fetchUrl = `${API_BASE_URL}/api/${apiCategory}/${itemId}`;
-        
+
         const response = await fetch(fetchUrl);
-        
+
         if (!response.ok) {
           throw new Error("Failed to fetch detail data");
         }
 
         const result = await response.json();
         setData(result);
-      } catch (error) {
-        console.error("Fetch error:", error);
+      } catch (fetchError: any) {
+        console.error("Fetch error:", fetchError);
+        setError(fetchError?.message || "Failed to load details.");
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchData();
-  }, [location.pathname, subCategory, itemId]);
+  }, [itemId, subCategory]);
 
   const displayTitle = data?.name || data?.title || subCategory.charAt(0).toUpperCase() + subCategory.slice(1);
   
@@ -108,6 +116,8 @@ export const DetailPage = () => {
       category: mainCategory.charAt(0).toUpperCase() + mainCategory.slice(1),
       path: location.pathname,
       icon: fetchedImage,
+      entityType: apiCategory,
+      entityId: itemId,
     });
   };
 
@@ -176,8 +186,8 @@ export const DetailPage = () => {
       return <p>{descData}</p>;
     }
     
-    const hasAbilities = data.special_abilities && data.special_abilities.length > 0;
-    const hasActions = data.actions && data.actions.length > 0;
+    const hasAbilities = Array.isArray(data.special_abilities) && data.special_abilities.length > 0;
+    const hasActions = Array.isArray(data.actions) && data.actions.length > 0;
 
     if (hasAbilities || hasActions) {
       return (
@@ -239,6 +249,25 @@ export const DetailPage = () => {
     return (
       <div className="flex-1 w-full flex justify-center items-center text-[#FFFBE4] min-h-[50vh]">
         Loading...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex-1 w-full flex justify-center items-center text-[#FFFBE4] min-h-[50vh]">
+        <div className="text-center">
+          <p className="text-lg font-medium">{error}</p>
+          <p className="opacity-80 mt-2">Please try again later or return to another section.</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!data) {
+    return (
+      <div className="flex-1 w-full flex justify-center items-center text-[#FFFBE4] min-h-[50vh]">
+        <p className="text-lg font-medium">No details were found for this item.</p>
       </div>
     );
   }

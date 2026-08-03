@@ -27,6 +27,7 @@ export const Header = ({
       setIsTablet(window.innerWidth < 1350);
     };
 
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);

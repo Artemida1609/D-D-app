@@ -1,6 +1,7 @@
 import axios from "axios";
+import { API_BASE_URL } from "./config.ts";
 
 export const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_APP_URL ?? "http://localhost:5173",
+  baseURL: API_BASE_URL,
   headers: { "Content-Type": "application/json" },
 });
