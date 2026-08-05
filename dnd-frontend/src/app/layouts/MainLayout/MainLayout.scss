@@ -1,0 +1,19 @@
+.main-layout {
+  width: 100%;
+  max-width: 1280px; /* desktop */
+  margin: 0 auto;
+}
+
+/* Tablet: up to 1279px use 754px content width */
+@media (max-width: 1279px) {
+  .main-layout {
+    max-width: 754px;
+  }
+}
+
+/* Mobile: up to 753px use 361px content width */
+@media (max-width: 753px) {
+  .main-layout {
+    max-width: 361px;
+  }
+}

@@ -47,41 +47,34 @@ export const CategoryCard = ({ id, category, title, path, icon }: CategoryCardPr
   };
 
   return (
-    <Link
-      to={path}
-      className="category-card group relative flex flex-col items-center gap-[16px]"
-    >
-      <button
-        onClick={handleFavoriteClick}
-        className={`absolute top-4 right-4 z-10 p-1 transition-all duration-300 hover:scale-110 cursor-pointer ${
-          isFavorite ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-        }`}
-      >
-        <HeartIcon
-          isFilled={isFavorite}
-          className="text-[#FFFBE4]"
-        />
-      </button>
+    <Link to={path} className="category-card group relative flex flex-col items-center">
+      <div className="category-card__image-wrapper">
+        {icon && (
+          <>
+            <img
+              src={imageSrc}
+              alt={title}
+              loading="lazy"
+              decoding="async"
+              fetchPriority="low"
+              onError={() => {
+                if (imageSrc !== icon) setImageSrc(icon);
+              }}
+              className="category-card__image"
+            />
 
-      {icon && (
-        <img 
-          src={imageSrc}
-          alt={title} 
-          loading="lazy"
-          decoding="async"
-          fetchPriority="low"
-          width={166}
-          height={166}
-          onError={() => {
-            if (imageSrc !== icon) {
-              setImageSrc(icon);
-            }
-          }}
-          className="w-[108px] h-[108px] md:w-[166px] md:h-[166px] object-contain"
-        />
-      )}
-      
-      <span className="text-[#FFFBE4] text-[20px] font-medium text-center leading-tight font-manrope">
+            <button
+              onClick={handleFavoriteClick}
+              aria-label="Toggle favorite"
+              className={`category-card__favorite ${isFavorite ? "favorite--active" : "favorite--inactive"}`}
+            >
+              <HeartIcon isFilled={isFavorite} className="text-[#FFFBE4]" />
+            </button>
+          </>
+        )}
+      </div>
+
+      <span className="category-card__title">
         {title}
       </span>
     </Link>

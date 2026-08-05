@@ -13,7 +13,28 @@ interface AsyncCategoryPageProps {
   backgroundVariant?: "signup" | "login" | "account" | "favorites";
 }
 
-const ITEMS_PER_PAGE = 18;
+const ROWS_PER_PAGE = 6;
+
+const computeColumnsFromContainer = () => {
+  if (typeof window === 'undefined') return 2;
+  // try to measure the main content container width (accounts for centered max-width)
+  const container = document.querySelector('.main-layout') as HTMLElement | null;
+  const containerWidth = container ? container.clientWidth : window.innerWidth;
+
+  // determine card size and gap based on container width
+  const isMobile = containerWidth <= 361;
+  const cardWidth = isMobile ? 172 : 230; // mobile vs tablet/desktop
+  const gap = isMobile ? 16 : 32; // use 32px gap to fit 3 columns at 754px
+
+  // determine largest columns that fit using exact check
+  for (let cols = 6; cols >= 1; cols--) {
+    const required = cols * cardWidth + (cols - 1) * gap;
+    if (required <= containerWidth) return cols;
+  }
+
+  return 1;
+};
+
 
 const subcategoryToCategory = new Map(
   filterCategories.flatMap((category) =>
@@ -71,8 +92,51 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
   const [totalPages, setTotalPages] = useState(1);
   const [error, setError] = useState<string | null>(null);
 
+  // compute columns and items per page so pages contain full rows
+  const [columns, setColumns] = useState<number>(() => computeColumnsFromContainer());
+  const [itemsPerPage, setItemsPerPage] = useState<number>(columns * ROWS_PER_PAGE);
+
   const query = useSearchStore((state) => state.query);
   const chosenSubcategories = useSearchStore((state) => state.chosenSubcategories);
+
+  useEffect(() => {
+    let timeout: number | undefined;
+    const handleResize = () => {
+      // debounce resize handling
+      if (timeout) window.clearTimeout(timeout);
+      timeout = window.setTimeout(() => {
+        const newCols = computeColumnsFromContainer();
+        if (newCols !== columns) {
+          setColumns(newCols);
+          setItemsPerPage(newCols * ROWS_PER_PAGE);
+          setCurrentPage(1);
+        }
+      }, 120);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // also observe container resize (e.g., when main-layout changes size)
+    const container = document.querySelector('.main-layout') as HTMLElement | null;
+    let ro: ResizeObserver | null = null;
+    if (container && typeof ResizeObserver !== 'undefined') {
+      ro = new ResizeObserver(() => {
+        const newCols = computeColumnsFromContainer();
+        if (newCols !== columns) {
+          setColumns(newCols);
+          setItemsPerPage(newCols * ROWS_PER_PAGE);
+          setCurrentPage(1);
+        }
+      });
+      ro.observe(container);
+    }
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (timeout) window.clearTimeout(timeout);
+      if (ro && container) ro.unobserve(container);
+    };
+  }, [columns]);
 
   const hasActiveSearch = normalizeText(query).length > 0 || chosenSubcategories.length > 0;
 
@@ -101,8 +165,8 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
         if (!isEquipmentPage) {
           const backendPage = currentPage - 1;
           fetchUrl = fullEndpoint.includes("?")
-            ? `${fullEndpoint}&page=${backendPage}&size=${ITEMS_PER_PAGE}`
-            : `${fullEndpoint}?page=${backendPage}&size=${ITEMS_PER_PAGE}`;
+            ? `${fullEndpoint}&page=${backendPage}&size=${itemsPerPage}`
+            : `${fullEndpoint}?page=${backendPage}&size=${itemsPerPage}`;
         }
 
         const response = await fetch(fetchUrl);
@@ -150,9 +214,9 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
         if (!isEquipmentPage && data.totalPages !== undefined) {
           setTotalPages(data.totalPages);
         } else {
-          setTotalPages(Math.ceil(dataArray.length / ITEMS_PER_PAGE) || 1);
-          const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-          paginatedData = dataArray.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+          setTotalPages(Math.ceil(dataArray.length / itemsPerPage) || 1);
+          const startIndex = (currentPage - 1) * itemsPerPage;
+          paginatedData = dataArray.slice(startIndex, startIndex + itemsPerPage);
         }
 
         const formattedItems = paginatedData.map((item: any) => {
@@ -200,7 +264,7 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
     return () => {
       isCancelled = true;
     };
-  }, [endpoint, basePath, title, currentPage]);
+  }, [endpoint, basePath, title, currentPage, itemsPerPage]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -263,6 +327,7 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
         title={title}
         items={filteredItems}
         backgroundVariant={backgroundVariant}
+        columns={columns}
       />
 
       {!isLoading && filteredItems.length === 0 && (

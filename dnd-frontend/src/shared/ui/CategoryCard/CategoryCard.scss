@@ -1,13 +1,19 @@
 .category-card {
   width: 172px;
-  min-height: 199px;
-  padding: 24px 32px;
+  /* updated to fit image (156) + gaps + title(min 48) + paddings */
+  height: 228px;
+  padding: 8px; /* 8px from sides and top */
   background-color: rgba(255, 255, 255, 0.1);
   border: 1px solid transparent;
   border-radius: 25px;
   transition: all 0.3s ease;
   cursor: pointer;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.15);
@@ -15,8 +21,108 @@
     transform: translateY(-4px);
   }
 
-  @media (min-width: 768px) {
+  /* Image wrapper: responsive square equal to card content width */
+  .category-card__image-wrapper {
+    position: relative;
+    width: 100%; /* fills card inner width (card width minus 2*8px padding) */
+    padding-top: 100%; /* creates a square based on width */
+    border-radius: 15px;
+    overflow: hidden;
+    flex: 0 0 auto;
+    background-color: rgba(255, 251, 228, 0.25); /* #FFFBE440 ~ 25% */
+  }
+
+  /* Place the image absolutely so it always fills the wrapper square exactly */
+  .category-card__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 15px;
+  }
+
+  /* Heart/button over image */
+  .category-card__favorite {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: #FFFBE4;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    cursor: pointer;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* When favorite is active it should be visible */
+  .category-card__favorite.favorite--active {
+    opacity: 1;
+  }
+
+  /* Show on hover of the card (group hover) */
+  &.group:hover .category-card__favorite,
+  &:hover .category-card__favorite {
+    opacity: 1;
+  }
+
+  .category-card__favorite:hover {
+    transform: scale(1.05);
+  }
+
+  /* Title */
+  .category-card__title {
+    margin-top: 8px; /* отступ от картинки */
+    margin-bottom: 0; /* bottom distance controlled by card padding */
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
+    font-style: normal; /* "Medium" указан как стиль — используем нормальный + weight */
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    color: #FFFBE4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* reserve vertical space so multi-line titles won't shrink image area */
+    min-height: 48px; /* two lines of 24px */
+    padding: 0 8px;
+    box-sizing: border-box;
+    width: 100%;
+    word-break: break-word;
+  }
+
+  /* Tablet and desktop sizes (>=754px) */
+  @media (min-width: 754px) {
     width: 230px;
-    min-height: 263px;
+    /* updated to accommodate 214px image + gaps + title */
+    height: 286px;
+
+    /* image-wrapper remains 100% and becomes 214x214 because card inner width is 214 */
+    .category-card__favorite {
+      top: 8px;
+      right: 8px;
+    }
+  }
+
+  /* Desktop refinements (>=1280px) — same dimensions as tablet per spec */
+  @media (min-width: 1280px) {
+    width: 230px;
+    height: 286px;
+
+    .category-card__favorite {
+      top: 8px;
+      right: 8px;
+    }
   }
 }

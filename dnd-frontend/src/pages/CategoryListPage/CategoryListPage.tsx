@@ -1,3 +1,4 @@
+import React from 'react';
 import { PageTitle } from "../../shared/ui/PageTitle";
 import { CategoryCard } from "../../shared/ui/CategoryCard/CategoryCard";
 import { PageBackground } from "../../shared/ui/PageBackground/PageBackground";
@@ -13,9 +14,24 @@ interface CategoryListPageProps {
   title: string;
   items: ListItem[];
   backgroundVariant?: "signup" | "login" | "account" | "favorites";
+  columns?: number;
 }
 
-export const CategoryListPage = ({ title, items, backgroundVariant }: CategoryListPageProps) => {
+export const CategoryListPage = ({ title, items, backgroundVariant, columns = 2 }: CategoryListPageProps) => {
+  // decide card width and gap based on columns (keeps layout consistent with AsyncCategoryPage)
+  const isMobile = columns <= 2;
+  const cardWidth = isMobile ? 172 : 230; // outer card widths
+  const gap = isMobile ? 16 : 32; // md gap vs mobile gap (32 fits 3 cols in 754)
+
+  const gridStyle: React.CSSProperties = {
+    display: 'grid',
+    gridTemplateColumns: `repeat(${columns}, ${cardWidth}px)`,
+    columnGap: `${gap}px`,
+    rowGap: `${gap}px`,
+    justifyContent: 'center',
+    paddingBottom: '20px',
+  };
+
   return (
     <div className="w-full flex flex-col flex-1">
       {backgroundVariant ? (
@@ -26,7 +42,7 @@ export const CategoryListPage = ({ title, items, backgroundVariant }: CategoryLi
 
       <PageTitle title={title} />
 
-      <div className="flex flex-wrap gap-4 md:gap-[32.5px] justify-start pb-20">
+      <div style={gridStyle}>
         {items.map((item) => (
           <CategoryCard
             key={item.id}
