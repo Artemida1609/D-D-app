@@ -1,4 +1,4 @@
-@use "../../styles/mixins" as *;
+﻿@use "../../styles/mixins" as *;
 
 .header {
   font-family: var(--font-manrope);
@@ -40,8 +40,8 @@
 }
 
 .burger-menu {
-  // display: none;
-  // position: absolute;
+  
+  
   top: 0;
   right: 0;
   transform: translateY(50%);

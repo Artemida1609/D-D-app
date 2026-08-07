@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import { CategoryListPage } from "../CategoryListPage/CategoryListPage";
 import { Pagination } from "../../shared/ui/Pagination/Pagination";
 import { filterCategories } from "../../shared/constants/filterCategories";
@@ -17,16 +17,16 @@ const ROWS_PER_PAGE = 6;
 
 const computeColumnsFromContainer = () => {
   if (typeof window === 'undefined') return 2;
-  // try to measure the main content container width (accounts for centered max-width)
+  
   const container = document.querySelector('.main-layout') as HTMLElement | null;
   const containerWidth = container ? container.clientWidth : window.innerWidth;
 
-  // determine card size and gap based on container width
+  
   const isMobile = containerWidth <= 361;
-  const cardWidth = isMobile ? 172 : 230; // mobile vs tablet/desktop
-  const gap = isMobile ? 16 : 32; // use 32px gap to fit 3 columns at 754px
+  const cardWidth = isMobile ? 172 : 230; 
+  const gap = isMobile ? 16 : 32; 
 
-  // determine largest columns that fit using exact check
+  
   for (let cols = 6; cols >= 1; cols--) {
     const required = cols * cardWidth + (cols - 1) * gap;
     if (required <= containerWidth) return cols;
@@ -92,7 +92,7 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
   const [totalPages, setTotalPages] = useState(1);
   const [error, setError] = useState<string | null>(null);
 
-  // compute columns and items per page so pages contain full rows
+  
   const [columns, setColumns] = useState<number>(() => computeColumnsFromContainer());
   const [itemsPerPage, setItemsPerPage] = useState<number>(columns * ROWS_PER_PAGE);
 
@@ -102,7 +102,7 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
   useEffect(() => {
     let timeout: number | undefined;
     const handleResize = () => {
-      // debounce resize handling
+      
       if (timeout) window.clearTimeout(timeout);
       timeout = window.setTimeout(() => {
         const newCols = computeColumnsFromContainer();
@@ -116,7 +116,7 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
 
     window.addEventListener('resize', handleResize);
 
-    // also observe container resize (e.g., when main-layout changes size)
+    
     const container = document.querySelector('.main-layout') as HTMLElement | null;
     let ro: ResizeObserver | null = null;
     if (container && typeof ResizeObserver !== 'undefined') {
@@ -346,3 +346,4 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
     </div>
   );
 };
+

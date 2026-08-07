@@ -1,4 +1,4 @@
-@use "../../styles/mixins" as *;
+﻿@use "../../styles/mixins" as *;
 
 .language {
   position: relative;
@@ -27,11 +27,11 @@
   }
 }
 
-// .language__dropdown--aside-animated {
-//   li {
-//     padding: 8px 0;
-//   }
-// }
+
+
+
+
+
 
 .nav-actions {
   button,
@@ -64,3 +64,4 @@
     }
   }
 }
+

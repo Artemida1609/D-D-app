@@ -1,5 +1,5 @@
-export interface DndClass {
-  index: string;          // @JsonProperty("index") <- originalIndex
+﻿export interface DndClass {
+  index: string;          
   name: string;
   hit_die: number;
   proficiency_choices: Record<string, unknown>[];

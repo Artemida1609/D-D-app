@@ -1,4 +1,4 @@
-@mixin dropdown-base {
+﻿@mixin dropdown-base {
   position: absolute;
   top: 160%;
   left: 50%;
@@ -55,7 +55,7 @@
   @media (min-width: 1024px) { @content; }
 }
 
-// Кастомний скролбар 
+
 @mixin custom-scrollbar($width: 4px, $color: #fffbe4) {
   &::-webkit-scrollbar {
     width: $width;

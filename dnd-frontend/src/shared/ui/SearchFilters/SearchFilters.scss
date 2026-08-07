@@ -1,4 +1,4 @@
-@use "../../styles/mixins" as *;
+﻿@use "../../styles/mixins" as *;
 
 .search {
   box-sizing: border-box;
@@ -8,7 +8,7 @@
   *::after {
     box-sizing: border-box;
   }
-  // ── Header режим (дефолт) ──────────────────────────────────
+  
   position: relative;
   display: flex;
   align-items: center;
@@ -180,7 +180,7 @@
       text-shadow: 0 0 12px var(--accent-hover);
     }
 
-    // замість Tailwind hidden
+    
     &--hidden {
       display: none;
     }
@@ -233,7 +233,7 @@
     }
   }
 
-  // ── Sidebar модифікатор ────────────────────────────────────
+  
   &--sidebar {
     position: static;
     width: 100%;
@@ -298,8 +298,8 @@
     }
 
     .search__lists {
-      display: flex; // явно flex
-      flex-direction: row; // явно row
+      display: flex; 
+      flex-direction: row; 
       margin-bottom: 16px;
     }
 
@@ -334,3 +334,4 @@
     }
   }
 }
+

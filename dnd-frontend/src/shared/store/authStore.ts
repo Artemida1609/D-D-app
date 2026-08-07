@@ -1,4 +1,4 @@
-import { create } from "zustand";
+﻿import { create } from "zustand";
 
 interface AuthState {
   isLoggedIn: boolean;
@@ -20,9 +20,10 @@ export const useAuthStore = create<AuthState>((set) => ({
   logout: () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("refreshToken");
-    // keep user info cleared as well
+    
     localStorage.removeItem("userNickname");
     localStorage.removeItem("userEmail");
     set({ isLoggedIn: false });
   },
 }));
+

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import "./Header.scss";
 // import { ArrowDown } from "../Icons/ArrowDown";
 import { useEffect, useState } from "react";
@@ -40,9 +40,7 @@ export const Header = ({
             <DnDIcon />
           </Link>
 
-          {/* <div className="hidden md:block">
-            <SearchFilters variant="header" />
-          </div> */}
+          
 
           <span className="cursor-pointer" onClick={() => setActiveAside(true)}>
             <BurgerMenuIcon />
@@ -129,3 +127,4 @@ export const Header = ({
     </header>
   );
 };
+

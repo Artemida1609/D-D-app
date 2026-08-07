@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { PageTitle } from "../../shared/ui/PageTitle";
 import { CategoryCard } from "../../shared/ui/CategoryCard/CategoryCard";
 import { PageBackground } from "../../shared/ui/PageBackground/PageBackground";
@@ -18,10 +18,10 @@ interface CategoryListPageProps {
 }
 
 export const CategoryListPage = ({ title, items, backgroundVariant, columns = 2 }: CategoryListPageProps) => {
-  // decide card width and gap based on columns (keeps layout consistent with AsyncCategoryPage)
+  
   const isMobile = columns <= 2;
-  const cardWidth = isMobile ? 172 : 230; // outer card widths
-  const gap = isMobile ? 16 : 32; // md gap vs mobile gap (32 fits 3 cols in 754)
+  const cardWidth = isMobile ? 172 : 230; 
+  const gap = isMobile ? 16 : 32; 
 
   const gridStyle: React.CSSProperties = {
     display: 'grid',
@@ -56,3 +56,4 @@ export const CategoryListPage = ({ title, items, backgroundVariant, columns = 2 
     </div>
   );
 };
+

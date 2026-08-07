@@ -5,6 +5,7 @@ import "../../shared/styles/AuthForm.scss";
 import { PageBackground } from "../../shared/ui/PageBackground/PageBackground";
 import { Button } from "../../shared/ui/Button/Button";
 import { useAuthStore } from "../../shared/store/authStore";
+import { useFavoritesStore } from "../../shared/store/favoritesStore";
 import { API_BASE_URL } from "../../shared/api/config";
 
 export const SignUpPage = () => {
@@ -66,6 +67,15 @@ export const SignUpPage = () => {
       }
 
       login(loginData.token, loginData.refreshToken);
+      // clear and reload favorites for the newly registered (and logged-in) user
+      try {
+        const { clearFavorites, loadFavorites } = useFavoritesStore.getState();
+        clearFavorites();
+        loadFavorites().catch((e) => console.error('Failed to load favorites after signup', e));
+      } catch (e) {
+        console.error('Favorites store not available', e);
+      }
+
       localStorage.setItem("userEmail", email);
       localStorage.setItem("userNickname", userNickname);
 

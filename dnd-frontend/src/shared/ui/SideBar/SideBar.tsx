@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import { DnDIcon } from "../Icons/DnDIcon";
 import "./SideBar.scss";
 import { SearchIcon } from "../Icons/SearchIcon";
@@ -94,7 +94,7 @@ export const SideBar = ({
           ease: [0.4, 0, 0.2, 1],
         }}
         style={{
-          // overflow: "hidden",
+          
         }}
       >
         <NavCategories setActiveAside={setActiveAside} />
@@ -132,7 +132,7 @@ export const SideBar = ({
         </div>
       </motion.div>
 
-      {/* Search Filters з'являються коли пошук активний */}
+      
       <motion.div
         initial={false}
         animate={{
@@ -256,3 +256,4 @@ export const SideBar = ({
 
   return createPortal(sidebarNode, portalRoot as Element);
 };
+
