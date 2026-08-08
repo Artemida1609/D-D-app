@@ -71,10 +71,79 @@ const normalizeText = (value: string) => value.toLowerCase().trim();
 
 const tokenFromFilter = (filterKey: string) => filterKey.split(".").pop() || filterKey;
 
+interface ApiListItem {
+  name?: string;
+  title?: string;
+  index?: string | number;
+  id?: string | number;
+  url?: string;
+  path?: string;
+  type?: string;
+  category?: string;
+  description?: string;
+  fullName?: string;
+  slug?: string;
+  image?: string;
+  imageUrl?: string;
+  icon?: string;
+  equipment?: ApiListItem[];
+  [key: string]: unknown;
+}
+
+interface ApiListResponse {
+  content?: ApiListItem[];
+  results?: ApiListItem[];
+  data?: ApiListItem[];
+  totalPages?: number;
+}
+
 const matchesSubcategory = (filterKey: string, searchText: string) => {
   const token = tokenFromFilter(filterKey);
   const keywords = filterKeywordsMap[token] || [token];
   return keywords.some((keyword) => searchText.includes(keyword));
+};
+
+const buildItemSearchText = (item: ApiListItem) => {
+  const textParts = [
+    item.name,
+    item.title,
+    item.index,
+    item.id,
+    item.url,
+    item.path,
+    item.type,
+    item.category,
+    item.description,
+    item.fullName,
+    item.slug,
+  ].filter((value): value is string => typeof value === "string" && value.trim().length > 0);
+
+  return normalizeText([JSON.stringify(item), ...textParts].join(" "));
+};
+
+const getItemIdentifier = (item: ApiListItem) => {
+  const identifier = item.index ?? item.id;
+  if (typeof identifier === "string" && identifier.trim().length > 0) {
+    return identifier;
+  }
+
+  if (typeof identifier === "number") {
+    return String(identifier);
+  }
+
+  return undefined;
+};
+
+const toApiItems = (payload: ApiListResponse | ApiListItem[] | null | undefined): ApiListItem[] => {
+  if (Array.isArray(payload)) {
+    return payload;
+  }
+
+  if (!payload) {
+    return [];
+  }
+
+  return payload.content ?? payload.results ?? payload.data ?? [];
 };
 
 interface AsyncListItem {
@@ -92,7 +161,6 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
   const [totalPages, setTotalPages] = useState(1);
   const [error, setError] = useState<string | null>(null);
 
-  
   const [columns, setColumns] = useState<number>(() => computeColumnsFromContainer());
   const [itemsPerPage, setItemsPerPage] = useState<number>(columns * ROWS_PER_PAGE);
 
@@ -102,7 +170,6 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
   useEffect(() => {
     let timeout: number | undefined;
     const handleResize = () => {
-      
       if (timeout) window.clearTimeout(timeout);
       timeout = window.setTimeout(() => {
         const newCols = computeColumnsFromContainer();
@@ -114,12 +181,11 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
       }, 120);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
-    
-    const container = document.querySelector('.main-layout') as HTMLElement | null;
+    const container = document.querySelector(".main-layout") as HTMLElement | null;
     let ro: ResizeObserver | null = null;
-    if (container && typeof ResizeObserver !== 'undefined') {
+    if (container && typeof ResizeObserver !== "undefined") {
       ro = new ResizeObserver(() => {
         const newCols = computeColumnsFromContainer();
         if (newCols !== columns) {
@@ -132,7 +198,7 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
     }
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
       if (timeout) window.clearTimeout(timeout);
       if (ro && container) ro.unobserve(container);
     };
@@ -141,9 +207,15 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
   const hasActiveSearch = normalizeText(query).length > 0 || chosenSubcategories.length > 0;
 
   useEffect(() => {
-    if (hasActiveSearch && currentPage !== 1) {
-      setCurrentPage(1);
+    if (!hasActiveSearch || currentPage === 1) {
+      return;
     }
+
+    const timeoutId = window.setTimeout(() => {
+      setCurrentPage(1);
+    }, 0);
+
+    return () => window.clearTimeout(timeoutId);
   }, [hasActiveSearch, currentPage]);
 
   useEffect(() => {
@@ -156,101 +228,136 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
 
         const targetEndpoint = endpoint;
         const isEquipmentPage = targetEndpoint.includes("/equipment-categories/");
+        const shouldFetchAll = hasActiveSearch;
 
         const fullEndpoint = targetEndpoint.startsWith("http")
           ? targetEndpoint
-          : `${API_BASE_URL}${targetEndpoint.startsWith('/') ? '' : '/'}${targetEndpoint}`;
+          : `${API_BASE_URL}${targetEndpoint.startsWith("/") ? "" : "/"}${targetEndpoint}`;
 
-        let fetchUrl = fullEndpoint;
-        if (!isEquipmentPage) {
-          const backendPage = currentPage - 1;
-          fetchUrl = fullEndpoint.includes("?")
-            ? `${fullEndpoint}&page=${backendPage}&size=${itemsPerPage}`
-            : `${fullEndpoint}?page=${backendPage}&size=${itemsPerPage}`;
-        }
+        const formatItems = (dataArray: ApiListItem[]) =>
+          dataArray.map((item) => {
+            let imagePath = item.image || item.imageUrl || item.icon || "";
 
-        const response = await fetch(fetchUrl);
-        
-        if (!response.ok) {
-          throw new Error(`Failed to fetch`);
-        }
+            if (typeof imagePath === "string" && imagePath.startsWith("/api/images/")) {
+              imagePath = `https://www.dnd5eapi.co${imagePath}`;
+            }
 
-        const data = await response.json();
-        let dataArray: any[] = [];
+            const rawPathId = item.index ?? item.id;
+            let pathId = typeof rawPathId === "string" || typeof rawPathId === "number"
+              ? String(rawPathId)
+              : "";
+
+            if (typeof item.url === "string" && !pathId) {
+              const urlParts = item.url.split("/").filter(Boolean);
+              pathId = urlParts[urlParts.length - 1] || "";
+            }
+
+            const entityType = getEntityTypeFromPath(basePath) || pathId || "";
+            const uniqueId = pathId ? getFavoriteUniqueId(entityType, pathId) : Math.random().toString();
+
+            return {
+              id: uniqueId,
+              title: item.name || item.title || "Unknown",
+              path: `${basePath}/${pathId}`,
+              icon: imagePath,
+              searchText: buildItemSearchText(item),
+            };
+          });
 
         if (isEquipmentPage) {
-          const rawCategories = data.content || data.results || data.data || (Array.isArray(data) ? data : []);
-          let allEquipment: any[] = [];
+          const response = await fetch(fullEndpoint);
+          if (!response.ok) {
+            throw new Error("Failed to fetch");
+          }
 
-          rawCategories.forEach((category: any) => {
-            if (category.equipment && Array.isArray(category.equipment)) {
+          const data = (await response.json()) as ApiListResponse | ApiListItem[];
+          const rawCategories = toApiItems(data);
+          let allEquipment: ApiListItem[] = [];
+
+          rawCategories.forEach((category) => {
+            if (Array.isArray(category.equipment)) {
               allEquipment = [...allEquipment, ...category.equipment];
             }
           });
 
-          const uniqueMap = new Map();
-          allEquipment.forEach((item: any) => {
-            const id = item.index || item.id;
+          const uniqueMap = new Map<string, ApiListItem>();
+          allEquipment.forEach((item) => {
+            const id = getItemIdentifier(item);
             if (id && !uniqueMap.has(id)) {
               uniqueMap.set(id, item);
             }
           });
-          
-          dataArray = Array.from(uniqueMap.values());
-        } else {
-          if (Array.isArray(data)) {
-            dataArray = data;
-          } else if (data && Array.isArray(data.content)) {
-            dataArray = data.content;
-          } else if (data && Array.isArray(data.results)) {
-            dataArray = data.results;
-          } else if (data && data.data && Array.isArray(data.data)) {
-            dataArray = data.data;
+
+          const formattedItems = formatItems(Array.from(uniqueMap.values()));
+          if (!isCancelled) {
+            setItems(formattedItems);
+            setTotalPages(Math.max(1, Math.ceil(formattedItems.length / itemsPerPage)));
           }
+          return;
         }
 
-        let paginatedData = dataArray;
+        if (shouldFetchAll) {
+          const firstResponse = await fetch(
+            fullEndpoint.includes("?")
+              ? `${fullEndpoint}&page=0&size=200`
+              : `${fullEndpoint}?page=0&size=200`
+          );
 
-        if (!isEquipmentPage && data.totalPages !== undefined) {
-          setTotalPages(data.totalPages);
-        } else {
-          setTotalPages(Math.ceil(dataArray.length / itemsPerPage) || 1);
-          const startIndex = (currentPage - 1) * itemsPerPage;
-          paginatedData = dataArray.slice(startIndex, startIndex + itemsPerPage);
+          if (!firstResponse.ok) {
+            throw new Error("Failed to fetch");
+          }
+
+          const firstPayload = (await firstResponse.json()) as ApiListResponse | ApiListItem[];
+          const totalPagesFromBackend = Array.isArray(firstPayload) ? 1 : firstPayload.totalPages ?? 1;
+          const allData: ApiListItem[] = [];
+
+          for (let page = 0; page < totalPagesFromBackend; page += 1) {
+            const pageUrl = fullEndpoint.includes("?")
+              ? `${fullEndpoint}&page=${page}&size=200`
+              : `${fullEndpoint}?page=${page}&size=200`;
+            const pageResponse = await fetch(pageUrl);
+
+            if (!pageResponse.ok) {
+              throw new Error("Failed to fetch");
+            }
+
+            const pagePayload = (await pageResponse.json()) as ApiListResponse | ApiListItem[];
+            const pageData = toApiItems(pagePayload);
+
+            allData.push(...pageData);
+          }
+
+          const formattedItems = formatItems(allData);
+          if (!isCancelled) {
+            setItems(formattedItems);
+            setTotalPages(Math.max(1, Math.ceil(formattedItems.length / itemsPerPage)));
+          }
+          return;
         }
 
-        const formattedItems = paginatedData.map((item: any) => {
-          let imagePath = item.image || item.imageUrl || item.icon || "";
+        const backendPage = currentPage - 1;
+        const fetchUrl = fullEndpoint.includes("?")
+          ? `${fullEndpoint}&page=${backendPage}&size=${itemsPerPage}`
+          : `${fullEndpoint}?page=${backendPage}&size=${itemsPerPage}`;
 
-          if (imagePath.startsWith("/api/images/")) {
-            imagePath = `https://www.dnd5eapi.co${imagePath}`;
-          }
+        const response = await fetch(fetchUrl);
+        if (!response.ok) {
+          throw new Error("Failed to fetch");
+        }
 
-          let pathId = item.index || item.id;
-          if (item.url && !pathId) {
-            const urlParts = item.url.split('/').filter(Boolean);
-            pathId = urlParts[urlParts.length - 1];
-          }
-
-          const entityType = getEntityTypeFromPath(basePath) || pathId || "";
-          const uniqueId = pathId ? getFavoriteUniqueId(entityType, pathId) : Math.random().toString();
-
-          return {
-            id: uniqueId,
-            title: item.name || item.title || "Unknown",
-            path: `${basePath}/${pathId}`,
-            icon: imagePath,
-            searchText: normalizeText(JSON.stringify(item || {})),
-          };
-        });
+        const data = (await response.json()) as ApiListResponse | ApiListItem[];
+        const dataArray = toApiItems(data);
+        const formattedItems = formatItems(dataArray);
 
         if (!isCancelled) {
           setItems(formattedItems);
+          setTotalPages(Array.isArray(data) ? Math.max(1, Math.ceil(dataArray.length / itemsPerPage)) : data.totalPages ?? Math.max(1, Math.ceil(dataArray.length / itemsPerPage)));
         }
-      } catch (fetchError: any) {
+      } catch (fetchError: unknown) {
         console.error("Error fetching data:", fetchError);
         if (!isCancelled) {
-          setError(fetchError?.message || "Failed to load items.");
+          const message = fetchError instanceof Error ? fetchError.message : "Failed to load items.";
+          setError(message);
         }
       } finally {
         if (!isCancelled) {
@@ -264,21 +371,21 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
     return () => {
       isCancelled = true;
     };
-  }, [endpoint, basePath, title, currentPage, itemsPerPage]);
+  }, [endpoint, basePath, title, currentPage, itemsPerPage, hasActiveSearch]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const filteredItems = useMemo(() => {
+  const visibleItems = useMemo(() => {
     const normalizedQuery = normalizeText(query);
 
-    return items.filter((item) => {
+    const filteredItems = items.filter((item) => {
       const queryMatch =
-        !normalizedQuery
-        || normalizeText(item.title).includes(normalizedQuery)
-        || item.searchText.includes(normalizedQuery);
+        !normalizedQuery ||
+        normalizeText(item.title).includes(normalizedQuery) ||
+        item.searchText.includes(normalizedQuery);
 
       if (!queryMatch) {
         return false;
@@ -300,7 +407,50 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
         filtersInCategory.some((filterKey) => matchesSubcategory(filterKey, item.searchText)),
       );
     });
-  }, [items, query, chosenSubcategories]);
+
+    if (!hasActiveSearch) {
+      return filteredItems;
+    }
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return filteredItems.slice(startIndex, startIndex + itemsPerPage);
+  }, [items, query, chosenSubcategories, currentPage, itemsPerPage, hasActiveSearch]);
+
+  const totalFilteredPages = useMemo(() => {
+    if (!hasActiveSearch) {
+      return totalPages;
+    }
+
+    const normalizedQuery = normalizeText(query);
+    const filteredItems = items.filter((item) => {
+      const queryMatch =
+        !normalizedQuery ||
+        normalizeText(item.title).includes(normalizedQuery) ||
+        item.searchText.includes(normalizedQuery);
+
+      if (!queryMatch) {
+        return false;
+      }
+
+      if (chosenSubcategories.length === 0) {
+        return true;
+      }
+
+      const groupedFilters = new Map<string, string[]>();
+
+      chosenSubcategories.forEach((filterKey) => {
+        const category = subcategoryToCategory.get(filterKey) || "filters.misc";
+        const current = groupedFilters.get(category) || [];
+        groupedFilters.set(category, [...current, filterKey]);
+      });
+
+      return Array.from(groupedFilters.values()).every((filtersInCategory) =>
+        filtersInCategory.some((filterKey) => matchesSubcategory(filterKey, item.searchText)),
+      );
+    });
+
+    return Math.max(1, Math.ceil(filteredItems.length / itemsPerPage));
+  }, [chosenSubcategories, hasActiveSearch, items, itemsPerPage, query, totalPages]);
 
   if (isLoading) {
     return (
@@ -325,24 +475,24 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
     <div className="flex flex-col min-h-screen">
       <CategoryListPage
         title={title}
-        items={filteredItems}
+        items={visibleItems}
         backgroundVariant={backgroundVariant}
         columns={columns}
       />
 
-      {!isLoading && filteredItems.length === 0 && (
+      {!isLoading && visibleItems.length === 0 && (
         <div className="text-[#FFFBE4] opacity-80 text-center pb-10">
           Nothing found. Try another search query or filters.
         </div>
       )}
 
-      {!hasActiveSearch && totalPages > 1 && (
+      {(!hasActiveSearch && totalPages > 1) || (hasActiveSearch && totalFilteredPages > 1) ? (
         <Pagination
           currentPage={currentPage}
-          totalPages={totalPages}
+          totalPages={hasActiveSearch ? totalFilteredPages : totalPages}
           onPageChange={handlePageChange}
         />
-      )}
+      ) : null}
     </div>
   );
 };
