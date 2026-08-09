@@ -31,7 +31,8 @@ public class SpellServiceImpl implements SpellService, SearchableService {
 
     @Override
     public Optional<SearchResult> searchByName(String name) {
-        return spellRepository.findByNameIgnoreCase(name)
+        return spellRepository.findByNameLike(name).stream()
+                .findFirst()
                 .map(e -> new SearchResult(
                         "spells",
                         e.getName(),

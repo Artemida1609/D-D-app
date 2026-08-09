@@ -31,7 +31,8 @@ public class SubraceServiceImpl implements SubraceService, SearchableService {
 
     @Override
     public Optional<SearchResult> searchByName(String name) {
-        return subraceRepository.findByNameIgnoreCase(name)
+        return subraceRepository.findByNameLike(name).stream()
+                .findFirst()
                 .map(e -> new SearchResult(
                         "subraces",
                         e.getName(),

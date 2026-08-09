@@ -1,6 +1,7 @@
 package mate.academy.jvteamproject.service.main;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import mate.academy.jvteamproject.dto.SearchResult;
 import mate.academy.jvteamproject.dto.skill.SkillDto;
@@ -62,7 +63,7 @@ public class SkillServiceTest {
         Skill skill = createSkill("skill", "Skill");
         SkillDto expected = createSkillDto("skill", "Skill");
 
-        when(repository.findByNameIgnoreCase(skill.getName())).thenReturn(Optional.of(skill));
+        when(repository.findByNameLike(skill.getName())).thenReturn(List.of(skill));
         when(mapper.toDto(skill)).thenReturn(expected);
 
         SearchResult actual = service.searchByName(skill.getName()).orElseThrow();

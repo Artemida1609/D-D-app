@@ -36,7 +36,7 @@ public class ProficiencyRepositoryTest extends TestContainersConfig {
 
     @Test
     void findByNameIgnoreCase_success() {
-        Proficiency actual = repository.findByNameIgnoreCase("Proficiency").orElseThrow();
+        Proficiency actual = repository.findByNameLike("Proficiency").stream().findFirst().orElseThrow();
 
         Assertions.assertEquals(proficiency.getOriginalIndex(), actual.getOriginalIndex());
         Assertions.assertEquals(proficiency.getName(), actual.getName());

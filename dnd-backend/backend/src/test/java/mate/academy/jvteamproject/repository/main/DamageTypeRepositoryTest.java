@@ -36,7 +36,7 @@ public class DamageTypeRepositoryTest extends TestContainersConfig {
 
     @Test
     void findByNameIgnoreCase_success() {
-        DamageType actual = repository.findByNameIgnoreCase("Damage type").orElseThrow();
+        DamageType actual = repository.findByNameLike("Damage type").stream().findFirst().orElseThrow();
 
         Assertions.assertEquals(damageType.getOriginalIndex(), actual.getOriginalIndex());
         Assertions.assertEquals(damageType.getName(), actual.getName());

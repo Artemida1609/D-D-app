@@ -31,7 +31,8 @@ public class LanguageServiceImpl implements LanguageService, SearchableService {
 
     @Override
     public Optional<SearchResult> searchByName(String name) {
-        return languageRepository.findByNameIgnoreCase(name)
+        return languageRepository.findByNameLike(name).stream()
+                .findFirst()
                 .map(e -> new SearchResult(
                         "languages",
                         e.getName(),

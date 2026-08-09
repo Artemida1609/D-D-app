@@ -1,6 +1,7 @@
 package mate.academy.jvteamproject.service.main;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import mate.academy.jvteamproject.dto.SearchResult;
 import mate.academy.jvteamproject.dto.race.RaceDto;
@@ -62,7 +63,7 @@ public class RaceServiceTest {
         Race race = createRace("race", "Race");
         RaceDto expected = createRaceDto("race", "Race");
 
-        when(repository.findByNameIgnoreCase(race.getName())).thenReturn(Optional.of(race));
+        when(repository.findByNameLike(race.getName())).thenReturn(List.of(race));
         when(mapper.toDto(race)).thenReturn(expected);
 
         SearchResult actual = service.searchByName(race.getName()).orElseThrow();

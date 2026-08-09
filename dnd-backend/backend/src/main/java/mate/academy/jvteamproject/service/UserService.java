@@ -17,5 +17,5 @@ public interface UserService {
 
     void deleteAvatar();
 
-    void deleteUser(Long userId);
+    void deleteUser();
 }

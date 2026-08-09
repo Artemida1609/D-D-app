@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static mate.academy.jvteamproject.helper.TestDataHelper.*;
@@ -63,7 +64,7 @@ public class WeaponPropertyServiceTest {
         WeaponProperty weaponProperty = createWeaponProperty("weapon-property", "Weapon property");
         WeaponPropertyDto expected = createWeaponPropertyDto("weapon-property", "Weapon property");
 
-        when(repository.findByNameIgnoreCase(weaponProperty.getName())).thenReturn(Optional.of(weaponProperty));
+        when(repository.findByNameLike(weaponProperty.getName())).thenReturn(List.of(weaponProperty));
         when(mapper.toDto(weaponProperty)).thenReturn(expected);
 
         SearchResult actual = service.searchByName(weaponProperty.getName()).orElseThrow();

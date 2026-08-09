@@ -36,7 +36,7 @@ public class SubraceRepositoryTest extends TestContainersConfig {
 
     @Test
     void findByNameIgnoreCase_success() {
-        Subrace actual = repository.findByNameIgnoreCase("Subrace").orElseThrow();
+        Subrace actual = repository.findByNameLike("Subrace").stream().findFirst().orElseThrow();
 
         Assertions.assertEquals(subrace.getOriginalIndex(), actual.getOriginalIndex());
         Assertions.assertEquals(subrace.getName(), actual.getName());

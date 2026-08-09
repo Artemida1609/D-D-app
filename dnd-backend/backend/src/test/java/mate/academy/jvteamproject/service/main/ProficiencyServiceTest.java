@@ -1,6 +1,7 @@
 package mate.academy.jvteamproject.service.main;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import mate.academy.jvteamproject.dto.SearchResult;
 import mate.academy.jvteamproject.dto.proficiency.ProficiencyDto;
@@ -62,7 +63,7 @@ public class ProficiencyServiceTest {
         Proficiency proficiency = createProficiency("proficiency", "Proficiency");
         ProficiencyDto expected = createProficiencyDto("proficiency", "Proficiency");
 
-        when(repository.findByNameIgnoreCase(proficiency.getName())).thenReturn(Optional.of(proficiency));
+        when(repository.findByNameLike(proficiency.getName())).thenReturn(List.of(proficiency));
         when(mapper.toDto(proficiency)).thenReturn(expected);
 
         SearchResult actual = service.searchByName(proficiency.getName()).orElseThrow();

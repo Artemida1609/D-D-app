@@ -36,7 +36,7 @@ public class TraitRepositoryTest extends TestContainersConfig {
 
     @Test
     void findByNameIgnoreCase_success() {
-        Trait actual = repository.findByNameIgnoreCase("Trait").orElseThrow();
+        Trait actual = repository.findByNameLike("Trait").stream().findFirst().orElseThrow();
 
         Assertions.assertEquals(trait.getOriginalIndex(), actual.getOriginalIndex());
         Assertions.assertEquals(trait.getName(), actual.getName());

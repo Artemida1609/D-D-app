@@ -101,7 +101,8 @@ public class ClassServiceImpl implements ClassService, SearchableService {
 
     @Override
     public Optional<SearchResult> searchByName(String name) {
-        return classRepository.findByNameIgnoreCase(name)
+        return classRepository.findByNameLike(name).stream()
+                .findFirst()
                 .map(e -> new SearchResult(
                         "classes",
                         e.getName(),

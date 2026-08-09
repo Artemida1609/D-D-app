@@ -29,10 +29,10 @@ public class UserControllerTest extends TestContainersConfig {
                 "Peatro"));
     }
 
-    @WithMockUser(username = "admin", roles = "ADMIN")
+    @WithMockUser(username = "petro@gmail.com", roles = "USER")
     @Test
     public void deleteUser_success() throws Exception {
-        mockMvc.perform(delete("/users/{id}", 1L))
+        mockMvc.perform(delete("/users"))
                 .andExpect(status().isNoContent());
     }
 }
