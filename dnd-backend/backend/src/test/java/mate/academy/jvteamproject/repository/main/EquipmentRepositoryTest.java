@@ -36,7 +36,7 @@ public class EquipmentRepositoryTest extends TestContainersConfig {
 
     @Test
     void findByNameIgnoreCase_success() {
-        Equipment actual = repository.findByNameIgnoreCase("Equipment").orElseThrow();
+        Equipment actual = repository.findByNameLike("Equipment").stream().findFirst().orElseThrow();
 
         Assertions.assertEquals(equipment.getOriginalIndex(), actual.getOriginalIndex());
         Assertions.assertEquals(equipment.getName(), actual.getName());

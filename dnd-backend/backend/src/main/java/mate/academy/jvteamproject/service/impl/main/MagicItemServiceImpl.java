@@ -31,7 +31,8 @@ public class MagicItemServiceImpl implements MagicItemService, SearchableService
 
     @Override
     public Optional<SearchResult> searchByName(String name) {
-        return magicItemRepository.findByNameIgnoreCase(name)
+        return magicItemRepository.findByNameLike(name).stream()
+                .findFirst()
                 .map(e -> new SearchResult(
                         "magic-items",
                         e.getName(),

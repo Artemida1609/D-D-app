@@ -31,7 +31,8 @@ public class ConditionServiceImpl implements ConditionService, SearchableService
 
     @Override
     public Optional<SearchResult> searchByName(String name) {
-        return conditionRepository.findByNameIgnoreCase(name)
+        return conditionRepository.findByNameLike(name).stream()
+                .findFirst()
                 .map(e -> new SearchResult(
                         "conditions",
                         e.getName(),

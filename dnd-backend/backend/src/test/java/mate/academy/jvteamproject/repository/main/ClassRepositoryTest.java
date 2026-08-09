@@ -36,7 +36,7 @@ public class ClassRepositoryTest extends TestContainersConfig {
 
     @Test
     void findByNameIgnoreCase_success() {
-        Class actual = repository.findByNameIgnoreCase("Class").orElseThrow();
+        Class actual = repository.findByNameLike("Class").stream().findFirst().orElseThrow();
 
         Assertions.assertEquals(classEntity.getOriginalIndex(), actual.getOriginalIndex());
         Assertions.assertEquals(classEntity.getName(), actual.getName());

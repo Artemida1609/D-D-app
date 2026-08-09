@@ -19,6 +19,7 @@ import static mate.academy.jvteamproject.helper.TestDataHelper.createRole;
 import static mate.academy.jvteamproject.helper.TestDataHelper.createUser;
 import static mate.academy.jvteamproject.helper.TestDataHelper.createUserRegistrationRequestDto;
 import static mate.academy.jvteamproject.helper.TestDataHelper.createUserRegistrationResponseDto;
+import static mate.academy.jvteamproject.helper.TestSecurityUtils.mockAuth;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
@@ -64,11 +65,14 @@ public class UserServiceTest {
 
     @Test
     void delete_success() {
-        Long userId = 1L;
+        mockAuth("email");
+        User user = createUser("email", "password",
+                "nickname");
+        user.setId(6L);
+        when(repository.getUserByEmail("email")).thenReturn(user);
+        doNothing().when(repository).deleteById(user.getId());
+        service.deleteUser();
 
-        doNothing().when(repository).deleteById(userId);
-        service.deleteUser(userId);
-
-        verify(repository, times(1)).deleteById(userId);
+        verify(repository, times(1)).deleteById(user.getId());
     }
 }

@@ -31,7 +31,8 @@ public class RuleServiceImpl implements RuleService, SearchableService {
 
     @Override
     public Optional<SearchResult> searchByName(String name) {
-        return ruleRepository.findByNameIgnoreCase(name)
+        return ruleRepository.findByNameLike(name).stream()
+                .findFirst()
                 .map(e -> new SearchResult(
                         "rules",
                         e.getName(),

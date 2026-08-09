@@ -36,7 +36,7 @@ public class FeatureRepositoryTest extends TestContainersConfig {
 
     @Test
     void findByNameIgnoreCase_success() {
-        Feature actual = repository.findByNameIgnoreCase("Feature").orElseThrow();
+        Feature actual = repository.findByNameLike("Feature").stream().findFirst().orElseThrow();
 
         Assertions.assertEquals(feature.getOriginalIndex(), actual.getOriginalIndex());
         Assertions.assertEquals(feature.getName(), actual.getName());

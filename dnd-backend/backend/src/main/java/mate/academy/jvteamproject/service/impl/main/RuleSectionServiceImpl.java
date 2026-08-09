@@ -31,7 +31,8 @@ public class RuleSectionServiceImpl implements RuleSectionService, SearchableSer
 
     @Override
     public Optional<SearchResult> searchByName(String name) {
-        return ruleSectionRepository.findByNameIgnoreCase(name)
+        return ruleSectionRepository.findByNameLike(name).stream()
+                .findFirst()
                 .map(e -> new SearchResult(
                         "rule-sections",
                         e.getName(),

@@ -36,7 +36,7 @@ public class RuleSectionRepositoryTest extends TestContainersConfig {
 
     @Test
     void findByNameIgnoreCase_success() {
-        RuleSection actual = repository.findByNameIgnoreCase("Rule section").orElseThrow();
+        RuleSection actual = repository.findByNameLike("Rule section").stream().findFirst().orElseThrow();
 
         Assertions.assertEquals(ruleSection.getOriginalIndex(), actual.getOriginalIndex());
         Assertions.assertEquals(ruleSection.getName(), actual.getName());

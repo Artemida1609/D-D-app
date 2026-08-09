@@ -1,6 +1,7 @@
 package mate.academy.jvteamproject.service.main;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import mate.academy.jvteamproject.dto.SearchResult;
 import mate.academy.jvteamproject.dto.monster.MonsterDto;
@@ -62,7 +63,7 @@ public class MonsterServiceTest {
         Monster monster = createMonster("monster", "Monster");
         MonsterDto expected = createMonsterDto("monster", "Monster");
 
-        when(repository.findByNameIgnoreCase(monster.getName())).thenReturn(Optional.of(monster));
+        when(repository.findByNameLike(monster.getName())).thenReturn(List.of(monster));
         when(mapper.toDto(monster)).thenReturn(expected);
 
         SearchResult actual = service.searchByName(monster.getName()).orElseThrow();

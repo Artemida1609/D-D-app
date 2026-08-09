@@ -1,6 +1,7 @@
 package mate.academy.jvteamproject.service.main;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import mate.academy.jvteamproject.dto.SearchResult;
 import mate.academy.jvteamproject.dto.rule.RuleSectionDto;
@@ -62,7 +63,7 @@ public class RuleSectionServiceTest {
         RuleSection race = createRuleSection("rule-section", "Rule Section");
         RuleSectionDto expected = createRuleSectionDto("rule-section", "Rule Section");
 
-        when(repository.findByNameIgnoreCase(race.getName())).thenReturn(Optional.of(race));
+        when(repository.findByNameLike(race.getName())).thenReturn(List.of(race));
         when(mapper.toDto(race)).thenReturn(expected);
 
         SearchResult actual = service.searchByName(race.getName()).orElseThrow();

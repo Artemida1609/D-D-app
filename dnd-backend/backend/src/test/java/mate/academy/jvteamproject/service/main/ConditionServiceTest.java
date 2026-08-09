@@ -1,6 +1,7 @@
 package mate.academy.jvteamproject.service.main;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import mate.academy.jvteamproject.dto.SearchResult;
 import mate.academy.jvteamproject.dto.condition.ConditionDto;
@@ -62,7 +63,7 @@ public class ConditionServiceTest {
         Condition condition = createCondition("condition", "Condition");
         ConditionDto expected = createConditionDto("condition", "Condition");
 
-        when(repository.findByNameIgnoreCase(condition.getName())).thenReturn(Optional.of(condition));
+        when(repository.findByNameLike(condition.getName())).thenReturn(List.of(condition));
         when(mapper.toDto(condition)).thenReturn(expected);
 
         SearchResult actual = service.searchByName(condition.getName()).orElseThrow();

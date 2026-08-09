@@ -31,7 +31,8 @@ public class EquipmentServiceImpl implements EquipmentService, SearchableService
 
     @Override
     public Optional<SearchResult> searchByName(String name) {
-        return equipmentRepository.findByNameIgnoreCase(name)
+        return equipmentRepository.findByNameLike(name).stream()
+                .findFirst()
                 .map(e -> new SearchResult(
                         "equipments",
                         e.getName(),

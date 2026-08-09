@@ -31,7 +31,8 @@ public class WeaponPropertyServiceImpl implements WeaponPropertyService, Searcha
 
     @Override
     public Optional<SearchResult> searchByName(String name) {
-        return weaponPropertyRepository.findByNameIgnoreCase(name)
+        return weaponPropertyRepository.findByNameLike(name).stream()
+                .findFirst()
                 .map(e -> new SearchResult(
                         "weapon-properties",
                         e.getName(),

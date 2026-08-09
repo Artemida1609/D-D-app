@@ -36,7 +36,7 @@ public class RuleRepositoryTest extends TestContainersConfig {
 
     @Test
     void findByNameIgnoreCase_success() {
-        Rule actual = repository.findByNameIgnoreCase("Rule").orElseThrow();
+        Rule actual = repository.findByNameLike("Rule").stream().findFirst().orElseThrow();
 
         Assertions.assertEquals(rule.getOriginalIndex(), actual.getOriginalIndex());
         Assertions.assertEquals(rule.getName(), actual.getName());

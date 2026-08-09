@@ -37,7 +37,7 @@ public class MagicSchoolRepositoryTest extends TestContainersConfig {
 
     @Test
     void findByNameIgnoreCase_success() {
-        MagicSchool actual = repository.findByNameIgnoreCase("Magic school").orElseThrow();
+        MagicSchool actual = repository.findByNameLike("Magic school").stream().findFirst().orElseThrow();
 
         Assertions.assertEquals(magicSchool.getOriginalIndex(), actual.getOriginalIndex());
         Assertions.assertEquals(magicSchool.getName(), actual.getName());

@@ -36,7 +36,7 @@ public class RaceRepositoryTest extends TestContainersConfig {
 
     @Test
     void findByNameIgnoreCase_success() {
-        Race actual = repository.findByNameIgnoreCase("Race").orElseThrow();
+        Race actual = repository.findByNameLike("Race").stream().findFirst().orElseThrow();
 
         Assertions.assertEquals(race.getOriginalIndex(), actual.getOriginalIndex());
         Assertions.assertEquals(race.getName(), actual.getName());
