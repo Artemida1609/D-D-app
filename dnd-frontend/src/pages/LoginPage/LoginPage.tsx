@@ -5,6 +5,7 @@ import "../../shared/styles/AuthForm.scss";
 import { PageBackground } from "../../shared/ui/PageBackground/PageBackground";
 import { Button } from "../../shared/ui/Button/Button";
 import { useAuthStore } from "../../shared/store/authStore";
+import { useFavoritesStore } from "../../shared/store/favoritesStore";
 import { API_BASE_URL } from "../../shared/api/config";
 
 export const LoginPage = () => {
@@ -37,6 +38,16 @@ export const LoginPage = () => {
         const previousEmail = localStorage.getItem("userEmail");
         const storedNickname = localStorage.getItem("userNickname");
         login(data.token, data.refreshToken);
+        // clear and reload favorites for the newly logged-in user
+        try {
+          const { clearFavorites, loadFavorites } = useFavoritesStore.getState();
+          clearFavorites();
+          // loadFavorites may be async — call but don't block UI excessively
+          loadFavorites().catch((e) => console.error('Failed to load favorites after login', e));
+        } catch (e) {
+          console.error('Favorites store not available', e);
+        }
+
         if (email) {
           localStorage.setItem("userEmail", email);
           if (!storedNickname || previousEmail !== email) {
@@ -60,7 +71,7 @@ export const LoginPage = () => {
           <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center auth-form w-full">
             <div className="flex flex-col justify-center items-center gap-[24px] w-full">
               <div className="flex flex-col gap-[8px] w-full md:w-[450px]">
-                <label className="text-white text-[24px]">E-mail</label>
+                <label className="text-[#FFFBE4] text-[24px]">E-mail</label>
                 <input
                   type="email"
                   placeholder="E-mail"
@@ -72,7 +83,7 @@ export const LoginPage = () => {
               </div>
 
               <div className="flex flex-col gap-[8px] w-full md:w-[450px]">
-                <label className="text-white text-[24px]">Password</label>
+                <label className="text-[#FFFBE4] text-[24px]">Password</label>
                 <input
                   type="password"
                   placeholder="Password"
@@ -99,3 +110,4 @@ export const LoginPage = () => {
     </>
   );
 };
+

@@ -1,3 +1,4 @@
+﻿import React from 'react';
 import { PageTitle } from "../../shared/ui/PageTitle";
 import { CategoryCard } from "../../shared/ui/CategoryCard/CategoryCard";
 import { PageBackground } from "../../shared/ui/PageBackground/PageBackground";
@@ -13,9 +14,27 @@ interface CategoryListPageProps {
   title: string;
   items: ListItem[];
   backgroundVariant?: "signup" | "login" | "account" | "favorites";
+  columns?: number;
 }
 
-export const CategoryListPage = ({ title, items, backgroundVariant }: CategoryListPageProps) => {
+export const CategoryListPage = ({ title, items, backgroundVariant, columns = 2 }: CategoryListPageProps) => {
+  
+  const isMobile = columns <= 2;
+  const cardWidth = isMobile ? 172 : 230; 
+  const gap = isMobile ? 16 : 32; 
+
+  const gridStyle: React.CSSProperties = {
+    display: 'grid',
+    gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+    columnGap: `${gap}px`,
+    rowGap: `${gap}px`,
+    justifyContent: 'center',
+    width: '100%',
+    maxWidth: `${columns * cardWidth + (columns - 1) * gap}px`,
+    margin: '0 auto',
+    paddingBottom: '20px',
+  };
+
   return (
     <div className="w-full flex flex-col flex-1">
       {backgroundVariant ? (
@@ -26,7 +45,7 @@ export const CategoryListPage = ({ title, items, backgroundVariant }: CategoryLi
 
       <PageTitle title={title} />
 
-      <div className="flex flex-wrap gap-4 md:gap-[32.5px] justify-start pb-20">
+      <div style={gridStyle}>
         {items.map((item) => (
           <CategoryCard
             key={item.id}
@@ -40,3 +59,4 @@ export const CategoryListPage = ({ title, items, backgroundVariant }: CategoryLi
     </div>
   );
 };
+

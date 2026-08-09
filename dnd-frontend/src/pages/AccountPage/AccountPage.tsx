@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PageTitle } from "../../shared/ui/PageTitle";
 import { PageBackground } from "../../shared/ui/PageBackground/PageBackground";
+import "../../shared/styles/AuthForm.scss";
 import { Button } from "../../shared/ui/Button/Button";
 import { useAuthStore } from "../../shared/store/authStore";
 import { useFavoritesStore } from "../../shared/store/favoritesStore";
@@ -103,9 +104,9 @@ export const AccountPage = () => {
                   {userNickname || "Guest"}
                 </p>
               </div>
-              <div className="w-full md:w-[380px] flex flex-col gap-[24px]">
+              <div className="w-full md:w-[450px] flex flex-col gap-[24px]">
                 <div className="flex flex-col gap-[8px]">
-                  <label className="text-white text-[24px]">Nickname</label>
+                  <label className="text-[#FFFBE4] text-[24px]">Nickname</label>
                   <input
                     type="text"
                     value={userNickname}
@@ -114,7 +115,7 @@ export const AccountPage = () => {
                   />
                 </div>
                 <div className="flex flex-col gap-[8px]">
-                  <label className="text-white text-[24px]">E-mail</label>
+                  <label className="text-[#FFFBE4] text-[24px]">E-mail</label>
                   <input
                     type="email"
                     value={userEmail}
@@ -123,7 +124,7 @@ export const AccountPage = () => {
                   />
                 </div>
                 <div className="flex flex-col gap-[8px]">
-                  <label className="text-white text-[24px]">Password</label>
+                  <label className="text-[#FFFBE4] text-[24px]">Password</label>
                   <input
                     type="password"
                     value="********"
@@ -147,3 +148,4 @@ export const AccountPage = () => {
     </>
   );
 };
+

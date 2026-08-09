@@ -4,6 +4,7 @@ import { HomePage } from "./pages/HomePage/HomePage";
 import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { AsyncCategoryPage } from "./pages/AsyncCategoryPage/AsyncCategoryPage";
+import { EquipmentCategoryPage } from "./pages/EquipmentCategoryPage/EquipmentCategoryPage";
 import { DetailPage } from "./pages/DetailPage/DetailPage";
 import { FavoritesPage } from "./pages/FavoritesPage/FavoritesPage";
 import { AccountPage } from "./pages/AccountPage/AccountPage";
@@ -69,10 +70,12 @@ export function App() {
               <Route
                 index
                 element={
-                  <AsyncCategoryPage 
+                  <EquipmentCategoryPage 
                     title="Weapons" 
-                    endpoint="/api/equipment-categories/weapon" 
+                    endpoint="/api/equipments" 
+                    categoriesEndpoint="/api/equipment-categories/weapon"
                     basePath="/equipment/weapons" 
+                    equipmentType="weaponCategory"
                   />
                 } 
               />
@@ -83,10 +86,12 @@ export function App() {
               <Route
                 index
                 element={
-                  <AsyncCategoryPage 
+                  <EquipmentCategoryPage 
                     title="Armors" 
-                    endpoint="/api/equipment-categories/armor" 
+                    endpoint="/api/equipments" 
+                    categoriesEndpoint="/api/equipment-categories/armor"
                     basePath="/equipment/armors" 
+                    equipmentType="armorCategory"
                   />
                 }
               />
@@ -97,10 +102,12 @@ export function App() {
               <Route
                 index
                 element={
-                  <AsyncCategoryPage 
+                  <EquipmentCategoryPage 
                     title="Gear" 
-                    endpoint="/api/equipment-categories/gear" 
+                    endpoint="/api/equipments" 
+                    categoriesEndpoint="/api/equipment-categories/gear"
                     basePath="/equipment/gear" 
+                    equipmentType="gearCategory"
                   />
                 }
               />

@@ -1,42 +1,96 @@
 @import "../../shared/styles/mixins";
 
 .detail-page {
+  .desc-heading {
+    font-family: var(--font-manrope);
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 100%;
+    letter-spacing: 0%;
+
+    @include mobile {
+      font-size: 28px;
+    }
+  }
+
   .description-text {
-    p {
-      margin-bottom: 24px;
-      line-height: 1.6;
-      opacity: 0.9;
+    h4, .desc-section-heading {
       font-family: var(--font-manrope);
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 100%;
+      letter-spacing: 0%;
+      margin-bottom: 24px;
+
+      @include mobile {
+        font-size: 28px;
+        margin-bottom: 16px;
+      }
+    }
+
+    p {
+      font-family: var(--font-manrope);
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 100%;
+      letter-spacing: 0%;
+      margin-bottom: 24px;
+      opacity: 0.9;
+
+      @include mobile {
+        margin-bottom: 16px;
+      }
     }
   }
 
   .characteristic-card {
     display: flex;
     align-items: center;
-    padding: 16px 24px;
+    padding: 12px 16px;
     border: 1px solid rgba(255, 251, 228, 0.2);
-    border-radius: 30px;
+    border-radius: 50px;
     color: #FFFBE4;
     font-size: 16px;
     font-family: var(--font-manrope);
-    width: 100%;
+    width: 493px;
+    height: 51px;
 
-    @include desktop {
-      font-size: 18px;
-      width: 498px;
+    @include tablet {
+      width: 365px;
+      height: 51px;
+    }
+
+    @include mobile {
+      width: 361px;
+      height: 46px;
     }
   }
 
   .image-container {
-    width: 240px;
-    height: 240px;
+    width: 230px;
+    height: 230px;
     flex-shrink: 0;
-    border: 1px solid #FFFBE4;
-    border-radius: 24px;
+    border: 0.5px solid rgba(255, 251, 228, 0.2);
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.05);
     overflow: hidden;
+  
+    @include mobile {
+      width: 361px;
+      height: 361px;
+    }
+  }
+}
+
+.primary-button.favorite-active {
+  background-color: transparent;
+  color: #FFFBE4;
+  border: 1px solid #FFFBE4;
+
+  &:hover {
+    background-color: rgba(255, 251, 228, 0.1);
   }
 }

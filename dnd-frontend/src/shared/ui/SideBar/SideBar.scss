@@ -1,6 +1,6 @@
-@use "../../styles/mixins" as *;
+﻿@use "../../styles/mixins" as *;
 
-/* SideBar styles to match mobile mockup */
+
 .sidebar {
   background: #00192d;
   color: #fffbe4;
@@ -14,9 +14,9 @@
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
     padding-bottom: 24px;
-    /* hide native scrollbar but keep scrolling functional */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE 10+ */
+    
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
     &::-webkit-scrollbar {
       width: 0;
       height: 0;
@@ -137,3 +137,4 @@
     font-weight: 700;
   }
 }
+
