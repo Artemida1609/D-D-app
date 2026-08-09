@@ -144,6 +144,9 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
               imagePath = getClassIconPath(pathId);
             } else if (!imagePath && pathId && endpoint.includes("/races")) {
               imagePath = `${API_BASE_URL}${endpoint.includes("/races") ? "/api/races" : "/api/classes"}/${pathId}/download-image`;
+            } else if (endpoint.includes("/magic-schools") && item.name) {
+              const schoolName = item.name.toLowerCase().replace(/\s+/g, "");
+              imagePath = `/images/card_icons/schools/${schoolName}.png`;
             }
 
             const entityType = getEntityTypeFromPath(basePath) || pathId || "";
