@@ -27,12 +27,10 @@
     }
 
     @include tablet {
-      /* keep desktop/tablet width 450 as per design */
       width: 450px;
     }
 
     @include mobile {
-      /* phone width per design */
       width: 361px;
     }
   }

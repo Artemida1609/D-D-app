@@ -13,7 +13,6 @@ export const SignUpPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-  const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [error, setError] = useState("");
 
   const login = useAuthStore((state) => state.login);
@@ -37,9 +36,6 @@ export const SignUpPage = () => {
         userNickname,
       };
       formData.append("data", JSON.stringify(dataPart));
-      if (avatarFile) {
-        formData.append("avatar", avatarFile);
-      }
 
       const registrationResponse = await fetch(`${API_BASE_URL}/auth/registration`, {
         method: "POST",
@@ -67,13 +63,12 @@ export const SignUpPage = () => {
       }
 
       login(loginData.token, loginData.refreshToken);
-      // clear and reload favorites for the newly registered (and logged-in) user
       try {
         const { clearFavorites, loadFavorites } = useFavoritesStore.getState();
         clearFavorites();
-        loadFavorites().catch((e) => console.error('Failed to load favorites after signup', e));
+        loadFavorites().catch((e) => console.error("Failed to load favorites after signup", e));
       } catch (e) {
-        console.error('Favorites store not available', e);
+        console.error("Favorites store not available", e);
       }
 
       localStorage.setItem("userEmail", email);
@@ -142,20 +137,6 @@ export const SignUpPage = () => {
                 />
               </div>
 
-              <div className="flex flex-col gap-[8px] w-full md:w-[450px]">
-                <label className="text-[#FFFBE4] text-[24px]">Avatar (optional)</label>
-                <label className="auth-form__file w-full">
-                  <span className="auth-form__file-text">
-                    {avatarFile?.name || "Choose avatar file"}
-                  </span>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => setAvatarFile(e.target.files ? e.target.files[0] : null)}
-                    className="auth-form__file-input"
-                  />
-                </label>
-              </div>
             </div>
 
             {error && (
@@ -173,4 +154,3 @@ export const SignUpPage = () => {
     </>
   );
 };
-

@@ -38,11 +38,9 @@ export const LoginPage = () => {
         const previousEmail = localStorage.getItem("userEmail");
         const storedNickname = localStorage.getItem("userNickname");
         login(data.token, data.refreshToken);
-        // clear and reload favorites for the newly logged-in user
         try {
           const { clearFavorites, loadFavorites } = useFavoritesStore.getState();
           clearFavorites();
-          // loadFavorites may be async — call but don't block UI excessively
           loadFavorites().catch((e) => console.error('Failed to load favorites after login', e));
         } catch (e) {
           console.error('Favorites store not available', e);
