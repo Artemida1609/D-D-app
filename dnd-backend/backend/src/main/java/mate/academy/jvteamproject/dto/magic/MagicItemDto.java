@@ -12,8 +12,10 @@ public class MagicItemDto {
     @JsonProperty("index")
     private String originalIndex;
     private String name;
+    private String nameUa;
     @JsonProperty("desc")
     private List<String> description;
+    private List<String> descriptionUa;
     @JsonProperty("equipment_category")
     private Map<String, Object> equipmentCategory;
     private Map<String, Object> rarity;

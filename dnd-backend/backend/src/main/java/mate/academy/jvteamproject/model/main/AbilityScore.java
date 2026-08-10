@@ -25,10 +25,13 @@ public class AbilityScore {
     private Long id;
     private String originalIndex;
     private String name;
+    private String nameUa;
     private String fullName;
     @Convert(converter = StringListConverter.class)
     @Column(columnDefinition = "TEXT")
     private List<String> description;
+    @Column(columnDefinition = "TEXT")
+    private List<String> descriptionUa;
     @Convert(converter = ListMapStringObjectConverter.class)
     @Column(columnDefinition = "TEXT")
     private List<Map<String, Object>> skills;

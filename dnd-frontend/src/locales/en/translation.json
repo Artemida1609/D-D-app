@@ -20,30 +20,54 @@
     "undead": "Undead",
     "dragon": "Dragon",
     "giant": "Giant",
-
     "classes": "Classes",
     "warrior": "Warrior",
     "mage": "Mage",
     "rogue": "Rogue",
     "cleric": "Cleric",
     "ranger": "Ranger",
-
     "weapons": "Weapons",
     "melee": "Melee",
     "ranged": "Ranged",
     "magic": "Magic",
     "siege": "Siege",
-
     "armors": "Armors",
     "light": "Light",
     "medium": "Medium",
     "heavy": "Heavy",
     "shields": "Shields",
-
     "spells": "Spells",
     "offensive": "Offensive",
     "defensive": "Defensive",
     "utility": "Utility",
     "healing": "Healing"
+  },
+  "account": {
+    "noAvatar": "No avatar",
+    "nickname": "Nickname",
+    "email": "E-mail",
+    "password": "Password",
+    "save": "Save",
+    "upload": "Upload",
+    "delete": "Delete"
+  },
+  "detail": {
+    "classBasics": "Class Basics",
+    "hitDie": "Hit Die",
+    "proficiencyChoices": "Proficiency choices",
+    "proficiencies": "Proficiencies",
+    "savingThrows": "Saving Throws",
+    "startingEquipment": "Starting Equipment",
+    "errorLoading": "Failed to load details.",
+    "pleaseTryAgain": "Please try again later or choose a different category."
+  },
+  "auth": {
+    "login": "Log in",
+    "signup": "Sign up",
+    "logout": "Log out"
+  },
+  "ui": {
+    "search": "Search",
+    "filters": "Filters"
   }
 }

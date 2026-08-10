@@ -26,6 +26,7 @@ public class Subrace {
     private Long id;
     private String originalIndex;
     private String name;
+    private String nameUa;
 
     @Convert(converter = MapStringObjectConverter.class)
     @Column(name = "race_data", columnDefinition = "LONGTEXT")
@@ -34,6 +35,8 @@ public class Subrace {
     @Convert(converter = StringListConverter.class)
     @Column(columnDefinition = "LONGTEXT")
     private List<String> description;
+    @Column(columnDefinition = "LONGTEXT")
+    private List<String> descriptionUa;
 
     @Convert(converter = ListMapStringObjectConverter.class)
     @Column(name = "ability_bonuses", columnDefinition = "LONGTEXT")

@@ -11,8 +11,10 @@ public class WeaponPropertyDto {
     @JsonProperty("index")
     private String originalIndex;
     private String name;
+    private String nameUa;
 
     @JsonProperty("desc")
     private List<String> description;
+    private List<String> descriptionUa;
     private String url;
 }

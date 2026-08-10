@@ -13,6 +13,7 @@ public class EquipmentCategoryDto {
     private String originalIndex;
     private String globalCategory;
     private String name;
+    private String nameUa;
     private List<Map<String, Object>> equipment;
     private String url;
 }

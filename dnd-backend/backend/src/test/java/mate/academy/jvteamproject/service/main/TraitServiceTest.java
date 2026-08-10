@@ -1,6 +1,7 @@
 package mate.academy.jvteamproject.service.main;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import mate.academy.jvteamproject.dto.SearchResult;
 import mate.academy.jvteamproject.dto.trait.TraitDto;
@@ -62,7 +63,7 @@ public class TraitServiceTest {
         Trait trait = createTrait("trait", "Trait");
         TraitDto expected = createTraitDto("trait", "Trait");
 
-        when(repository.findByNameIgnoreCase(trait.getName())).thenReturn(Optional.of(trait));
+        when(repository.findByNameLike(trait.getName())).thenReturn(List.of(trait));
         when(mapper.toDto(trait)).thenReturn(expected);
 
         SearchResult actual = service.searchByName(trait.getName()).orElseThrow();

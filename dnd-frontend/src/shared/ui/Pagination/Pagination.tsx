@@ -41,7 +41,7 @@ export const Pagination = ({ currentPage, totalPages, onPageChange }: Pagination
       <button 
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="px-4 py-2 bg-gray-800 text-white rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-700 transition"
+        className="w-10 h-10 border border-[#FFFBE4] text-[#FFFBE4] rounded-[8px] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#FFFBE4] hover:text-[#00192D] transition flex items-center justify-center"
       >
         {"<"}
       </button>
@@ -49,17 +49,17 @@ export const Pagination = ({ currentPage, totalPages, onPageChange }: Pagination
       <div className="flex gap-1 overflow-x-auto max-w-[50vw]">
         {getPageNumbers().map((page, index) => (
           typeof page === "string" ? (
-            <span key={`ellipsis-${index}`} className="px-4 py-2 text-gray-300">
+            <span key={`ellipsis-${index}`} className="w-10 h-10 flex items-center justify-center text-[#FFFBE4] opacity-50">
               {page}
             </span>
           ) : (
             <button
               key={page}
               onClick={() => onPageChange(page)}
-              className={`px-4 py-2 rounded-md font-medium transition ${
+              className={`w-10 h-10 rounded-[8px] font-medium transition border flex items-center justify-center ${
                 currentPage === page 
-                  ? 'bg-white text-black' 
-                  : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                  ? 'bg-[#FFFBE4] text-[#00192D] border-[#FFFBE4]' 
+                  : 'bg-transparent text-[#FFFBE4] border-[#FFFBE4] opacity-50 hover:opacity-100'
               }`}
             >
               {page}
@@ -71,7 +71,7 @@ export const Pagination = ({ currentPage, totalPages, onPageChange }: Pagination
       <button 
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="px-4 py-2 bg-gray-800 text-white rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-700 transition"
+        className="w-10 h-10 border border-[#FFFBE4] text-[#FFFBE4] rounded-[8px] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#FFFBE4] hover:text-[#00192D] transition flex items-center justify-center"
       >
         {">"}
       </button>

@@ -36,7 +36,7 @@ public class LanguageRepositoryTest extends TestContainersConfig {
 
     @Test
     void findByNameIgnoreCase_success() {
-        Language actual = repository.findByNameIgnoreCase("Language").orElseThrow();
+        Language actual = repository.findByNameLike("Language").stream().findFirst().orElseThrow();
 
         Assertions.assertEquals(language.getOriginalIndex(), actual.getOriginalIndex());
         Assertions.assertEquals(language.getName(), actual.getName());

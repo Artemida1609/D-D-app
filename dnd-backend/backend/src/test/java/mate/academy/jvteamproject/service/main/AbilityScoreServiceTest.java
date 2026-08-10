@@ -1,6 +1,7 @@
 package mate.academy.jvteamproject.service.main;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import mate.academy.jvteamproject.dto.ability.AbilityScoreDto;
 import mate.academy.jvteamproject.dto.SearchResult;
@@ -64,7 +65,7 @@ public class AbilityScoreServiceTest {
 
         AbilityScoreDto expected = createAbilityScoreDto("ability-score", "Ability Score");
 
-        when(repository.findByNameIgnoreCase(abilityScore.getName())).thenReturn(Optional.of(abilityScore));
+        when(repository.findByNameLike(abilityScore.getName())).thenReturn(List.of(abilityScore));
         when(mapper.toDto(abilityScore)).thenReturn(expected);
 
         SearchResult actual = service.searchByName(abilityScore.getName()).orElseThrow();

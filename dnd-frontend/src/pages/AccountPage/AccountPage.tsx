@@ -9,6 +9,7 @@ import { useFavoritesStore } from "../../shared/store/favoritesStore";
 import { API_BASE_URL } from "../../shared/api/config";
 
 export const AccountPage = () => {
+  const { t } = useTranslation();
   const logout = useAuthStore((state) => state.logout);
   const clearFavorites = useFavoritesStore((state) => state.clearFavorites);
   const navigate = useNavigate();
@@ -97,7 +98,7 @@ export const AccountPage = () => {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <span className="text-[#FFFBE4] opacity-80 text-center">No avatar</span>
+                    <span className="text-[#FFFBE4] opacity-80 text-center">{t("account.noAvatar")}</span>
                   )}
                 </div>
                 <p className="text-[#FFFBE4] text-[18px] opacity-90 text-center">
@@ -106,7 +107,7 @@ export const AccountPage = () => {
               </div>
               <div className="w-full md:w-[450px] flex flex-col gap-[24px]">
                 <div className="flex flex-col gap-[8px]">
-                  <label className="text-white text-[24px]">Nickname</label>
+                  <label className="text-[#FFFBE4] text-[24px]">{t("account.nickname")}</label>
                   <input
                     type="text"
                     value={userNickname}
@@ -115,7 +116,7 @@ export const AccountPage = () => {
                   />
                 </div>
                 <div className="flex flex-col gap-[8px]">
-                  <label className="text-white text-[24px]">E-mail</label>
+                  <label className="text-[#FFFBE4] text-[24px]">{t("account.email")}</label>
                   <input
                     type="email"
                     value={userEmail}
@@ -124,7 +125,7 @@ export const AccountPage = () => {
                   />
                 </div>
                 <div className="flex flex-col gap-[8px]">
-                  <label className="text-white text-[24px]">Password</label>
+                  <label className="text-[#FFFBE4] text-[24px]">{t("account.password")}</label>
                   <input
                     type="password"
                     value="********"
@@ -148,3 +149,4 @@ export const AccountPage = () => {
     </>
   );
 };
+

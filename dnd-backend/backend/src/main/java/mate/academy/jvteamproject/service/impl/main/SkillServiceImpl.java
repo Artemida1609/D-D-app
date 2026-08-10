@@ -31,10 +31,12 @@ public class SkillServiceImpl implements SkillService, SearchableService {
 
     @Override
     public Optional<SearchResult> searchByName(String name) {
-        return skillRepository.findByNameIgnoreCase(name)
+        return skillRepository.findByNameLike(name).stream()
+                .findFirst()
                 .map(e -> new SearchResult(
                         "skills",
                         e.getName(),
+                        e.getNameUa(),
                         e.getOriginalIndex(),
                         e.getUrl(),
                         skillMapper.toDto(e)

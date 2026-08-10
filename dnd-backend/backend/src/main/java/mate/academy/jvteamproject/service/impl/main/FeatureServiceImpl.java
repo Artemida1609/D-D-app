@@ -31,10 +31,12 @@ public class FeatureServiceImpl implements FeatureService, SearchableService {
 
     @Override
     public Optional<SearchResult> searchByName(String name) {
-        return featureRepository.findByNameIgnoreCase(name)
+        return featureRepository.findByNameLike(name).stream()
+                .findFirst()
                 .map(e -> new SearchResult(
                         "features",
                         e.getName(),
+                        e.getNameUa(),
                         e.getOriginalIndex(),
                         e.getUrl(),
                         featureMapper.toDto(e)

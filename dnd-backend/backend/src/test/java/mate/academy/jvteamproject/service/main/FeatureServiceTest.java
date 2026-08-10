@@ -1,6 +1,7 @@
 package mate.academy.jvteamproject.service.main;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import mate.academy.jvteamproject.dto.SearchResult;
 import mate.academy.jvteamproject.dto.feature.FeatureDto;
@@ -62,7 +63,7 @@ public class FeatureServiceTest {
         Feature feature = createFeature("feature", "Feature");
         FeatureDto expected = createFeatureDto("feature", "Feature");
 
-        when(repository.findByNameIgnoreCase(feature.getName())).thenReturn(Optional.of(feature));
+        when(repository.findByNameLike(feature.getName())).thenReturn(List.of(feature));
         when(mapper.toDto(feature)).thenReturn(expected);
 
         SearchResult actual = service.searchByName(feature.getName()).orElseThrow();

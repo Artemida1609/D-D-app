@@ -29,6 +29,7 @@ public class Class {
     private Long id;
     private String originalIndex;
     private String name;
+    private String nameUa;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "file_resource_id")

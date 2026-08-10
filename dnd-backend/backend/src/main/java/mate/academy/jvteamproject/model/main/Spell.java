@@ -25,6 +25,7 @@ public class Spell {
     private Long id;
     private String originalIndex;
     private String name;
+    private String nameUa;
     private Integer level;
 
     @Convert(converter = MapStringObjectConverter.class)
@@ -42,10 +43,14 @@ public class Spell {
     @Convert(converter = StringListConverter.class)
     @Column(columnDefinition = "LONGTEXT")
     private List<String> description;
+    @Column(columnDefinition = "LONGTEXT")
+    private List<String> descriptionUa;
 
     @Convert(converter = StringListConverter.class)
     @Column(name = "higher_level", columnDefinition = "LONGTEXT")
     private List<String> higherLevel;
+    @Column(name = "higher_levelUaUa", columnDefinition = "LONGTEXTUaUa")
+    private List<String> higherLevelUa;
 
     @Column(name = "spell_range")
     private String range;

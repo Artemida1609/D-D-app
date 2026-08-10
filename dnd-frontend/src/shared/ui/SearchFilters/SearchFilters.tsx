@@ -41,7 +41,7 @@ export const SearchFilters = ({
           </button>
           <input
             type="text"
-            placeholder="Search"
+            placeholder={t("ui.search")}
             className="search__input"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -51,7 +51,7 @@ export const SearchFilters = ({
       </div>
 
       <div className={`search__dropdown ${isOpen ? "search__dropdown--open" : ""}`}>
-        <h2 className="search__title">Filters</h2>
+        <h2 className="search__title">{t("ui.filters")}</h2>
 
         <div className={`search__chosen ${showAllChosen ? "search__chosen--expanded" : ""}`}>
           {visibleChosen.map((sub) => (
@@ -114,7 +114,7 @@ export const SearchFilters = ({
             }
           }}
         >
-          <span>Search</span>
+          <span>{t("ui.search")}</span>
         </Button>
       </div>
     </div>

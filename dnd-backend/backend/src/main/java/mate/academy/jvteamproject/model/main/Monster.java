@@ -24,9 +24,11 @@ public class Monster {
     private Long id;
     private String originalIndex;
     private String name;
+    private String nameUa;
     private String size;
     private String type;
     private String alignment;
+    private String alignmentUa;
 
     @Column(name = "armor_class")
     private Integer armorClass;

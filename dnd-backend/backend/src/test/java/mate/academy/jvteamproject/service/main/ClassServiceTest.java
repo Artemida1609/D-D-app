@@ -1,6 +1,7 @@
 package mate.academy.jvteamproject.service.main;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import mate.academy.jvteamproject.dto.SearchResult;
 import mate.academy.jvteamproject.dto.classes.ClassDto;
@@ -100,7 +101,7 @@ public class ClassServiceTest {
         Class classEntity = createClass("class", "Class");
         ClassDto expected = createClassDto("class", "Class");
 
-        when(classRepository.findByNameIgnoreCase(classEntity.getName())).thenReturn(Optional.of(classEntity));
+        when(classRepository.findByNameLike(classEntity.getName())).thenReturn(List.of(classEntity));
         when(classMapper.toDto(classEntity)).thenReturn(expected);
 
         SearchResult actual = service.searchByName(classEntity.getName()).orElseThrow();

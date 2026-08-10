@@ -36,7 +36,7 @@ public class SkillRepositoryTest extends TestContainersConfig {
 
     @Test
     void findByNameIgnoreCase_success() {
-        Skill actual = repository.findByNameIgnoreCase("Skill").orElseThrow();
+        Skill actual = repository.findByNameLike("Skill").stream().findFirst().orElseThrow();
 
         Assertions.assertEquals(skill.getOriginalIndex(), actual.getOriginalIndex());
         Assertions.assertEquals(skill.getName(), actual.getName());

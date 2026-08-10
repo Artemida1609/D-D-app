@@ -1,6 +1,7 @@
 package mate.academy.jvteamproject.service.main;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import mate.academy.jvteamproject.dto.SearchResult;
 import mate.academy.jvteamproject.dto.spell.SpellDto;
@@ -62,7 +63,7 @@ public class SpellServiceTest {
         Spell spell = createSpell("spell", "Spell");
         SpellDto expected = createSpellDto("spell", "Spell");
 
-        when(repository.findByNameIgnoreCase(spell.getName())).thenReturn(Optional.of(spell));
+        when(repository.findByNameLike(spell.getName())).thenReturn(List.of(spell));
         when(mapper.toDto(spell)).thenReturn(expected);
 
         SearchResult actual = service.searchByName(spell.getName()).orElseThrow();

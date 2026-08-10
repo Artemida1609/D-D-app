@@ -6,6 +6,7 @@ import {
   getFavoritePathFromEntity,
   getFavoriteUniqueId,
 } from "../utils/favoritesUtils";
+import { getClassIconPath } from "../utils/classIcon";
 
 export interface FavoriteItem {
   id: string;
@@ -167,7 +168,9 @@ export const useFavoritesStore = create<FavoritesState>()(
               try {
                 const details = await fetchEntityDetails(saved.entityType, saved.entityId);
                 const title = details?.name || details?.title || `${saved.entityType} ${saved.entityId}`;
-                const icon = details?.image || details?.imageUrl || details?.icon || "";
+                const icon = saved.entityType === "classes"
+                  ? getClassIconPath(String(saved.entityId))
+                  : details?.image || details?.imageUrl || details?.icon || "";
                 const category = getFavoriteCategoryFromEntityType(saved.entityType);
                 const path = getFavoritePathFromEntity(saved.entityType, saved.entityId, details);
                 return {
@@ -211,5 +214,4 @@ export const useFavoritesStore = create<FavoritesState>()(
     },
   ),
 );
-
 

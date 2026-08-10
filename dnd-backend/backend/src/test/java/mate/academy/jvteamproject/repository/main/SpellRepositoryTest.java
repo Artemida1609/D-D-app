@@ -36,7 +36,7 @@ public class SpellRepositoryTest extends TestContainersConfig {
 
     @Test
     void findByNameIgnoreCase_success() {
-        Spell actual = repository.findByNameIgnoreCase("Spell").orElseThrow();
+        Spell actual = repository.findByNameLike("Spell").stream().findFirst().orElseThrow();
 
         Assertions.assertEquals(spell.getOriginalIndex(), actual.getOriginalIndex());
         Assertions.assertEquals(spell.getName(), actual.getName());

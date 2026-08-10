@@ -31,10 +31,12 @@ public class SubclassServiceImpl implements SubclassService, SearchableService {
 
     @Override
     public Optional<SearchResult> searchByName(String name) {
-        return subclassRepository.findByNameIgnoreCase(name)
+        return subclassRepository.findByNameLike(name).stream()
+                .findFirst()
                 .map(e -> new SearchResult(
                         "subclasses",
                         e.getName(),
+                        e.getNameUa(),
                         e.getOriginalIndex(),
                         e.getUrl(),
                         subclassMapper.toDto(e)

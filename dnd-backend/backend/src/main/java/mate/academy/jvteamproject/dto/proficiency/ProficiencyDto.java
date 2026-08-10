@@ -13,6 +13,7 @@ public class ProficiencyDto {
     @JsonProperty("index")
     private String originalIndex;
     private String name;
+    private String nameUa;
     private String type;
     private List<Map<String, Object>> classes;
     private List<Map<String, Object>> races;

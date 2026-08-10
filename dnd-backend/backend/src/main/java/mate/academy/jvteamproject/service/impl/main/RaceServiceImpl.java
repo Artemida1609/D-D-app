@@ -84,10 +84,12 @@ public class RaceServiceImpl implements RaceService, SearchableService {
 
     @Override
     public Optional<SearchResult> searchByName(String name) {
-        return raceRepository.findByNameIgnoreCase(name)
+        return raceRepository.findByNameLike(name).stream()
+                .findFirst()
                 .map(e -> new SearchResult(
                         "races",
                         e.getName(),
+                        e.getNameUa(),
                         e.getOriginalIndex(),
                         e.getUrl(),
                         raceMapper.toDto(e)

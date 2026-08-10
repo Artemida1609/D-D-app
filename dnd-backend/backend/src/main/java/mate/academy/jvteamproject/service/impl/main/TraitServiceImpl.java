@@ -31,10 +31,12 @@ public class TraitServiceImpl implements TraitService, SearchableService {
 
     @Override
     public Optional<SearchResult> searchByName(String name) {
-        return traitRepository.findByNameIgnoreCase(name)
+        return traitRepository.findByNameLike(name).stream()
+                .findFirst()
                 .map(e -> new SearchResult(
                         "traits",
                         e.getName(),
+                        e.getNameUa(),
                         e.getOriginalIndex(),
                         e.getUrl(),
                         traitMapper.toDto(e)

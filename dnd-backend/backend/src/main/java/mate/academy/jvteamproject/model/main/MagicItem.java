@@ -27,10 +27,13 @@ public class MagicItem {
 
     private String originalIndex;
     private String name;
+    private String nameUa;
 
     @Convert(converter = StringListConverter.class)
     @Column(columnDefinition = "LONGTEXT")
     private List<String> description;
+    @Column(columnDefinition = "LONGTEXT")
+    private List<String> descriptionUa;
 
     @Convert(converter = MapStringObjectConverter.class)
     private Map<String, Object> equipmentCategory;

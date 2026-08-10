@@ -26,10 +26,13 @@ public class Equipment {
 
     private String originalIndex;
     private String name;
+    private String nameUa;
 
     @Convert(converter = StringListConverter.class)
     @Column(columnDefinition = "TEXT")
     private List<String> description;
+    @Column(columnDefinition = "TEXT")
+    private List<String> descriptionUa;
 
     @Convert(converter = MapStringObjectConverter.class)
     @Column(columnDefinition = "TEXT")

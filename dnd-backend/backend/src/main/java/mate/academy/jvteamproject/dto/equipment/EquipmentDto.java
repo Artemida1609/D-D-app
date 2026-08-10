@@ -14,9 +14,11 @@ public class EquipmentDto {
 
     @JsonProperty("name")
     private String name;
+    private String nameUa;
 
     @JsonProperty("desc")
     private List<String> desc;
+    private List<String> descUa;
 
     @JsonProperty("equipment_category")
     private Map<String, Object> equipmentCategory;

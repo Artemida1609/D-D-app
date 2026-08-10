@@ -4,7 +4,36 @@
   font-family: var(--font-manrope);
   font-size: 20px;
   color: #fffbe4;
-  margin-top: 44px;
+  padding-top: 44px;
+  padding-bottom: 16px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: background-color 0.3s ease;
+
+  &--scrolled {
+    background-color: var(--main-dark);
+  }
+
+  &__inner {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1279px) {
+    &__inner {
+      max-width: 754px;
+    }
+  }
+
+  @media (max-width: 753px) {
+    &__inner {
+      max-width: 361px;
+    }
+  }
 }
 
 .nav-item {

@@ -35,8 +35,8 @@ public class AbilityScoreRepositoryTest extends TestContainersConfig {
     }
 
     @Test
-    void findByNameIgnoreCase_success() {
-        AbilityScore actual = repository.findByNameIgnoreCase("Ability Score").orElseThrow();
+    void findFirstByNameLike_success() {
+        AbilityScore actual = repository.findByNameLike("Ability Score").stream().findFirst().orElseThrow();
 
         Assertions.assertEquals(abilityScore.getOriginalIndex(), actual.getOriginalIndex());
         Assertions.assertEquals(abilityScore.getName(), actual.getName());

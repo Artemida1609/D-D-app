@@ -23,6 +23,7 @@ public class Proficiency {
     private Long id;
     private String originalIndex;
     private String name;
+    private String nameUa;
     private String type;
 
     @Convert(converter = ListMapStringObjectConverter.class)

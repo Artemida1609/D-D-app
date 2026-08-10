@@ -13,6 +13,7 @@ public class FeatureDto {
     private String originalIndex;
 
     private String name;
+    private String nameUa;
     private Integer level;
 
     @JsonProperty("class")
@@ -25,6 +26,7 @@ public class FeatureDto {
 
     @JsonProperty("desc")
     private List<String> description;
+    private List<String> descriptionUa;
 
     @JsonProperty("feature_specific")
     private Map<String, Object> featureSpecific;

@@ -1,6 +1,7 @@
 package mate.academy.jvteamproject.service.main;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import mate.academy.jvteamproject.dto.SearchResult;
 import mate.academy.jvteamproject.dto.damage.DamageTypeDto;
@@ -62,7 +63,7 @@ public class DamageTypeServiceTest {
         DamageType damageType = createDamageType("damage-type", "Damage Type");
         DamageTypeDto expected = createDamageTypeDto("damage-type", "Damage Type");
 
-        when(repository.findByNameIgnoreCase(damageType.getName())).thenReturn(Optional.of(damageType));
+        when(repository.findByNameLike(damageType.getName())).thenReturn(List.of(damageType));
         when(mapper.toDto(damageType)).thenReturn(expected);
 
         SearchResult actual = service.searchByName(damageType.getName()).orElseThrow();

@@ -14,6 +14,7 @@ public class SubraceDto {
     @JsonProperty("index")
     private String originalIndex;
     private String name;
+    private String nameUa;
 
     @JsonProperty("race")
     private Map<String, Object> race;
@@ -21,6 +22,7 @@ public class SubraceDto {
     @JsonProperty("desc")
     @JsonDeserialize(using = StringOrListDeserializer.class)
     private List<String> description;
+    private List<String> descriptionUa;
 
     @JsonProperty("ability_bonuses")
     private List<Map<String, Object>> abilityBonuses;

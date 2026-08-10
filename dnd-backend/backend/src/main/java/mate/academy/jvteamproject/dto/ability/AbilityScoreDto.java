@@ -12,10 +12,12 @@ public class AbilityScoreDto {
     @JsonProperty("index")
     private String originalIndex;
     private String name;
+    private String nameUa;
     @JsonProperty("full_name")
     private String fullName;
     @JsonProperty("desc")
     private List<String> description;
+    private List<String> descriptionUa;
     private List<Map<String, Object>> skills;
     private String url;
 }

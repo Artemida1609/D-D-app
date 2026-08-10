@@ -1,6 +1,7 @@
 package mate.academy.jvteamproject.service.main;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import mate.academy.jvteamproject.dto.SearchResult;
 import mate.academy.jvteamproject.dto.language.LanguageDto;
@@ -62,7 +63,7 @@ public class LanguageServiceTest {
         Language language = createLanguage("language", "Language");
         LanguageDto expected = createLanguageDto("language", "Language");
 
-        when(repository.findByNameIgnoreCase(language.getName())).thenReturn(Optional.of(language));
+        when(repository.findByNameLike(language.getName())).thenReturn(List.of(language));
         when(mapper.toDto(language)).thenReturn(expected);
 
         SearchResult actual = service.searchByName(language.getName()).orElseThrow();

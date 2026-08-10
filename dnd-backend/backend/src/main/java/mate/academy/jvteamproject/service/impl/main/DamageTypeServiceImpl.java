@@ -31,10 +31,12 @@ public class DamageTypeServiceImpl implements DamageTypeService, SearchableServi
 
     @Override
     public Optional<SearchResult> searchByName(String name) {
-        return damageTypeRepository.findByNameIgnoreCase(name)
+        return damageTypeRepository.findByNameLike(name).stream()
+                .findFirst()
                 .map(e -> new SearchResult(
                         "damage-types",
                         e.getName(),
+                        e.getNameUa(),
                         e.getOriginalIndex(),
                         e.getUrl(),
                         damageTypeMapper.toDto(e)

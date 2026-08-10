@@ -22,12 +22,15 @@ public class Language {
     private Long id;
     private String originalIndex;
     private String name;
+    private String nameUa;
     private String type;
     private String script;
 
     @Convert(converter = StringListConverter.class)
     @Column(name = "description_data", columnDefinition = "LONGTEXT")
     private List<String> description;
+    @Column(name = "description_dataUaUa", columnDefinition = "LONGTEXTUaUa")
+    private List<String> descriptionUa;
 
     @Convert(converter = StringListConverter.class)
     @Column(name = "typical_speakers_data", columnDefinition = "LONGTEXT")

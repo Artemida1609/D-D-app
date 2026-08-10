@@ -26,10 +26,13 @@ public class Trait {
     private Long id;
     private String originalIndex;
     private String name;
+    private String nameUa;
 
     @Convert(converter = StringListConverter.class)
     @Column(columnDefinition = "LONGTEXT")
     private List<String> description;
+    @Column(columnDefinition = "LONGTEXT")
+    private List<String> descriptionUa;
 
     @Convert(converter = ListMapStringObjectConverter.class)
     @Column(columnDefinition = "LONGTEXT")

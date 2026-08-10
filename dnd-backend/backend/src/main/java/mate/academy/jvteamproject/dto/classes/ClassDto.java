@@ -12,6 +12,7 @@ public class ClassDto {
     @JsonProperty("index")
     private String originalIndex;
     private String name;
+    private String nameUa;
     @JsonProperty("hit_die")
     private Integer hitDie;
     @JsonProperty("proficiency_choices")

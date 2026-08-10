@@ -8,5 +8,6 @@ import lombok.Setter;
 public class ApiReferenceDto {
     private String id;
     private String name;
+    private String nameUa;
     private String url;
 }

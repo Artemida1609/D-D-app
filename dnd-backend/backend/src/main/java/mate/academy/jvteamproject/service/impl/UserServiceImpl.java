@@ -167,8 +167,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void deleteUser(Long userId) {
-        userRepository.deleteById(userId);
+    public void deleteUser() {
+        userRepository.deleteById(getUserId());
     }
 
     private Long getUserId() {

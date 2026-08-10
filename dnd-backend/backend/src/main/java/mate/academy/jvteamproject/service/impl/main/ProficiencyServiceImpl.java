@@ -31,10 +31,12 @@ public class ProficiencyServiceImpl implements ProficiencyService, SearchableSer
 
     @Override
     public Optional<SearchResult> searchByName(String name) {
-        return proficiencyRepository.findByNameIgnoreCase(name)
+        return proficiencyRepository.findByNameLike(name).stream()
+                .findFirst()
                 .map(e -> new SearchResult(
                         "proficiencies",
                         e.getName(),
+                        e.getNameUa(),
                         e.getOriginalIndex(),
                         e.getUrl(),
                         proficiencyMapper.toDto(e)

@@ -1,6 +1,7 @@
 package mate.academy.jvteamproject.service.main;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import mate.academy.jvteamproject.dto.SearchResult;
 import mate.academy.jvteamproject.dto.subrace.SubraceDto;
@@ -62,7 +63,7 @@ public class SubraceServiceTest {
         Subrace subrace = createSubrace("subrace", "Subrace");
         SubraceDto expected = createSubraceDto("subrace", "Subrace");
 
-        when(repository.findByNameIgnoreCase(subrace.getName())).thenReturn(Optional.of(subrace));
+        when(repository.findByNameLike(subrace.getName())).thenReturn(List.of(subrace));
         when(mapper.toDto(subrace)).thenReturn(expected);
 
         SearchResult actual = service.searchByName(subrace.getName()).orElseThrow();

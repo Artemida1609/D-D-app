@@ -29,6 +29,7 @@ public class Race {
     private Long id;
     private String originalIndex;
     private String name;
+    private String nameUa;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "file_resource_id")
@@ -46,6 +47,8 @@ public class Race {
 
     @Column(columnDefinition = "LONGTEXT")
     private String alignment;
+    @Column(columnDefinition = "LONGTEXT")
+    private String alignmentUa;
 
     @Column(columnDefinition = "LONGTEXT")
     private String age;
@@ -54,6 +57,8 @@ public class Race {
 
     @Column(name = "size_description", columnDefinition = "LONGTEXT")
     private String sizeDescription;
+    @Column(name = "size_descriptionUaUa", columnDefinition = "LONGTEXTUaUa")
+    private String sizeDescriptionUa;
 
     @Convert(converter = ListMapStringObjectConverter.class)
     @Column(name = "starting_proficiencies_data", columnDefinition = "LONGTEXT")

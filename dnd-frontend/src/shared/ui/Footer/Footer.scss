@@ -1,19 +1,45 @@
 @use "../../styles/mixins.scss" as *;
 
 .footer {
-  &__link {
+  &__text {
     font-family: "Manrope", sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     color: #fffbe4;
-    transition: color 0.25s ease, text-shadow 0.3s ease;
+    opacity: 0.8;
+    max-width: 800px;
+    line-height: 1.5;
 
     @include desktop {
-      font-size: 20px;
+      font-size: 16px;
+    }
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+    color: #fffbe4;
+    transition: color 0.25s ease, text-shadow 0.3s ease;
+    text-decoration: underline;
+
+    @include desktop {
+      font-size: 16px;
     }
 
     &:hover {
       color: var(--accent-hover);
       text-shadow: 0 0 12px var(--accent-hover);
     }
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    border-radius: 50%;
   }
 }

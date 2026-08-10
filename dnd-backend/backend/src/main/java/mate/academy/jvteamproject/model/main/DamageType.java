@@ -22,10 +22,13 @@ public class DamageType {
     private Long id;
     private String originalIndex;
     private String name;
+    private String nameUa;
 
     @Convert(converter = StringListConverter.class)
     @Column(columnDefinition = "TEXT")
     private List<String> description;
+    @Column(columnDefinition = "TEXT")
+    private List<String> descriptionUa;
 
     @Column(unique = true, nullable = false)
     private String url;

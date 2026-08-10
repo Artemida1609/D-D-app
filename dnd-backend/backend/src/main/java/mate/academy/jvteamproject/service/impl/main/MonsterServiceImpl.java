@@ -31,10 +31,12 @@ public class MonsterServiceImpl implements MonsterService, SearchableService {
 
     @Override
     public Optional<SearchResult> searchByName(String name) {
-        return monsterRepository.findByNameIgnoreCase(name)
+        return monsterRepository.findByNameLike(name).stream()
+                .findFirst()
                 .map(e -> new SearchResult(
                         "monsters",
                         e.getName(),
+                        e.getNameUa(),
                         e.getOriginalIndex(),
                         e.getUrl(),
                         monsterMapper.toDto(e)

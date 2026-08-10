@@ -13,6 +13,7 @@ public class RaceDto {
     @JsonProperty("index")
     private String originalIndex;
     private String name;
+    private String nameUa;
     private Integer speed;
 
     @JsonProperty("ability_bonuses")
@@ -20,6 +21,7 @@ public class RaceDto {
 
     @JsonProperty("alignment")
     private String alignment;
+    private String alignmentUa;
 
     @JsonProperty("age")
     private String age;
@@ -28,6 +30,7 @@ public class RaceDto {
 
     @JsonProperty("size_description")
     private String sizeDescription;
+    private String sizeDescriptionUa;
 
     @JsonProperty("starting_proficiencies")
     private List<Map<String, Object>> startingProficiencies;

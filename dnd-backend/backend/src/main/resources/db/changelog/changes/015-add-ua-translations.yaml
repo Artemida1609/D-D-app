@@ -1,0 +1,194 @@
+databaseChangeLog:
+  - changeSet:
+      id: 015
+      author: antigravity
+      changes:
+        - addColumn:
+            tableName: ability_scores
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+              - column:
+                  name: description_ua
+                  type: LONGTEXT
+        - addColumn:
+            tableName: classes
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+        - addColumn:
+            tableName: conditions
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+              - column:
+                  name: description_ua
+                  type: LONGTEXT
+        - addColumn:
+            tableName: damage_types
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+              - column:
+                  name: description_ua
+                  type: LONGTEXT
+        - addColumn:
+            tableName: equipments
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+              - column:
+                  name: description_ua
+                  type: LONGTEXT
+        - addColumn:
+            tableName: equipment_categories
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+        - addColumn:
+            tableName: features
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+              - column:
+                  name: description_ua
+                  type: LONGTEXT
+        - addColumn:
+            tableName: languages
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+              - column:
+                  name: description_ua
+                  type: LONGTEXT
+        - addColumn:
+            tableName: magic_items
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+              - column:
+                  name: description_ua
+                  type: LONGTEXT
+        - addColumn:
+            tableName: magic_schools
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+              - column:
+                  name: description_ua
+                  type: LONGTEXT
+        - addColumn:
+            tableName: monsters
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+              - column:
+                  name: alignment_ua
+                  type: VARCHAR(255)
+        - addColumn:
+            tableName: proficiencies
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+        - addColumn:
+            tableName: races
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+              - column:
+                  name: alignment_ua
+                  type: VARCHAR(255)
+              - column:
+                  name: size_description_ua
+                  type: LONGTEXT
+        - addColumn:
+            tableName: rules
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+              - column:
+                  name: description_ua
+                  type: LONGTEXT
+        - addColumn:
+            tableName: rule_sections
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+              - column:
+                  name: description_ua
+                  type: LONGTEXT
+        - addColumn:
+            tableName: skills
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+              - column:
+                  name: description_ua
+                  type: LONGTEXT
+        - addColumn:
+            tableName: spells
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+              - column:
+                  name: description_ua
+                  type: LONGTEXT
+              - column:
+                  name: higher_level_ua
+                  type: LONGTEXT
+        - addColumn:
+            tableName: subclasses
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+              - column:
+                  name: subclass_flavor_ua
+                  type: LONGTEXT
+              - column:
+                  name: description_ua
+                  type: LONGTEXT
+        - addColumn:
+            tableName: subraces
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+              - column:
+                  name: description_ua
+                  type: LONGTEXT
+        - addColumn:
+            tableName: traits
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+              - column:
+                  name: description_ua
+                  type: LONGTEXT
+        - addColumn:
+            tableName: weapon_properties
+            columns:
+              - column:
+                  name: name_ua
+                  type: VARCHAR(255)
+              - column:
+                  name: description_ua
+                  type: LONGTEXT

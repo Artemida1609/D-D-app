@@ -31,10 +31,12 @@ public class AbilityScoreServiceImpl implements AbilityScoreService, SearchableS
 
     @Override
     public Optional<SearchResult> searchByName(String name) {
-        return abilityScoreRepository.findByNameIgnoreCase(name)
+        return abilityScoreRepository.findByNameLike(name).stream()
+                .findFirst()
                 .map(e -> new SearchResult(
                         "ability-scores",
                         e.getName(),
+                        e.getNameUa(),
                         e.getOriginalIndex(),
                         e.getUrl(),
                         abilityScoreMapper.toDto(e)

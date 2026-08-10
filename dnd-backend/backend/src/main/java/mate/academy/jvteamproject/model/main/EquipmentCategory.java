@@ -26,6 +26,7 @@ public class EquipmentCategory {
     private String originalIndex;
     private String globalCategory;
     private String name;
+    private String nameUa;
 
     @Convert(converter = ListMapStringObjectConverter.class)
     @Column(columnDefinition = "TEXT")

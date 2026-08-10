@@ -17,14 +17,22 @@ export const Header = ({
 }) => {
   // const [language, setLanguage] = useState("EN");
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
-  const [isTablet, setIsTablet] = useState(() => window.innerWidth < 1350);
+  const [isTablet, setIsTablet] = useState(() => window.innerWidth < 1280);
   const [isActiveBurgerDropdown, setIsActiveBurgerDropdown] = useState(false);
   const { t } = useTranslation();
+
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
-      setIsTablet(window.innerWidth < 1350);
+      setIsTablet(window.innerWidth < 1280);
     };
 
     handleResize();
@@ -33,9 +41,10 @@ export const Header = ({
   }, []);
 
   return (
-    <header className="flex justify-between items-center w-full z-50 relative header">
+    <header className={`w-full z-50 header ${isScrolled ? "header--scrolled" : ""}`}>
+      <div className="header__inner flex justify-between items-center relative">
       {isMobile && (
-        <div className="flex items-center justify-between w-full h-10 px-4">
+        <div className="flex items-center justify-between w-full h-10 !px-0">
           <Link to="/">
             <DnDIcon />
           </Link>
@@ -49,7 +58,7 @@ export const Header = ({
       )}
 
       {isTablet && !isMobile && (
-        <div className="flex items-center justify-between w-full h-10 px-10">
+        <div className="flex items-center justify-between w-full h-10">
           <Link to="/">
             <DnDIcon />
           </Link>
@@ -124,6 +133,7 @@ export const Header = ({
           <NavActions isAside={false} />
         </>
       )}
+      </div>
     </header>
   );
 };

@@ -71,7 +71,7 @@ export const LoginPage = () => {
           <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center auth-form w-full">
             <div className="flex flex-col justify-center items-center gap-[24px] w-full">
               <div className="flex flex-col gap-[8px] w-full md:w-[450px]">
-                <label className="text-white text-[24px]">E-mail</label>
+                <label className="text-[#FFFBE4] text-[24px]">E-mail</label>
                 <input
                   type="email"
                   placeholder="E-mail"
@@ -83,7 +83,7 @@ export const LoginPage = () => {
               </div>
 
               <div className="flex flex-col gap-[8px] w-full md:w-[450px]">
-                <label className="text-white text-[24px]">Password</label>
+                <label className="text-[#FFFBE4] text-[24px]">Password</label>
                 <input
                   type="password"
                   placeholder="Password"
@@ -110,3 +110,4 @@ export const LoginPage = () => {
     </>
   );
 };
+

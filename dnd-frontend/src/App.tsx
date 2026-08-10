@@ -1,14 +1,17 @@
+import { useTranslation } from "react-i18next";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { MainLayout } from "./app/layouts/MainLayout/MainLayout";
 import { HomePage } from "./pages/HomePage/HomePage";
 import { SignUpPage } from "./pages/SignUpPage/SignUpPage";
 import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { AsyncCategoryPage } from "./pages/AsyncCategoryPage/AsyncCategoryPage";
+import { EquipmentCategoryPage } from "./pages/EquipmentCategoryPage/EquipmentCategoryPage";
 import { DetailPage } from "./pages/DetailPage/DetailPage";
 import { FavoritesPage } from "./pages/FavoritesPage/FavoritesPage";
 import { AccountPage } from "./pages/AccountPage/AccountPage";
 
 export function App() {
+  const { t } = useTranslation();
   return (
     <BrowserRouter>
       <Routes>
@@ -24,7 +27,7 @@ export function App() {
                 index
                 element={
                   <AsyncCategoryPage 
-                    title="Species" 
+                    title={t("nav.species")} 
                     endpoint="/api/races" 
                     basePath="/character/species" 
                   />
@@ -38,7 +41,7 @@ export function App() {
                 index 
                 element={
                   <AsyncCategoryPage 
-                    title="Classes" 
+                    title={t("nav.classes")} 
                     endpoint="/api/classes" 
                     basePath="/character/classes" 
                   />
@@ -52,7 +55,7 @@ export function App() {
                 index
                 element={
                   <AsyncCategoryPage 
-                    title="Skills" 
+                    title={t("nav.skills")} 
                     endpoint="/api/skills" 
                     basePath="/character/skills" 
                   />
@@ -69,10 +72,12 @@ export function App() {
               <Route
                 index
                 element={
-                  <AsyncCategoryPage 
-                    title="Weapons" 
-                    endpoint="/api/equipment-categories/weapon" 
+                  <EquipmentCategoryPage 
+                    title={t("nav.weapons")} 
+                    endpoint="/api/equipments" 
+                    categoriesEndpoint="/api/equipment-categories/weapon"
                     basePath="/equipment/weapons" 
+                    equipmentType="weaponCategory"
                   />
                 } 
               />
@@ -83,10 +88,12 @@ export function App() {
               <Route
                 index
                 element={
-                  <AsyncCategoryPage 
-                    title="Armors" 
-                    endpoint="/api/equipment-categories/armor" 
+                  <EquipmentCategoryPage 
+                    title={t("nav.armor")} 
+                    endpoint="/api/equipments" 
+                    categoriesEndpoint="/api/equipment-categories/armor"
                     basePath="/equipment/armors" 
+                    equipmentType="armorCategory"
                   />
                 }
               />
@@ -97,10 +104,12 @@ export function App() {
               <Route
                 index
                 element={
-                  <AsyncCategoryPage 
-                    title="Gear" 
-                    endpoint="/api/equipment-categories/gear" 
+                  <EquipmentCategoryPage 
+                    title={t("nav.gear")} 
+                    endpoint="/api/equipments" 
+                    categoriesEndpoint="/api/equipment-categories/gear"
                     basePath="/equipment/gear" 
+                    equipmentType="gearCategory"
                   />
                 }
               />
@@ -116,7 +125,7 @@ export function App() {
                 index
                 element={
                   <AsyncCategoryPage 
-                    title="Spells" 
+                    title={t("nav.spells")} 
                     endpoint="/api/spells" 
                     basePath="/magic/spells" 
                   />
@@ -130,7 +139,7 @@ export function App() {
                 index
                 element={
                   <AsyncCategoryPage 
-                    title="Schools" 
+                    title={t("nav.schools")} 
                     endpoint="/api/magic-schools" 
                     basePath="/magic/schools" 
                   />
@@ -146,7 +155,7 @@ export function App() {
               index
               element={
                 <AsyncCategoryPage
-                  title="Bestiary"
+                  title={t("nav.bestiary")}
                   endpoint="/api/monsters"
                   basePath="/bestiary/monster"
                 />

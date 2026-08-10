@@ -26,6 +26,7 @@ public class Feature {
     private Long id;
     private String originalIndex;
     private String name;
+    private String nameUa;
     private Integer level;
 
     @Convert(converter = MapStringObjectConverter.class)
@@ -43,6 +44,8 @@ public class Feature {
     @Convert(converter = StringListConverter.class)
     @Column(name = "description_data", columnDefinition = "LONGTEXT")
     private List<String> description;
+    @Column(name = "description_dataUaUa", columnDefinition = "LONGTEXTUaUa")
+    private List<String> descriptionUa;
 
     @Convert(converter = MapStringObjectConverter.class)
     @Column(name = "feature_specific_data", columnDefinition = "LONGTEXT")

@@ -18,17 +18,19 @@ interface CategoryListPageProps {
 }
 
 export const CategoryListPage = ({ title, items, backgroundVariant, columns = 2 }: CategoryListPageProps) => {
-  
   const isMobile = columns <= 2;
-  const cardWidth = isMobile ? 172 : 230; 
-  const gap = isMobile ? 16 : 32; 
+  const cardWidth = isMobile ? 172 : 230;
+  const gap = isMobile ? 16 : 32;
 
   const gridStyle: React.CSSProperties = {
     display: 'grid',
-    gridTemplateColumns: `repeat(${columns}, ${cardWidth}px)`,
+    gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
     columnGap: `${gap}px`,
     rowGap: `${gap}px`,
     justifyContent: 'center',
+    width: '100%',
+    maxWidth: `${columns * cardWidth + (columns - 1) * gap}px`,
+    margin: '0 auto',
     paddingBottom: '20px',
   };
 

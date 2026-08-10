@@ -12,15 +12,18 @@ public class SubclassDto {
     @JsonProperty("index")
     private String originalIndex;
     private String name;
+    private String nameUa;
 
     @JsonProperty("subclass_flavor")
     private String subclassFlavor;
+    private String subclassFlavorUa;
 
     @JsonProperty("class")
     private Map<String, Object> classRef;
 
     @JsonProperty("desc")
     private List<String> description;
+    private List<String> descriptionUa;
 
     @JsonProperty("subclass_levels")
     private String subclassLevels;

@@ -35,8 +35,8 @@ public class ConditionRepositoryTest extends TestContainersConfig {
     }
 
     @Test
-    void findByNameIgnoreCase_success() {
-        Condition actual = repository.findByNameIgnoreCase("Condition").orElseThrow();
+    void findByNameLike_success() {
+        Condition actual = repository.findByNameLike("Condition").stream().findFirst().orElseThrow();
 
         Assertions.assertEquals(condition.getOriginalIndex(), actual.getOriginalIndex());
         Assertions.assertEquals(condition.getName(), actual.getName());

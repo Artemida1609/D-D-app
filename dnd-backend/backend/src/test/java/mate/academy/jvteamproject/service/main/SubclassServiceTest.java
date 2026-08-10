@@ -1,6 +1,7 @@
 package mate.academy.jvteamproject.service.main;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import mate.academy.jvteamproject.dto.SearchResult;
 import mate.academy.jvteamproject.dto.subclass.SubclassDto;
@@ -62,7 +63,7 @@ public class SubclassServiceTest {
         Subclass subclass = createSubclass("subclass", "Subclass");
         SubclassDto expected = createSubclassDto("subclass", "Subclass");
 
-        when(repository.findByNameIgnoreCase(subclass.getName())).thenReturn(Optional.of(subclass));
+        when(repository.findByNameLike(subclass.getName())).thenReturn(List.of(subclass));
         when(mapper.toDto(subclass)).thenReturn(expected);
 
         SearchResult actual = service.searchByName(subclass.getName()).orElseThrow();

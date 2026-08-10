@@ -12,6 +12,7 @@ public class SpellDto {
     @JsonProperty("index")
     private String originalIndex;
     private String name;
+    private String nameUa;
     private Integer level;
 
     @JsonProperty("school")
@@ -25,9 +26,11 @@ public class SpellDto {
 
     @JsonProperty("desc")
     private List<String> description;
+    private List<String> descriptionUa;
 
     @JsonProperty("higher_level")
     private List<String> higherLevel;
+    private List<String> higherLevelUa;
 
     private String range;
 

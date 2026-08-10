@@ -31,10 +31,12 @@ public class MagicSchoolServiceImpl implements MagicSchoolService, SearchableSer
 
     @Override
     public Optional<SearchResult> searchByName(String name) {
-        return magicSchoolRepository.findByNameIgnoreCase(name)
+        return magicSchoolRepository.findByNameLike(name).stream()
+                .findFirst()
                 .map(e -> new SearchResult(
                         "magic-schools",
                         e.getName(),
+                        e.getNameUa(),
                         e.getOriginalIndex(),
                         e.getUrl(),
                         magicSchoolMapper.toDto(e)

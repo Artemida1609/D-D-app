@@ -34,7 +34,7 @@ public class MagicItemRepositoryTest extends TestContainersConfig {
 
     @Test
     void findByNameIgnoreCase_success() {
-        MagicItem actual = repository.findByNameIgnoreCase("Magic item").orElseThrow();
+        MagicItem actual = repository.findByNameLike("Magic item").stream().findFirst().orElseThrow();
 
         Assertions.assertEquals(magicItem.getOriginalIndex(), actual.getOriginalIndex());
         Assertions.assertEquals(magicItem.getName(), actual.getName());

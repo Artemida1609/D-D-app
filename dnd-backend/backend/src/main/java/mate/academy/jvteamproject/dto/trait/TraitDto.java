@@ -12,9 +12,11 @@ public class TraitDto {
     @JsonProperty("index")
     private String originalIndex;
     private String name;
+    private String nameUa;
 
     @JsonProperty("desc")
     private List<String> description;
+    private List<String> descriptionUa;
 
     @JsonProperty("races")
     private List<Map<String, Object>> races;

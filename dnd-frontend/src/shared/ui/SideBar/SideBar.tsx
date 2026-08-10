@@ -77,7 +77,7 @@ export const SideBar = ({
           onClick={() => setIsSearchFocused(false)}
         >
           <ArrowLeft />
-          <span className="sidebar__back-text">Search</span>
+          <span className="sidebar__back-text">{t("ui.search")}</span>
         </button>
       </motion.div>
 
@@ -122,7 +122,7 @@ export const SideBar = ({
 
             <input
               type="text"
-              placeholder="Search"
+              placeholder={t("ui.search")}
               className="sidebar__search__input"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -152,7 +152,7 @@ export const SideBar = ({
         <div
           className={`search__dropdown search__dropdown--open`}
         >
-          <h2 className="search__title mb-6">Filters</h2>
+          <h2 className="search__title mb-6">{t("ui.filters")}</h2>
 
           <div
             className={`search__chosen ${showAllChosen ? "search__chosen--expanded" : ""}`}
@@ -225,7 +225,7 @@ export const SideBar = ({
           </div>
 
           <Button className="search__dropdown-btn">
-            <span>Search</span>
+            <span>{t("ui.search")}</span>
           </Button>
         </div>
       </motion.div>

@@ -1,0 +1,76 @@
+﻿import json
+
+ua_json = {
+  "nav": {
+    "character": "Персонаж",
+    "species": "Раси",
+    "classes": "Класи",
+    "skills": "Навички",
+    "equipment": "Спорядження",
+    "weapons": "Зброя",
+    "armor": "Броня",
+    "gear": "Спорядження",
+    "magic": "Магія",
+    "spells": "Закляття",
+    "schools": "Школи магії",
+    "bestiary": "Бестіарій"
+  },
+  "filters": {
+    "species": "Раси",
+    "humanoid": "Гуманоїд",
+    "beast": "Звір",
+    "undead": "Нежить",
+    "dragon": "Дракон",
+    "giant": "Велетень",
+    "classes": "Класи",
+    "warrior": "Воїн",
+    "mage": "Маг",
+    "rogue": "Розбійник",
+    "cleric": "Жрець",
+    "ranger": "Слідопит",
+    "weapons": "Зброя",
+    "melee": "Ближній бій",
+    "ranged": "Дальня зброя",
+    "magic": "Магічна",
+    "siege": "Облогова",
+    "armors": "Броня",
+    "light": "Легка",
+    "medium": "Середня",
+    "heavy": "Важка",
+    "shields": "Щити",
+    "spells": "Закляття",
+    "offensive": "Атакувальні",
+    "defensive": "Захисні",
+    "utility": "Допоміжні",
+    "healing": "Лікувальні"
+  },
+  "account": {
+    "noAvatar": "Немає аватара",
+    "nickname": "Нікнейм",
+    "email": "Електронна пошта",
+    "password": "Пароль",
+    "save": "Зберегти",
+    "upload": "Завантажити",
+    "delete": "Видалити"
+  },
+  "detail": {
+    "classBasics": "Основи класу",
+    "hitDie": "Кістка здоров'я",
+    "proficiencyChoices": "Вибір навичок",
+    "proficiencies": "Навички",
+    "savingThrows": "Рятівні кидки",
+    "startingEquipment": "Початкове спорядження",
+    "errorLoading": "Не вдалося завантажити деталі.",
+    "pleaseTryAgain": "Будь ласка, спробуйте пізніше або виберіть іншу категорію."
+  },
+  "auth": {
+    "login": "Увійти",
+    "signup": "Зареєструватися",
+    "logout": "Вийти"
+  }
+}
+
+with open(r'd:\DnD-app\dnd-frontend\src\locales\ua\translation.json', 'w', encoding='utf-8') as f:
+    json.dump(ua_json, f, ensure_ascii=False, indent=2)
+
+print('Done fixing encoding!')

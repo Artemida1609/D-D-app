@@ -13,9 +13,11 @@ public class MonsterDto {
     @JsonProperty("index")
     private String originalIndex;
     private String name;
+    private String nameUa;
     private String size;
     private String type;
     private String alignment;
+    private String alignmentUa;
 
     @JsonProperty("armor_class")
     private List<Map<String, Object>> armorClassData;

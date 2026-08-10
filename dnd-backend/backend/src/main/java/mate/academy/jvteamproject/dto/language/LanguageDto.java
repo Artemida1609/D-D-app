@@ -13,12 +13,14 @@ public class LanguageDto {
     @JsonProperty("index")
     private String originalIndex;
     private String name;
+    private String nameUa;
     private String type;
     private String script;
 
     @JsonProperty("desc")
     @JsonDeserialize(using = StringOrListDeserializer.class)
     private List<String> description;
+    private List<String> descriptionUa;
 
     @JsonProperty("typical_speakers")
     @JsonDeserialize(using = StringOrListDeserializer.class)

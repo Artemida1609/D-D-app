@@ -1,21 +1,27 @@
-import { Link } from "react-router-dom";
 import "./Footer.scss";
-import { navItems } from "../../constants/navItems";
-import { useTranslation } from "react-i18next";
 
 export const Footer = () => {
-  const { t } = useTranslation();
   return (
-    <footer className="w-full px-20 pb-[34px] md:pb-[40px] pt-10 z-10">
-      <ul className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
-        {navItems.map((item) => (
-          <li key={item.path}>
-            <Link to={item.path} className="footer__link">
-              {t(item.titleKey)}
-            </Link>
-          </li>
-        ))}
-      </ul>
+    <footer className="w-full px-5 md:px-20 pb-[34px] md:pb-[40px] pt-10 z-10">
+      <div className="flex flex-col justify-center items-center gap-4 text-center">
+        <p className="footer__text">
+          Educational project created at Mate Academy. Dungeons & Dragons and related IP belong to Wizards of the Coast. For informational purposes only.
+        </p>
+        
+        <a 
+          href="https://github.com/Artemida1609/D-D-app" 
+          target="_blank" 
+          rel="noreferrer"
+          className="footer__link"
+        >
+          <img 
+            src="/images/icons/github.jpg" 
+            alt="GitHub logo" 
+            className="footer__icon"
+          />
+          https://github.com/Artemida1609/D-D-app
+        </a>
+      </div>
     </footer>
   );
 };

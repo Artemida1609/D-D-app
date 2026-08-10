@@ -1,6 +1,7 @@
 package mate.academy.jvteamproject.service.main;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import mate.academy.jvteamproject.dto.SearchResult;
 import mate.academy.jvteamproject.dto.magic.MagicItemDto;
@@ -62,7 +63,7 @@ public class MagicItemServiceTest {
         MagicItem magicItem = createMagicItem("magic-item", "Magic item");
         MagicItemDto expected = createMagicItemDto("magic-item", "Magic item");
 
-        when(repository.findByNameIgnoreCase(magicItem.getName())).thenReturn(Optional.of(magicItem));
+        when(repository.findByNameLike(magicItem.getName())).thenReturn(List.of(magicItem));
         when(mapper.toDto(magicItem)).thenReturn(expected);
 
         SearchResult actual = service.searchByName(magicItem.getName()).orElseThrow();

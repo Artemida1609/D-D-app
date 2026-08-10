@@ -24,9 +24,12 @@ public class Subclass {
     private Long id;
     private String originalIndex;
     private String name;
+    private String nameUa;
 
     @Column(name = "subclass_flavor")
     private String subclassFlavor;
+    @Column(name = "subclass_flavorUaUa")
+    private String subclassFlavorUa;
 
     @Convert(converter = MapStringObjectConverter.class)
     @Column(name = "class_ref_data", columnDefinition = "LONGTEXT")
@@ -35,6 +38,8 @@ public class Subclass {
     @Convert(converter = StringListConverter.class)
     @Column(name = "description", columnDefinition = "LONGTEXT")
     private List<String> description;
+    @Column(name = "descriptionUaUa", columnDefinition = "LONGTEXTUaUa")
+    private List<String> descriptionUa;
 
     @Column(name = "subclass_levels")
     private String subclassLevels;

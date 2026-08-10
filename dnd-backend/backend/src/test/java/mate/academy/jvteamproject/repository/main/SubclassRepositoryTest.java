@@ -36,7 +36,7 @@ public class SubclassRepositoryTest extends TestContainersConfig {
 
     @Test
     void findByNameIgnoreCase_success() {
-        Subclass actual = repository.findByNameIgnoreCase("Subclass").orElseThrow();
+        Subclass actual = repository.findByNameLike("Subclass").stream().findFirst().orElseThrow();
 
         Assertions.assertEquals(subclass.getOriginalIndex(), actual.getOriginalIndex());
         Assertions.assertEquals(subclass.getName(), actual.getName());

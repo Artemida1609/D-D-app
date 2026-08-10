@@ -36,7 +36,7 @@ public class WeaponPropertyRepositoryTest extends TestContainersConfig {
 
     @Test
     void findByNameIgnoreCase_success() {
-        WeaponProperty actual = repository.findByNameIgnoreCase("Weapon property").orElseThrow();
+        WeaponProperty actual = repository.findByNameLike("Weapon property").stream().findFirst().orElseThrow();
 
         Assertions.assertEquals(weaponProperty.getOriginalIndex(), actual.getOriginalIndex());
         Assertions.assertEquals(weaponProperty.getName(), actual.getName());

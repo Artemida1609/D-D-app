@@ -36,7 +36,7 @@ public class MonsterRepositoryTest extends TestContainersConfig {
 
     @Test
     void findByNameIgnoreCase_success() {
-        Monster actual = repository.findByNameIgnoreCase("Monster").orElseThrow();
+        Monster actual = repository.findByNameLike("Monster").stream().findFirst().orElseThrow();
 
         Assertions.assertEquals(monster.getOriginalIndex(), actual.getOriginalIndex());
         Assertions.assertEquals(monster.getName(), actual.getName());

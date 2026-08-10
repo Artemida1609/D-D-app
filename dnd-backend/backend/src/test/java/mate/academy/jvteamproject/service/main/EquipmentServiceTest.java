@@ -1,6 +1,7 @@
 package mate.academy.jvteamproject.service.main;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import mate.academy.jvteamproject.dto.SearchResult;
 import mate.academy.jvteamproject.dto.equipment.EquipmentDto;
@@ -62,7 +63,7 @@ public class EquipmentServiceTest {
         Equipment equipment = createEquipment("equipment", "Equipment");
         EquipmentDto expected = createEquipmentDto("equipment", "Equipment");
 
-        when(repository.findByNameIgnoreCase(equipment.getName())).thenReturn(Optional.of(equipment));
+        when(repository.findByNameLike(equipment.getName())).thenReturn(List.of(equipment));
         when(mapper.toDto(equipment)).thenReturn(expected);
 
         SearchResult actual = service.searchByName(equipment.getName()).orElseThrow();
