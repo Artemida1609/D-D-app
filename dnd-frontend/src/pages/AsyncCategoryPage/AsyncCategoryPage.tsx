@@ -6,6 +6,8 @@ import { useSearchStore } from "../../shared/store/searchStore";
 import { API_BASE_URL } from "../../shared/api/config";
 import { getFavoriteUniqueId, getEntityTypeFromPath } from "../../shared/utils/favoritesUtils";
 import { getClassIconPath } from "../../shared/utils/classIcon";
+import { getSchoolIconPath } from "../../shared/utils/schoolIcon";
+import { getSkillIconPath } from "../../shared/utils/skillIcon";
 import { ROWS_PER_PAGE, SIZE_BREAKPOINTS, GRID_CALC } from "./constants/gridConfig";
 import { normalizeText, buildItemSearchText, matchesSubcategory } from "./utils/searchUtils";
 import { getItemIdentifier, toApiItems } from "./utils/apiItemUtils";
@@ -145,8 +147,11 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
             } else if (!imagePath && pathId && endpoint.includes("/races")) {
               imagePath = `${API_BASE_URL}${endpoint.includes("/races") ? "/api/races" : "/api/classes"}/${pathId}/download-image`;
             } else if (endpoint.includes("/magic-schools") && item.name) {
-              const schoolName = item.name.toLowerCase().replace(/\s+/g, "");
-              imagePath = `/images/card_icons/schools/${schoolName}.png`;
+              imagePath = getSchoolIconPath(item.name);
+            } else if (!imagePath && endpoint.includes("/spells")) {
+              imagePath = getSchoolIconPath(item.school);
+            } else if (endpoint.includes("/skills")) {
+              imagePath = getSkillIconPath(pathId || item.index || item.name);
             }
 
             const entityType = getEntityTypeFromPath(basePath) || pathId || "";

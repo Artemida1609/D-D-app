@@ -9,17 +9,14 @@ import { SearchFilters } from "../SearchFilters/SearchFilters";
 import { NavActions } from "../NavActions/NavActions";
 import { NavCategories } from "../NavCategories/NavCategories";
 import { useTranslation } from "react-i18next";
+import { useSidebarStore } from "../../store/sidebarStore";
 
-export const Header = ({
-  setActiveAside,
-}: {
-  setActiveAside: (active: boolean) => void;
-}) => {
-  // const [language, setLanguage] = useState("EN");
+export const Header = () => {
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
   const [isTablet, setIsTablet] = useState(() => window.innerWidth < 1280);
   const [isActiveBurgerDropdown, setIsActiveBurgerDropdown] = useState(false);
   const { t } = useTranslation();
+  const openAside = useSidebarStore((state) => state.openAside);
 
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -51,7 +48,7 @@ export const Header = ({
 
           
 
-          <span className="cursor-pointer" onClick={() => setActiveAside(true)}>
+          <span className="cursor-pointer" onClick={openAside}>
             <BurgerMenuIcon />
           </span>
         </div>
@@ -137,4 +134,3 @@ export const Header = ({
     </header>
   );
 };
-

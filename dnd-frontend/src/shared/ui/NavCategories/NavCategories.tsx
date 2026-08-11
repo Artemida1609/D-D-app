@@ -5,18 +5,18 @@ import { useState } from "react";
 import "./NavCategories.scss";
 import { useCollapse } from "../../hooks/useCollapse";
 import { useTranslation } from "react-i18next";
+import { useSidebarStore } from "../../store/sidebarStore";
 
 type NavCategoryProps = {
-  setActiveAside?: (active: boolean) => void;
   isTablet?: boolean;
 };
 
 export const NavCategories = ({
-  setActiveAside,
   isTablet,
 }: NavCategoryProps) => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const { t } = useTranslation();
+  const closeAside = useSidebarStore((state) => state.closeAside);
 
   return (
     <>
@@ -26,7 +26,7 @@ export const NavCategories = ({
             <Link
               to={item.path}
               className="cursor-pointer flex-1"
-              onClick={() => setActiveAside && setActiveAside(false)}
+              onClick={closeAside}
             >
               {t(item.titleKey)}
             </Link>
@@ -50,7 +50,6 @@ export const NavCategories = ({
           <SubItems
             item={item}
             activeCategory={activeCategory}
-            setActiveAside={setActiveAside}
             isTablet={isTablet}
           />
         </ul>
@@ -65,17 +64,16 @@ type NavItem = { titleKey: string; path: string; subItems?: SubItem[] };
 const SubItems = ({
   item,
   activeCategory,
-  setActiveAside,
   isTablet,
 }: {
   item: NavItem;
   activeCategory: string | null;
-  setActiveAside?: (active: boolean) => void;
   isTablet?: boolean;
 }) => {
   const isOpen = activeCategory === item.titleKey;
   const { ref, height } = useCollapse(isOpen);
   const { t } = useTranslation();
+  const closeAside = useSidebarStore((state) => state.closeAside);
 
   return (
     <ul
@@ -88,7 +86,7 @@ const SubItems = ({
           <Link
             to={sub.path}
             className="cursor-pointer block"
-            onClick={() => setActiveAside?.(false)}
+            onClick={closeAside}
           >
             {t(sub.titleKey)}
           </Link>

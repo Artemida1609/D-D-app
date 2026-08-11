@@ -6,19 +6,20 @@ import { useCollapse } from "../../hooks/useCollapse";
 import { useAuthStore } from "../../store/authStore";
 import { useLangStore } from "../../store/languageStore";
 import { useTranslation } from "react-i18next";
+import { useSidebarStore } from "../../store/sidebarStore";
 
 interface NavActionsProps {
   isAside: boolean;
   isTablet?: boolean;
-  closeSidebar?: () => void;
 }
 
-export const NavActions = ({ isAside, closeSidebar, isTablet }: NavActionsProps) => {
+export const NavActions = ({ isAside, isTablet }: NavActionsProps) => {
   const language = useLangStore((state) => state.lang);
   const toggleLang = useLangStore((state) => state.toggleLang);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const { ref, height } = useCollapse(isAside && isLangOpen);
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+  const closeAside = useSidebarStore((state) => state.closeAside);
   const { i18n } = useTranslation();
 
   const handleSelect = (option: string) => {
@@ -34,14 +35,14 @@ export const NavActions = ({ isAside, closeSidebar, isTablet }: NavActionsProps)
           <Link
             to="/favorites"
             className={`flex items-center justify-center login cursor-pointer ${isAside ? "h-auto self-start" : "h-[54px] w-[100px]"}`}
-            onClick={closeSidebar}
+            onClick={isAside ? closeAside : undefined}
           >
             Favorites
           </Link>
           <Link
             to="/account"
             className={`flex items-center justify-center signup ${isAside ? "h-auto self-start" : "border border-[#FFFBE4] rounded-[25px] h-[54px] w-[100px]"} cursor-pointer`}
-            onClick={closeSidebar}
+            onClick={isAside ? closeAside : undefined}
           >
             Account
           </Link>
@@ -51,14 +52,14 @@ export const NavActions = ({ isAside, closeSidebar, isTablet }: NavActionsProps)
           <Link
             to="/login"
             className={`flex items-center justify-center login cursor-pointer ${isAside ? "h-auto self-start" : "h-[54px] w-[100px]"}`}
-            onClick={closeSidebar}
+            onClick={isAside ? closeAside : undefined}
           >
             Log in
           </Link>
           <Link
             to="/signup"
             className={`flex items-center justify-center signup ${isAside ? "h-auto self-start" : "border border-[#FFFBE4] rounded-[25px] h-[54px] w-[100px]"} cursor-pointer`}
-            onClick={closeSidebar}
+            onClick={isAside ? closeAside : undefined}
           >
             Sign up
           </Link>

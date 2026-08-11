@@ -13,6 +13,7 @@ export interface ApiListItem {
   image?: string;
   imageUrl?: string;
   icon?: string;
+  school?: string | { index?: string; name?: string; url?: string };
   equipment?: ApiListItem[];
   [key: string]: unknown;
 }

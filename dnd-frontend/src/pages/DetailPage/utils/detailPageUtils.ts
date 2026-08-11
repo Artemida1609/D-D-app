@@ -1,5 +1,7 @@
 import { API_BASE_URL } from "../../../shared/api/config";
 import { getClassIconPath } from "../../../shared/utils/classIcon";
+import { getSchoolIconPath } from "../../../shared/utils/schoolIcon";
+import { getSkillIconPath } from "../../../shared/utils/skillIcon";
 
 export const apiCategoryMap: Record<string, string> = {
   species: "races",
@@ -76,9 +78,12 @@ export const resolveDetailImage = (
     fetchedImage = getClassIconPath(itemId);
   } else if (!fetchedImage && itemId && apiCategory === "races") {
     fetchedImage = `${API_BASE_URL}/api/${apiCategory}/${itemId}/download-image`;
+  } else if (!fetchedImage && apiCategory === "spells") {
+    fetchedImage = getSchoolIconPath(data?.school);
   } else if (apiCategory === "magic-schools" && data?.name) {
-    const schoolName = data.name.toLowerCase().replace(/\s+/g, "");
-    fetchedImage = `/images/card_icons/schools/${schoolName}.png`;
+    fetchedImage = getSchoolIconPath(data?.name);
+  } else if (apiCategory === "skills") {
+    fetchedImage = getSkillIconPath(itemId || data?.index || data?.name);
   }
 
   return {
