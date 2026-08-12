@@ -14,13 +14,11 @@ import { CloseIcon } from "../Icons/CloseIcon";
 import { useSearchFilters } from "../../hooks/useSearchFilters";
 import { filterCategories } from "../../constants/filterCategories";
 import { useTranslation } from "react-i18next";
+import { useSidebarStore } from "../../store/sidebarStore";
 
-export const SideBar = ({
-  setActiveAside,
-}: {
-  setActiveAside: (active: boolean) => void;
-}) => {
+export const SideBar = () => {
   const { t } = useTranslation();
+  const closeAside = useSidebarStore((state) => state.closeAside);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const { 
       query,
@@ -31,6 +29,7 @@ export const SideBar = ({
       visibleChosen,
       handleRemove,
       handleToggle,
+      handleSearch,
     } = useSearchFilters(true);
 
   const portalRoot = (typeof document !== "undefined" && document.getElementById("portal-root")) || document.body;
@@ -46,11 +45,11 @@ export const SideBar = ({
       <div className="sidebar__inner">
       {/* header */}
       <div className="flex justify-between items-center mb-6">
-        <Link to="/" onClick={() => setActiveAside(false)}>
+        <Link to="/" onClick={closeAside}>
           <DnDIcon />
         </Link>
 
-        <span className="cursor-pointer" onClick={() => setActiveAside(false)}>
+        <span className="cursor-pointer" onClick={closeAside}>
           <BurgerMenuIcon />
         </span>
       </div>
@@ -77,7 +76,7 @@ export const SideBar = ({
           onClick={() => setIsSearchFocused(false)}
         >
           <ArrowLeft />
-          <span className="sidebar__back-text">{t("ui.search")}</span>
+          <span className="sidebar__back-text">Search</span>
         </button>
       </motion.div>
 
@@ -97,7 +96,7 @@ export const SideBar = ({
           
         }}
       >
-        <NavCategories setActiveAside={setActiveAside} />
+        <NavCategories />
 
         <hr className="w-full h-[1px] bg-[#FFFBE4] mb-6" />
       </motion.div>
@@ -116,7 +115,7 @@ export const SideBar = ({
       >
         <div className="sidebar__search__input-wrapper">
           <div className="sidebar__search__input-inner">
-            <button className="sidebar__search__input-icon">
+            <button type="button" className="sidebar__search__input-icon" onClick={handleSearch}>
               <SearchIcon />
             </button>
 
@@ -127,6 +126,11 @@ export const SideBar = ({
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onFocus={() => setIsSearchFocused(true)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
+              }}
             />
           </div>
         </div>
@@ -224,7 +228,7 @@ export const SideBar = ({
             </ul>
           </div>
 
-          <Button className="search__dropdown-btn">
+          <Button className="search__dropdown-btn" onClick={handleSearch}>
             <span>{t("ui.search")}</span>
           </Button>
         </div>
@@ -248,7 +252,7 @@ export const SideBar = ({
       >
         <hr className="w-full h-[1px] bg-[#FFFBE4] mb-6" />
 
-        <NavActions isAside={true} closeSidebar={() => setActiveAside(false)} />
+        <NavActions isAside={true} />
       </motion.div>
       </div>
     </motion.aside>
@@ -256,4 +260,3 @@ export const SideBar = ({
 
   return createPortal(sidebarNode, portalRoot as Element);
 };
-

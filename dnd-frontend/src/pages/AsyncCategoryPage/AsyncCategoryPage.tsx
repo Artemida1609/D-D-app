@@ -6,8 +6,10 @@ import { useSearchStore } from "../../shared/store/searchStore";
 import { API_BASE_URL } from "../../shared/api/config";
 import { getFavoriteUniqueId, getEntityTypeFromPath } from "../../shared/utils/favoritesUtils";
 import { getClassIconPath } from "../../shared/utils/classIcon";
+import { getSchoolIconPath } from "../../shared/utils/schoolIcon";
+import { getSkillIconPath } from "../../shared/utils/skillIcon";
 import { ROWS_PER_PAGE, SIZE_BREAKPOINTS, GRID_CALC } from "./constants/gridConfig";
-import { buildItemSearchText, matchesSubcategory, normalizeText } from "./utils/searchUtils";
+import { normalizeText, buildItemSearchText, matchesSubcategory } from "./utils/searchUtils";
 import { getItemIdentifier, toApiItems } from "./utils/apiItemUtils";
 import type { ApiListItem, ApiListResponse, AsyncListItem } from "./types/api";
 
@@ -18,23 +20,17 @@ interface AsyncCategoryPageProps {
   backgroundVariant?: "signup" | "login" | "account" | "favorites";
 }
 
-const subcategoryToCategory = new Map(
-  filterCategories.flatMap((category) =>
-    category.subcategories.map((subcategory) => [subcategory, category.categoryKey]),
-  ),
-);
-
 const computeColumnsFromContainer = () => {
-  if (typeof window === "undefined") return GRID_CALC.minColumns;
-
-  const container = document.querySelector(".main-layout") as HTMLElement | null;
+  if (typeof window === 'undefined') return 2;
+  
+  const container = document.querySelector('.main-layout') as HTMLElement | null;
   const containerWidth = container ? container.clientWidth : window.innerWidth;
 
   const isMobile = containerWidth <= SIZE_BREAKPOINTS.mobile;
   const cardWidth = isMobile ? SIZE_BREAKPOINTS.mobilCardWidth : SIZE_BREAKPOINTS.desktopCardWidth;
   const gap = isMobile ? SIZE_BREAKPOINTS.mobileGap : SIZE_BREAKPOINTS.desktopGap;
 
-  for (let cols = GRID_CALC.maxColumns; cols >= GRID_CALC.minColumns; cols -= 1) {
+  for (let cols = GRID_CALC.maxColumns; cols >= GRID_CALC.minColumns; cols--) {
     const required = cols * cardWidth + (cols - 1) * gap;
     if (required <= containerWidth) return cols;
   }
@@ -42,29 +38,11 @@ const computeColumnsFromContainer = () => {
   return GRID_CALC.minColumns;
 };
 
-const formatItems = (items: ApiListItem[], basePath: string): AsyncListItem[] => {
-  const entityType = getEntityTypeFromPath(basePath) || "item";
-
-  return items.map((item) => {
-    const itemIdentifier = getItemIdentifier(item) || String(item.index ?? item.id ?? "");
-    const normalizedIcon =
-      typeof item.icon === "string" && item.icon.startsWith("/api/images/")
-        ? `https://www.dnd5eapi.co${item.icon}`
-        : item.icon || item.imageUrl || item.image || "";
-
-    const icon =
-      normalizedIcon ||
-      (entityType === "classes" && itemIdentifier ? getClassIconPath(itemIdentifier) : "");
-
-    return {
-      id: getFavoriteUniqueId(entityType, itemIdentifier || item.title || item.name || Math.random().toString()),
-      title: item.name || item.title || "Unknown",
-      path: itemIdentifier ? `${basePath}/${itemIdentifier}` : basePath,
-      icon,
-      searchText: buildItemSearchText(item),
-    };
-  });
-};
+const subcategoryToCategory = new Map(
+  filterCategories.flatMap((category) =>
+    category.subcategories.map((subcategory) => [subcategory, category.categoryKey]),
+  ),
+);
 
 export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant }: AsyncCategoryPageProps) => {
   const [items, setItems] = useState<AsyncListItem[]>([]);
@@ -144,15 +122,57 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
 
         const fullEndpoint = targetEndpoint.startsWith("http")
           ? targetEndpoint
-          : `${API_BASE_URL}${targetEndpoint.startsWith('/') ? '' : '/'}${targetEndpoint}`;
+          : `${API_BASE_URL}${targetEndpoint.startsWith("/") ? "" : "/"}${targetEndpoint}`;
+
+        const formatItems = (dataArray: ApiListItem[]) =>
+          dataArray.map((item) => {
+            let imagePath = item.image || item.imageUrl || item.icon || "";
+
+            if (typeof imagePath === "string" && imagePath.startsWith("/api/images/")) {
+              imagePath = `https://www.dnd5eapi.co${imagePath}`;
+            }
+
+            const rawPathId = item.index ?? item.id;
+            let pathId = typeof rawPathId === "string" || typeof rawPathId === "number"
+              ? String(rawPathId)
+              : "";
+
+            if (typeof item.url === "string" && !pathId) {
+              const urlParts = item.url.split("/").filter(Boolean);
+              pathId = urlParts[urlParts.length - 1] || "";
+            }
+
+            if (pathId && endpoint.includes("/classes")) {
+              imagePath = getClassIconPath(pathId);
+            } else if (!imagePath && pathId && endpoint.includes("/races")) {
+              imagePath = `${API_BASE_URL}${endpoint.includes("/races") ? "/api/races" : "/api/classes"}/${pathId}/download-image`;
+            } else if (endpoint.includes("/magic-schools") && item.name) {
+              imagePath = getSchoolIconPath(item.name);
+            } else if (!imagePath && endpoint.includes("/spells")) {
+              imagePath = getSchoolIconPath(item.school);
+            } else if (endpoint.includes("/skills")) {
+              imagePath = getSkillIconPath(pathId || item.index || item.name);
+            }
+
+            const entityType = getEntityTypeFromPath(basePath) || pathId || "";
+            const uniqueId = pathId ? getFavoriteUniqueId(entityType, pathId) : Math.random().toString();
+
+            return {
+              id: uniqueId,
+              title: item.name || item.title || "Unknown",
+              path: `${basePath}/${pathId}`,
+              icon: imagePath,
+              searchText: buildItemSearchText(item),
+            };
+          });
 
         if (isEquipmentPage) {
-          const equipmentResponse = await fetch(fullEndpoint);
-          if (!equipmentResponse.ok) {
+          const response = await fetch(fullEndpoint);
+          if (!response.ok) {
             throw new Error("Failed to fetch");
           }
 
-          const data = (await equipmentResponse.json()) as ApiListResponse | ApiListItem[];
+          const data = (await response.json()) as ApiListResponse | ApiListItem[];
           const rawCategories = toApiItems(data);
           let allEquipment: ApiListItem[] = [];
 
@@ -170,7 +190,7 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
             }
           });
 
-          const formattedItems = formatItems(Array.from(uniqueMap.values()), basePath);
+          const formattedItems = formatItems(Array.from(uniqueMap.values()));
           if (!isCancelled) {
             setItems(formattedItems);
             setTotalPages(Math.max(1, Math.ceil(formattedItems.length / itemsPerPage)));
@@ -209,7 +229,7 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
             allData.push(...pageData);
           }
 
-          const formattedItems = formatItems(allData, basePath);
+          const formattedItems = formatItems(allData);
           if (!isCancelled) {
             setItems(formattedItems);
             setTotalPages(Math.max(1, Math.ceil(formattedItems.length / itemsPerPage)));
@@ -222,14 +242,14 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
           ? `${fullEndpoint}&page=${backendPage}&size=${itemsPerPage}`
           : `${fullEndpoint}?page=${backendPage}&size=${itemsPerPage}`;
 
-        const pageResponse = await fetch(fetchUrl);
-        if (!pageResponse.ok) {
+        const response = await fetch(fetchUrl);
+        if (!response.ok) {
           throw new Error("Failed to fetch");
         }
 
-        const data = (await pageResponse.json()) as ApiListResponse | ApiListItem[];
+        const data = (await response.json()) as ApiListResponse | ApiListItem[];
         const dataArray = toApiItems(data);
-        const formattedItems = formatItems(dataArray, basePath);
+        const formattedItems = formatItems(dataArray);
 
         if (!isCancelled) {
           setItems(formattedItems);
@@ -253,7 +273,7 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
     return () => {
       isCancelled = true;
     };
-  }, [endpoint, basePath, currentPage, itemsPerPage, hasActiveSearch]);
+  }, [endpoint, basePath, title, currentPage, itemsPerPage, hasActiveSearch]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -347,7 +367,7 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
       <div className="flex-1 w-full flex justify-center items-center text-[#FFFBE4] min-h-[50vh]">
         <div className="text-center">
           <p className="text-lg font-medium">{error}</p>
-          <p className="opacity-80 mt-2">{t("detail.pleaseTryAgain")}</p>
+          <p className="opacity-80 mt-2">Please try again later or choose a different category.</p>
         </div>
       </div>
     );
@@ -378,4 +398,3 @@ export const AsyncCategoryPage = ({ title, endpoint, basePath, backgroundVariant
     </div>
   );
 };
-

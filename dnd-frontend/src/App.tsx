@@ -9,6 +9,7 @@ import { EquipmentCategoryPage } from "./pages/EquipmentCategoryPage/EquipmentCa
 import { DetailPage } from "./pages/DetailPage/DetailPage";
 import { FavoritesPage } from "./pages/FavoritesPage/FavoritesPage";
 import { AccountPage } from "./pages/AccountPage/AccountPage";
+import { SearchResultsPage } from "./pages/SearchResultsPage/SearchResultsPage";
 
 export function App() {
   const { t } = useTranslation();
@@ -172,6 +173,7 @@ export function App() {
           <Route path="signup" element={<SignUpPage />} />
           <Route path="favorites" element={<FavoritesPage />} />
           <Route path="account" element={<AccountPage />} />
+          <Route path="search" element={<SearchResultsPage />} />
           <Route path="*" element={<Navigate replace to="/" />} />
         </Route>
       </Routes>

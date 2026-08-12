@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { filterCategories } from "../constants/filterCategories";
 import { useSearchStore } from "../store/searchStore";
+import { useSidebarStore } from "../store/sidebarStore";
 
 export const useSearchFilters = (isSidebar: boolean) => {
   const [isOpen, setIsOpen] = useState(isSidebar);
@@ -9,6 +10,8 @@ export const useSearchFilters = (isSidebar: boolean) => {
   const searchRef = useRef<HTMLDivElement>(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const hasHydratedFromUrlRef = useRef(false);
+  const navigate = useNavigate();
+  const closeAside = useSidebarStore((state) => state.closeAside);
 
   const query = useSearchStore((state) => state.query);
   const setQuery = useSearchStore((state) => state.setQuery);
@@ -89,6 +92,30 @@ export const useSearchFilters = (isSidebar: boolean) => {
 
   const handleToggle = (sub: string) => toggleSubcategory(sub);
 
+  const handleSearch = () => {
+    const params = new URLSearchParams();
+
+    if (query.trim()) {
+      params.set("q", query.trim());
+    }
+
+    if (chosenSubcategories.length > 0) {
+      params.set("filters", chosenSubcategories.join(","));
+    }
+
+    if (activeCategory && activeCategory !== filterCategories[0]?.categoryKey) {
+      params.set("category", activeCategory);
+    }
+
+    navigate(`/search?${params.toString()}`);
+
+    if (!isSidebar) {
+      setIsOpen(false);
+    } else {
+      closeAside();
+    }
+  };
+
   const handleQueryChange = (value: string) => {
     setQuery(value);
     if (!isSidebar) {
@@ -111,5 +138,6 @@ export const useSearchFilters = (isSidebar: boolean) => {
     searchRef,
     handleRemove,
     handleToggle,
+    handleSearch,
   };
 };

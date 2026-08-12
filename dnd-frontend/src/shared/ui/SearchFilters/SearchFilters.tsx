@@ -27,6 +27,7 @@ export const SearchFilters = ({
     searchRef,
     handleRemove,
     handleToggle,
+    handleSearch,
   } = useSearchFilters(isSidebar);
 
   return (
@@ -36,7 +37,7 @@ export const SearchFilters = ({
     >
       <div className={`search__input-wrapper ${isOpen ? "search__input-wrapper--open" : ""}`}>
         <div className="search__input-inner">
-          <button className="search__input-icon">
+          <button type="button" className="search__input-icon" onClick={handleSearch}>
             <SearchIcon />
           </button>
           <input
@@ -46,6 +47,11 @@ export const SearchFilters = ({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onFocus={() => setIsOpen(true)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSearch();
+              }
+            }}
           />
         </div>
       </div>
@@ -108,11 +114,7 @@ export const SearchFilters = ({
 
         <Button
           className="search__dropdown-btn"
-          onClick={() => {
-            if (!isSidebar) {
-              setIsOpen(false);
-            }
-          }}
+          onClick={handleSearch}
         >
           <span>{t("ui.search")}</span>
         </Button>

@@ -5,7 +5,6 @@ export const EquipmentDetail: React.FC<{ data: any }> = ({ data }) => {
 
   const cost = data.cost ? `${data.cost.quantity} ${data.cost.unit}` : null;
 
-  // Armor
   if (data.equipment_category?.name === "Armor" || data.armor_category) {
     return (
       <div className="flex flex-col gap-6">

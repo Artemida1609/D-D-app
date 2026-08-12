@@ -68,6 +68,13 @@
   },
   "ui": {
     "search": "Search",
-    "filters": "Filters"
+    "filters": "Filters",
+    "loading": "Loading..."
+  },
+  "search": {
+    "results": "Search results",
+    "nothingFound": "Nothing found. Try another search query or filters.",
+    "enterQuery": "Enter a search query or select filters to find items.",
+    "tryAgain": "Please try again later."
   }
 }
